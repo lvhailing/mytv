@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setFocusable(false);
         border.attachTo(recyclerView);
-
     }
 
     private void initData() {
