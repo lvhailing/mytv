@@ -6,4 +6,6 @@
 
     <color name="black_overlay">#66000000</color>
     <color name="textColor">#FFEFEF</color>
+    <color name="transparent">#00000000</color>
+    <color name="bg_line">#32EFEFEF</color>
 </resources>
