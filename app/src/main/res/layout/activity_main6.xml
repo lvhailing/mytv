@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#556791"
+    android:clipChildren="false"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="45dp"
+        android:clipChildren="false">
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/logo_title" />
+
+        <TextView
+            android:id="@+id/tv_title_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:focusable="true"
+            android:text="22:22"
+            android:textColor="@color/textColor"
+            android:textSize="20sp" />
+
+        <View
+            android:id="@+id/v_title_vertical_line"
+            android:layout_width="1dp"
+            android:layout_height="19dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="17dp"
+            android:layout_toLeftOf="@id/tv_title_time"
+            android:background="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/iv_title_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="17dp"
+            android:layout_toLeftOf="@id/v_title_vertical_line"
+            android:background="@mipmap/buy_normal"
+            android:focusable="true" />
+
+        <ImageView
+            android:id="@+id/iv_title_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="17dp"
+            android:layout_toLeftOf="@id/iv_title_buy"
+            android:background="@mipmap/me_normal"
+            android:focusable="true" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_title"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_menu_jx"
+                style="@style/TextStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="26dp"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="精选" />
+
+            <TextView
+                android:id="@+id/tv_menu_zmgj"
+                style="@style/TextStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/menu_margin_17"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="正面管教" />
+
+            <TextView
+                android:id="@+id/tv_menu_hylx"
+                style="@style/TextStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/menu_margin_17"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="婚姻两性" />
+
+            <TextView
+                android:id="@+id/tv_menu_zyl"
+                style="@style/TextStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/menu_margin_17"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="注意力" />
+
+            <TextView
+                android:id="@+id/tv_menu_gdjy"
+                style="@style/TextStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/menu_margin_17"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="隔代教育" />
+
+            <TextView
+                android:id="@+id/tv_menu_hbjd"
+                style="@style/TextStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/menu_margin_17"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="绘本解读" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_course"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="15dp"
+            android:clipToPadding="false"
+            android:focusable="false" />
+    </LinearLayout>
+</LinearLayout>
