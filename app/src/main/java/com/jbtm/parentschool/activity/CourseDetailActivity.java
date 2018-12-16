@@ -71,11 +71,10 @@ public class CourseDetailActivity extends AppCompatActivity implements View.OnCl
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_title_me:
-//                Intent intent = new Intent(this, PersonalInformationActivity.class);
-//                startActivity(intent);
+                PersonalInformationActivity.startActivity(this, 0);
                 break;
             case R.id.ll_title_buy:
-                PayActivity.startActivity(this, 2);
+                PayActivity.startActivity(this, 0);
                 break;
             case R.id.rl_buy:  //单点这一课购买
                 PayActivity.startActivity(this, 1);

@@ -17,7 +17,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/ll_menu"
@@ -29,7 +30,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_menu_jx"
+                android:id="@+id/tv_menu_personal"
                 style="@style/TextNormalStyle"
                 android:layout_width="125dp"
                 android:layout_height="50dp"
@@ -40,7 +41,7 @@
                 android:text="个人信息" />
 
             <TextView
-                android:id="@+id/tv_menu_zmgj"
+                android:id="@+id/tv_menu_buy"
                 style="@style/TextNormalStyle"
                 android:layout_width="125dp"
                 android:layout_height="50dp"
@@ -51,7 +52,7 @@
                 android:text="订购信息" />
 
             <TextView
-                android:id="@+id/tv_menu_hylx"
+                android:id="@+id/tv_menu_watch_history"
                 style="@style/TextNormalStyle"
                 android:layout_width="125dp"
                 android:layout_height="50dp"
@@ -62,9 +63,46 @@
                 android:text="观看记录" />
         </LinearLayout>
 
-        <com.jbtm.parentschool.widget.LoginYesView
-            android:id="@+id/personal_login_yes"
+        <!--个人信息：已登录-->
+        <com.jbtm.parentschool.widget.PersonalLoginYesView
+            android:id="@+id/v_personal_login_yes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <!--个人信息：未登录-->
+        <com.jbtm.parentschool.widget.PersonalLoginNoView
+            android:id="@+id/v_personal_login_no"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <!--订购信息：订了卡和单点-->
+        <com.jbtm.parentschool.widget.BuyKaAndDandianView
+            android:id="@+id/v_buy_ka_and_dandian"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <!--订购信息：只订了卡-->
+        <com.jbtm.parentschool.widget.BuyKaView
+            android:id="@+id/v_buy_ka"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <!--订购信息：什么都没订-->
+        <com.jbtm.parentschool.widget.BuyNothingView
+            android:id="@+id/v_buy_nothing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <!--观看记录-->
+        <com.jbtm.parentschool.widget.WatchHistoryView
+            android:id="@+id/v_watch_history"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
     </LinearLayout>
 </LinearLayout>

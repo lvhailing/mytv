@@ -10,44 +10,44 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.VideoActivity;
-import com.jbtm.parentschool.models.MaterModel;
+import com.jbtm.parentschool.models.WatchHistoryModel;
 import com.jbtm.parentschool.utils.ToastUtil;
 
 import java.util.List;
 
-public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapter.ViewHolder> {
-    private List<MaterModel> list;
+public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapter.ViewHolder> {
+    private List<WatchHistoryModel> list;
     private Context mContext;
     private float scaleValue = 1.1f;
     private int scaleTime = 200;
 
-    public CourseDetailAdapter(Context context, List<MaterModel> list) {
+    public WatchHistoryAdapter(Context context, List<WatchHistoryModel> list) {
         super();
         mContext = context;
         this.list = list;
     }
 
-    public void setData(List<MaterModel> list) {
+    public void setData(List<WatchHistoryModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item_course_detail, viewGroup, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.item_watch_history, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
-        viewHolder.tv_title.setText(list.get(position).ma_title);
-        viewHolder.tv_time.setText(list.get(position).ma_time_format);
+        viewHolder.tv_progress.setText("已观看" + list.get(position).progress);
 
-        listenViewFocus(viewHolder.itemView);
+        listenViewFocus(viewHolder.itemView, viewHolder.v_bg);
         listenViewClick(viewHolder.itemView, position);
     }
 
@@ -57,18 +57,20 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView iv_mater;
-        private TextView tv_title;
-        private TextView tv_time;
+        public ImageView iv;
+        private ImageView v_bg;    //边框
+        private TextView tv_progress;
+        private RelativeLayout rl_pic;
         private View itemView;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             this.itemView = itemView;
-            iv_mater = itemView.findViewById(R.id.iv_mater);
-            tv_title = itemView.findViewById(R.id.tv_title);
-            tv_time = itemView.findViewById(R.id.tv_time);
+            iv = itemView.findViewById(R.id.iv);
+            v_bg = itemView.findViewById(R.id.v_bg);
+            tv_progress = itemView.findViewById(R.id.tv_progress);
+            rl_pic = itemView.findViewById(R.id.rl_pic);
         }
     }
 
@@ -76,13 +78,13 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showCustom(list.get(position).ma_title);
+                ToastUtil.showCustom(list.get(position).title);
                 VideoActivity.startActivity(mContext);
             }
         });
     }
 
-    private void listenViewFocus(View itemView) {
+    private void listenViewFocus(View itemView, final ImageView v_bg) {
         itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(final View v, final boolean hasFocus) {
@@ -96,6 +98,7 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onAnimationStart(View view) {
+                                    v_bg.setVisibility(View.VISIBLE);
                                     view.bringToFront();
                                     view.setElevation(100f);   //防止被其他view z轴方向覆盖
                                 }
@@ -117,6 +120,7 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onAnimationStart(View view) {
+                                    v_bg.setVisibility(View.GONE);
                                     view.setElevation(0f); //防止z轴方向，覆盖其他view
                                 }
 

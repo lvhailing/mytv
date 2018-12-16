@@ -17,8 +17,10 @@
     <color name="gray_btm_left">#556079</color>
     <color name="gray_btm_right">#495877</color>
     <color name="textColor">#FFEFEF</color>
+    <color name="textColorHint">#CCFFEFEF</color>
     <color name="textColorDeep">#6D4611</color>
     <color name="textColorOrange">#E3C17B</color>
+    <color name="dialog_bg">#ee414141</color>
     <color name="transparent">#00000000</color>
     <color name="bg_line">#32EFEFEF</color>
 </resources>

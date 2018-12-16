@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.models.PayModel;
+import com.jbtm.parentschool.utils.ToastUtil;
 import com.jbtm.parentschool.widget.PayTypeView;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.List;
 public class PayActivity extends AppCompatActivity implements View.OnClickListener {
     private LinearLayout ll_title_me; // 点击跳转至个人信息
     private LinearLayout ll_title_buy; // 点击跳转课程详情
+    private LinearLayout ll_dandian_arrow; // 单点的箭头，在没有单点是需隐藏
     private PayTypeView yearView;
     private PayTypeView monthView;
     private PayTypeView dandianView;
@@ -60,6 +62,7 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
         iv_year_arrow = findViewById(R.id.iv_year_arrow);
         iv_month_arrow = findViewById(R.id.iv_month_arrow);
         iv_dandian_arrow = findViewById(R.id.iv_dandian_arrow);
+        ll_dandian_arrow = findViewById(R.id.ll_dandian_arrow);
 
         ll_title_me.setOnClickListener(this);
         ll_title_buy.setOnClickListener(this);
@@ -90,6 +93,8 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
         if (from == 0) {
             //从顶部flag来，则包年聚焦
             dandianView.setVisibility(View.GONE);
+            //单点的箭头，在没有单点是需隐藏
+            ll_dandian_arrow.setVisibility(View.GONE);
             yearView.requestFocus();
         } else {
             //从单点购买来，则单点聚焦
@@ -104,12 +109,10 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_title_me:
-                Intent intent1 = new Intent(this, PersonalInformationActivity.class);
-                startActivity(intent1);
+                PersonalInformationActivity.startActivity(this, 0);
                 break;
             case R.id.ll_title_buy:
-                Intent intent2 = new Intent(this, CourseDetailActivity.class);
-                startActivity(intent2);
+                ToastUtil.showCustom("已经在本页");
                 break;
         }
     }

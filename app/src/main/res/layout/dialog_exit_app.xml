@@ -19,7 +19,7 @@
     <RelativeLayout
         android:layout_width="250dp"
         android:layout_height="match_parent"
-        android:background="#ee414141">
+        android:background="@color/dialog_bg">
 
         <TextView
             android:id="@+id/tv_more_time"
@@ -28,9 +28,9 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="92dp"
             android:background="#4a4b50"
+            android:focusable="true"
             android:gravity="center"
             android:text="再看一会儿"
-            android:focusable="true"
             android:textColor="@color/textColor"
             android:textSize="18sp" />
 
@@ -42,8 +42,8 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="25dp"
             android:background="@drawable/gradient_blue"
-            android:gravity="center"
             android:focusable="true"
+            android:gravity="center"
             android:text="退出不看了"
             android:textColor="@color/textColor"
             android:textSize="18sp" />

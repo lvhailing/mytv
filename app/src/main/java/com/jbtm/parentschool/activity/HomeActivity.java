@@ -1,6 +1,5 @@
 package com.jbtm.parentschool.activity;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.adapter.HomeAdapter;
-import com.jbtm.parentschool.dialog.ExitDialog;
+import com.jbtm.parentschool.dialog.ExitAppDialog;
 import com.jbtm.parentschool.utils.ToastUtil;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -28,8 +27,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout ll_title_me; // 点击跳转至个人信息
     private LinearLayout ll_title_buy; // 点击跳转课程详情
     private RelativeLayout rl_jx_2items;   //精选的两个item
-    private RelativeLayout rl_item_1;   //精选的两个item
-    private RelativeLayout rl_item_2;   //精选的两个item
+    private RelativeLayout rl_jx_item_1;   //精选的两个item
+    private RelativeLayout rl_jx_item_2;   //精选的两个item
     private TextView tv_menu_jx;
     private TextView tv_menu_zmgj;
     private TextView tv_menu_hylx;
@@ -60,8 +59,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         tv_menu_gdjy = findViewById(R.id.tv_menu_gdjy);
 
         rl_jx_2items = findViewById(R.id.rl_jx_2items);
-        rl_item_1 = findViewById(R.id.rl_jx_item_1);
-        rl_item_2 = findViewById(R.id.rl_jx_item_2);
+        rl_jx_item_1 = findViewById(R.id.rl_jx_item_1);
+        rl_jx_item_2 = findViewById(R.id.rl_jx_item_2);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
@@ -70,14 +69,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         ll_title_me.setOnClickListener(this);
         ll_title_buy.setOnClickListener(this);
+        rl_jx_item_1.setOnClickListener(this);
+        rl_jx_item_2.setOnClickListener(this);
 
         listenTvFocus(tv_menu_jx);
         listenTvFocus(tv_menu_zmgj);
         listenTvFocus(tv_menu_hylx);
         listenTvFocus(tv_menu_zyl);
         listenTvFocus(tv_menu_gdjy);
-        listenJXFocus(rl_item_1);
-        listenJXFocus(rl_item_2);
+        listenJXFocus(rl_jx_item_1);
+        listenJXFocus(rl_jx_item_2);
     }
 
     private void initData() {
@@ -94,12 +95,16 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_title_me:
-                Intent intent1 = new Intent(this, PersonalInformationActivity.class);
-                startActivity(intent1);
+                PersonalInformationActivity.startActivity(this, 0);
                 break;
             case R.id.ll_title_buy:
-                Intent intent2 = new Intent(this, CourseDetailActivity.class);
-                startActivity(intent2);
+                PayActivity.startActivity(this, 0);
+                break;
+            case R.id.rl_jx_item_1:
+                CourseDetailActivity.startActivity(this);
+                break;
+            case R.id.rl_jx_item_2:
+                CourseDetailActivity.startActivity(this);
                 break;
         }
     }
@@ -110,7 +115,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             long nowTime = System.currentTimeMillis();
             if (nowTime - lastTime < 1500) {
                 //双击了返回键，退出应用
-                showExitDialog();
+                showExitAppDialog();
             } else {
                 lastTime = System.currentTimeMillis();
                 ToastUtil.showCustom("再按退出应用");
@@ -120,19 +125,19 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         return super.onKeyDown(keyCode, event);
     }
 
-    private void showExitDialog() {
-        final ExitDialog dialog = new ExitDialog(this);
+    private void showExitAppDialog() {
+        final ExitAppDialog dialog = new ExitAppDialog(this);
         dialog.show();
-        dialog.setOnMyClickListener(new ExitDialog.MyClickListener() {
+        dialog.setOnMyClickListener(new ExitAppDialog.MyClickListener() {
             @Override
-            public void MoreTime() {
+            public void moreTime() {
                 dialog.dismiss();
-                finish();
             }
 
             @Override
-            public void Exit() {
+            public void exit() {
                 dialog.dismiss();
+                finish();
             }
         });
     }

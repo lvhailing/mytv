@@ -2,33 +2,29 @@ package com.jbtm.parentschool.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
 
-public class ExitDialog extends Dialog {
+public class ExitAppDialog extends Dialog {
     private Context context;
     private MyClickListener listener;
 
     public interface MyClickListener {
-        void MoreTime();
+        void moreTime();
 
-        void Exit();
+        void exit();
     }
 
-    public ExitDialog(Context context) {
+    public ExitAppDialog(Context context) {
         super(context, R.style.MyDialogStyle);
         this.context = context;
     }
@@ -42,7 +38,7 @@ public class ExitDialog extends Dialog {
 
     public void init() {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.dialog_exit, null);
+        View view = inflater.inflate(R.layout.dialog_exit_app, null);
         setContentView(view);
 
         TextView tv_more_time = view.findViewById(R.id.tv_more_time);
@@ -75,10 +71,10 @@ public class ExitDialog extends Dialog {
             int id = v.getId();
             switch (id) {
                 case R.id.tv_more_time:
-                    listener.MoreTime();
+                    listener.moreTime();
                     break;
                 case R.id.tv_exit:
-                    listener.Exit();
+                    listener.exit();
                     break;
             }
         }
