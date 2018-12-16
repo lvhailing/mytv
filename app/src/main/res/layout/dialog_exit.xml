@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="610dp"
+    android:layout_height="290dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="match_parent"
+        android:background="@color/blue"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@mipmap/exit" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:background="#ee414141">
+
+        <TextView
+            android:id="@+id/tv_more_time"
+            android:layout_width="195dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="92dp"
+            android:background="#4a4b50"
+            android:gravity="center"
+            android:text="再看一会儿"
+            android:focusable="true"
+            android:textColor="@color/textColor"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_exit"
+            android:layout_width="195dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/tv_more_time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/gradient_blue"
+            android:gravity="center"
+            android:focusable="true"
+            android:text="退出不看了"
+            android:textColor="@color/textColor"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</LinearLayout>

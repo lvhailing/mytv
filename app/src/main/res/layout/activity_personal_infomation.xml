@@ -1,70 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#556791"
-              android:clipChildren="false"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    android:clipChildren="false"
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <include
         android:id="@+id/rl_title"
+        layout="@layout/include_title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="45dp"
-        android:layout_marginTop="45dp"
-        android:clipChildren="false">
-
-        <ImageView
-            android:layout_width="130dp"
-            android:layout_height="35dp"
-            android:background="@mipmap/logo_title"/>
-
-        <TextView
-            android:id="@+id/tv_title_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:focusable="true"
-            android:text="22:22"
-            android:textColor="@color/textColor"
-            android:textSize="20sp"/>
-
-        <View
-            android:id="@+id/v_title_vertical_line"
-            android:layout_width="1dp"
-            android:layout_height="19dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="17dp"
-            android:layout_toLeftOf="@id/tv_title_time"
-            android:background="@android:color/white"/>
-
-        <ImageView
-            android:id="@+id/iv_title_buy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="17dp"
-            android:layout_toLeftOf="@id/v_title_vertical_line"
-            android:background="@mipmap/buy_normal"
-            android:focusable="true"/>
-
-        <ImageView
-            android:id="@+id/iv_title_me_login"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="17dp"
-            android:layout_toLeftOf="@id/iv_title_buy"
-            android:background="@mipmap/me_login"
-            android:focusable="true"/>
-    </RelativeLayout>
+        android:layout_marginTop="40dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:id="@+id/ll_menu"
@@ -77,120 +30,41 @@
 
             <TextView
                 android:id="@+id/tv_menu_jx"
-                style="@style/TextStyle"
+                style="@style/TextNormalStyle"
                 android:layout_width="125dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="26dp"
+                android:background="@drawable/selector_jingxuan"
                 android:focusable="true"
                 android:gravity="center"
-                android:text="个人信息"/>
+                android:text="个人信息" />
 
             <TextView
                 android:id="@+id/tv_menu_zmgj"
-                style="@style/TextStyle"
+                style="@style/TextNormalStyle"
                 android:layout_width="125dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="@dimen/menu_margin_17"
+                android:background="@drawable/selector_jingxuan"
                 android:focusable="true"
                 android:gravity="center"
-                android:text="订购信息"/>
+                android:text="订购信息" />
 
             <TextView
                 android:id="@+id/tv_menu_hylx"
-                style="@style/TextStyle"
+                style="@style/TextNormalStyle"
                 android:layout_width="125dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="@dimen/menu_margin_17"
+                android:background="@drawable/selector_jingxuan"
                 android:focusable="true"
                 android:gravity="center"
-                android:text="观看记录"/>
+                android:text="观看记录" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="450dp"
-                android:layout_height="0.5dp"
-                android:layout_marginLeft="160dp"
-                android:layout_marginTop="99dp"
-                android:background="#32EFEFEF"
-                />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="187dp"
-                android:layout_marginTop="16dp">
-
-                <ImageView
-                    android:id="@+id/iv_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_login_phone"/>
-
-                <TextView
-                    android:id="@+id/tv_my_phone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="27dp"
-                    android:layout_marginLeft="24.5dp"
-                    android:layout_toRightOf="@id/iv_phone"
-                    android:text="我的手机号:12312312312"
-                    android:textColor="#FFEFEFEF"
-                    android:textSize="18sp"
-                    />
-
-                <Button
-                    android:id="@+id/btn_modify_phone"
-                    android:layout_width="45dp"
-                    android:layout_height="23dp"
-                    android:layout_marginLeft="128.5dp"
-                    android:layout_toRightOf="@id/tv_my_phone"
-                    android:background="#4DFFFFFF"
-                    android:text="修改"
-                    android:textColor="@color/textColor"
-                    />
-            </RelativeLayout>
-
-            <View
-                android:layout_width="450dp"
-                android:layout_height="0.5dp"
-                android:layout_marginLeft="160dp"
-                android:layout_marginTop="16dp"
-                android:background="#32EFEFEF"
-                />
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="180.5dp">
-
-                <Button
-                    android:id="@+id/btn_login_out"
-                    android:layout_width="105dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="19dp"
-                    android:background="#4DFFFFFF"
-                    android:text="退出登录"
-                    android:textColor="@color/textColor"
-                    android:textSize="18sp"
-                    />
-
-                <Button
-                    android:id="@+id/btn_check_update"
-                    android:layout_width="105dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="19dp"
-                    android:layout_toRightOf="@id/btn_login_out"
-                    android:background="#4DFFFFFF"
-                    android:text="检测更新"
-                    android:textColor="@color/textColor"
-                    android:textSize="18sp"
-                    />
-            </RelativeLayout>
-        </LinearLayout>
+        <com.jbtm.parentschool.widget.LoginYesView
+            android:id="@+id/personal_login_yes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </LinearLayout>

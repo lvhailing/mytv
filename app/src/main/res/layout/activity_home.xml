@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_bg"
+    android:clipChildren="false"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/rl_title"
+        layout="@layout/include_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginTop="40dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_title"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_menu_jx"
+                style="@style/TextNormalStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/selector_jingxuan"
+                android:focusable="true"
+                android:gravity="center"
+                android:tag="jx"
+                android:text="精选">
+
+                <requestFocus />
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv_menu_zmgj"
+                style="@style/TextNormalStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/menu_margin_17"
+                android:background="@drawable/selector_jingxuan"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="正面管教" />
+
+            <TextView
+                android:id="@+id/tv_menu_hylx"
+                style="@style/TextNormalStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/menu_margin_17"
+                android:background="@drawable/selector_jingxuan"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="婚姻两性" />
+
+            <TextView
+                android:id="@+id/tv_menu_zyl"
+                style="@style/TextNormalStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/menu_margin_17"
+                android:background="@drawable/selector_jingxuan"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="注意力" />
+
+            <TextView
+                android:id="@+id/tv_menu_gdjy"
+                style="@style/TextNormalStyle"
+                android:layout_width="125dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/menu_margin_17"
+                android:background="@drawable/selector_jingxuan"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="隔代教育" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="vertical"
+            android:paddingBottom="15dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="60dp"
+            android:paddingTop="15dp">
+
+            <RelativeLayout
+                android:id="@+id/rl_jx_2items"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include
+                    android:id="@+id/rl_jx_item_1"
+                    layout="@layout/item_home"
+                    android:layout_width="345dp"
+                    android:layout_height="147dp"
+                    android:layout_margin="0dp" />
+
+                <include
+                    android:id="@+id/rl_jx_item_2"
+                    layout="@layout/item_home"
+                    android:layout_width="345dp"
+                    android:layout_height="147dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="end"
+                    android:layout_margin="0dp" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_course"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:focusable="false" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
