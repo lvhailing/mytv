@@ -2,6 +2,7 @@ package com.jbtm.parentschool.models;
 
 /**
  * Created by lvhailing on 2018/12/15.
+ * 已支付和售卖套餐的对象
  */
 
 public class PayModel {

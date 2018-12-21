@@ -11,23 +11,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.CourseDetailActivity;
+import com.jbtm.parentschool.models.HomeCourseModel;
+
+import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
-    private String[] mData;
     private Context mContext;
+    private List<HomeCourseModel> courseList;
     private float scaleValue = 1.25f;
     private int scaleTime = 200;
 
-    public HomeAdapter(Context context, String[] data) {
+    public HomeAdapter(Context context, List<HomeCourseModel> courseList) {
         super();
         mContext = context;
-        mData = data;
+        this.courseList = courseList;
     }
 
-    public void setData(String[] data) {
-        this.mData = data;
+    public void setData(List<HomeCourseModel> courseList) {
+        this.courseList = courseList;
         notifyDataSetChanged();
     }
 
@@ -39,13 +43,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int i) {
-//        viewHolder.mTextView.setText(mData[i]);
+        Glide.with(mContext)
+                .load(courseList.get(i).photo)
+                .into(viewHolder.iv);
 
+        listenViewFocus(viewHolder.itemView, viewHolder.v_bg);
+        listenViewClick(viewHolder.itemView, i);
     }
 
     @Override
     public int getItemCount() {
-        return mData.length;
+        return courseList == null ? 0 : courseList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,17 +65,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
             iv = itemView.findViewById(R.id.iv);
             v_bg = itemView.findViewById(R.id.v_bg);
-
-            listenViewFocus(itemView, v_bg);
-            listenViewClick(itemView);
         }
     }
 
-    private void listenViewClick(View itemView) {
+    private void listenViewClick(View itemView, final int position) {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CourseDetailActivity.startActivity(mContext);
+                CourseDetailActivity.startActivity(mContext, courseList.get(position).course_id);
             }
         });
     }

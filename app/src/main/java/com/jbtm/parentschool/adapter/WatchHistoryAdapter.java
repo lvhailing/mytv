@@ -79,7 +79,7 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
             @Override
             public void onClick(View v) {
                 ToastUtil.showCustom(list.get(position).title);
-                VideoActivity.startActivity(mContext);
+                VideoActivity.startActivity(mContext,"");
             }
         });
     }

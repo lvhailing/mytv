@@ -4,6 +4,37 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <!-- Leanback required fields -->
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.faketouch"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.sensor"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <!-- End Leanback required fields -->
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -23,5 +54,6 @@
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.VideoActivity" />
         <activity android:name=".activity.PayActivity" />
+        <activity android:name=".activity.TestActivity" />
     </application>
 </manifest>

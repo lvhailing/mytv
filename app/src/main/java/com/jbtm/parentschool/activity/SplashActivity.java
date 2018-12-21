@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.jbtm.parentschool.R;
+import com.jbtm.parentschool.utils.SPUtil;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -25,8 +27,14 @@ public class SplashActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                if (TextUtils.isEmpty(SPUtil.getToken())) {
+                    //说明未登录，去登录页面
+                    PersonalInformationActivity.startActivity(SplashActivity.this, 1);
+                } else {
+                    //去首页
+                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                }
                 finish();
-                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
             }
         }, 1000);
     }

@@ -17,11 +17,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
+import com.jbtm.parentschool.activity.HomeActivity;
+import com.jbtm.parentschool.activity.PersonalInformationActivity;
+import com.jbtm.parentschool.models.CommonModel;
+import com.jbtm.parentschool.network.MyObserverAdapter;
+import com.jbtm.parentschool.network.MyRemoteFactory;
+import com.jbtm.parentschool.network.MyRequestProxy;
+import com.jbtm.parentschool.network.model.ResultModel;
+import com.jbtm.parentschool.utils.RequestUtil;
+import com.jbtm.parentschool.utils.SPUtil;
 import com.jbtm.parentschool.utils.ToastUtil;
 import com.jbtm.parentschool.utils.Util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class PersonalLoginNoView extends RelativeLayout {
@@ -31,6 +45,8 @@ public class PersonalLoginNoView extends RelativeLayout {
     private Button btn_sure;
 
     private Context mContext;
+    private int from;
+    private CountDownTimer timer;
 
     public PersonalLoginNoView(Context context) {
         super(context);
@@ -62,11 +78,9 @@ public class PersonalLoginNoView extends RelativeLayout {
                 if (hasFocus) {
                     tv_get_code.setTextColor(mContext.getResources().getColor(R.color.textColorOrange));
                     startAnim(tv_get_code);
-                    Log.i("aaa", "tv_get_code anim start");
                 } else {
                     tv_get_code.setTextColor(mContext.getResources().getColor(R.color.textColor));
                     stopAnim(tv_get_code);
-                    Log.i("aaa", "tv_get_code anim stop");
                 }
             }
         });
@@ -83,7 +97,11 @@ public class PersonalLoginNoView extends RelativeLayout {
                     ToastUtil.showCustom("请输入正确的手机号");
                     return;
                 }
-                CountDownTimer timer = new CountDownTimer(10_000, 1000) {
+
+                //去获取验证码
+                getCaptcha(et_phone.getText().toString());
+
+                timer = new CountDownTimer(10_000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         tv_get_code.setEnabled(false);
@@ -99,7 +117,7 @@ public class PersonalLoginNoView extends RelativeLayout {
             }
         });
 
-        //确认
+        //确认登录
         btn_sure.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,13 +129,66 @@ public class PersonalLoginNoView extends RelativeLayout {
                     ToastUtil.showCustom("请输入正确的手机号");
                     return;
                 }
-                if (TextUtils.isEmpty(et_phone.getText().toString().trim())) {
+                if (TextUtils.isEmpty(et_code.getText().toString().trim())) {
                     ToastUtil.showCustom("请输入验证码");
                     return;
                 }
-                ToastUtil.showCustom("请等待...");
+                login(et_phone.getText().toString(), et_code.getText().toString());
             }
         });
+    }
+
+    public void getCaptcha(String phone) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("phone", phone);
+        RequestUtil.getBasicMap(params);
+
+        MyRemoteFactory.getInstance().getProxy(MyRequestProxy.class)
+                .sendCaptcha(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MyObserverAdapter<ResultModel>() {
+                    @Override
+                    public void onMyError(Throwable e) {
+                        ToastUtil.showCustom("调接口失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(ResultModel result) {
+                        ToastUtil.showCustom("验证码发送成功");
+                    }
+                });
+    }
+
+    public void login(String phone, String captcha) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("phone", phone);
+        params.put("captcha", captcha);
+        RequestUtil.getBasicMap(params);
+
+        MyRemoteFactory.getInstance().getProxy(MyRequestProxy.class)
+                .login(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MyObserverAdapter<ResultModel<CommonModel>>() {
+                    @Override
+                    public void onMyError(Throwable e) {
+                        ToastUtil.showCustom("调接口失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(ResultModel<CommonModel> result) {
+                        if (result.result != null) {
+                            SPUtil.putToken(result.result.access_token);
+                            ToastUtil.showCustom("登录成功：" + result.result.access_token);
+                            if (from == 1) {
+                                //从未登录来登录成功后去首页
+                                HomeActivity.startActivity(mContext);
+                                ((PersonalInformationActivity) mContext).finish();
+                            }
+                        }
+                    }
+                });
     }
 
     private void startAnim(View view) {
@@ -144,5 +215,16 @@ public class PersonalLoginNoView extends RelativeLayout {
         animatorSet.setDuration(200);
         animatorSet.playTogether(animatorList);
         animatorSet.start();
+    }
+
+    public void setFrom(int from) {
+        this.from = from;
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        timer.cancel();
+        Log.i("aaa", "onDetachedFromWindow time cancel");
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_bg"
@@ -113,12 +114,35 @@
                 android:background="@mipmap/qr_code_bg"
                 android:orientation="vertical">
 
-                <ImageView
+                <RelativeLayout
                     android:layout_width="260dp"
                     android:layout_height="260dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="28dp"
-                    android:background="@mipmap/qr_code" />
+                    android:layout_marginTop="28dp">
+
+                    <ImageView
+                        android:id="@+id/iv_qrcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/qr_code" />
+
+                    <View
+                        android:id="@+id/v_pay_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#99000000"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/iv_pay_success"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
+                        android:layout_centerInParent="true"
+                        android:background="@mipmap/pay_sucess"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+                </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -138,12 +162,14 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/iv_zfb"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@drawable/selector_zfb"
                     android:focusable="true" />
 
                 <ImageView
+                    android:id="@+id/iv_wx"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="30dp"

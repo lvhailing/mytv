@@ -46,7 +46,6 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
         setContentView(R.layout.activity_personal_infomation);
 
         initView();
-        initData();
     }
 
     private void initView() {
@@ -69,16 +68,27 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
         listenTvFocus(tv_menu_buy);
         listenTvFocus(tv_menu_watch_history);
 
-        tv_menu_personal.requestFocus();
-
         ll_title_me.setOnClickListener(this);
         ll_title_buy.setOnClickListener(this);
-    }
 
-    private void initData() {
         //0（默认值）从顶部flag来。1未登录，从登录来
         from = getIntent().getIntExtra("from", 0);
 
+        if (from == 1) {
+            //未登录，则禁用focus
+            tv_menu_personal.setFocusable(false);
+            tv_menu_buy.setFocusable(false);
+            tv_menu_watch_history.setFocusable(false);
+            ll_title_me.setFocusable(false);
+            ll_title_buy.setFocusable(false);
+
+            //未登录界面呈现
+            setVisible(v_personal_login_no);
+            v_personal_login_no.setFrom(from);
+        } else {
+            //已登录，则默认选中个人信息
+            tv_menu_personal.requestFocus();
+        }
     }
 
     private boolean personalFlag;
@@ -173,7 +183,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                 ToastUtil.showCustom("已经在本页");
                 break;
             case R.id.ll_title_buy:
-                PayActivity.startActivity(this, 0);
+                PayActivity.startActivity(this);
                 break;
         }
     }

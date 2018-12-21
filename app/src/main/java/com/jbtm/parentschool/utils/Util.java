@@ -1,6 +1,14 @@
 package com.jbtm.parentschool.utils;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
+import android.util.Base64;
+
+import com.jbtm.parentschool.MyApplication;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by lvhailing on 2018/12/16.
@@ -23,5 +31,32 @@ public class Util {
             return false;
         else
             return phoneNum.matches(telRegex);
+    }
+
+    public static int getVersionName() {
+        PackageInfo pInfo = null;
+        try {
+            pInfo = MyApplication.instance.getPackageManager().getPackageInfo(MyApplication.instance.getPackageName(), 0);
+            return pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public static String getBase64(String str) {
+        String result = "";
+        if (str != null) {
+            try {
+                result = new String(Base64.encode(str.getBytes("utf-8"), Base64.NO_WRAP), "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public static String getBase64(byte[] bytes) {
+        return new String(Base64.encode(bytes, Base64.DEFAULT));
     }
 }

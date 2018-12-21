@@ -13,25 +13,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
+import com.jbtm.parentschool.activity.CourseDetailActivity;
 import com.jbtm.parentschool.activity.VideoActivity;
-import com.jbtm.parentschool.models.MaterModel;
+import com.jbtm.parentschool.models.DetailMaterModel;
 import com.jbtm.parentschool.utils.ToastUtil;
 
 import java.util.List;
 
 public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapter.ViewHolder> {
-    private List<MaterModel> list;
+    private List<DetailMaterModel> list;
     private Context mContext;
     private float scaleValue = 1.1f;
     private int scaleTime = 200;
 
-    public CourseDetailAdapter(Context context, List<MaterModel> list) {
+    public CourseDetailAdapter(Context context, List<DetailMaterModel> list) {
         super();
         mContext = context;
         this.list = list;
     }
 
-    public void setData(List<MaterModel> list) {
+    public void setData(List<DetailMaterModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -76,8 +77,9 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showCustom(list.get(position).ma_title);
-                VideoActivity.startActivity(mContext);
+                ToastUtil.showCustom("请稍等");
+                //去请求播放地址
+                ((CourseDetailActivity)mContext).getPlayUrl(list.get(position).ma_id);
             }
         });
     }

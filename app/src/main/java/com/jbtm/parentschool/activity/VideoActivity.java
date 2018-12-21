@@ -14,8 +14,9 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 public class VideoActivity extends Activity {
     private JCVideoPlayerStandard jcVideoPlayerStandard;
 
-    public static void startActivity(Context context) {
+    public static void startActivity(Context context, String url) {
         Intent intent = new Intent(context, VideoActivity.class);
+        intent.putExtra("url", url);
         context.startActivity(intent);
     }
 
@@ -29,7 +30,9 @@ public class VideoActivity extends Activity {
 
         jcVideoPlayerStandard = findViewById(R.id.video_player);
 
-        String url = "http://jbtm-test.oss-cn-beijing.aliyuncs.com/v3.0/20181121/20181121102620187.mp4";
+        String url = getIntent().getStringExtra("url");
+
+//        String url = "http://jbtm-test.oss-cn-beijing.aliyuncs.com/v3.0/20181121/20181121102620187.mp4";
         jcVideoPlayerStandard.setUp(url, JCVideoPlayerStandard.SCREEN_LAYOUT_LIST, "课堂");
         jcVideoPlayerStandard.startPlayLocic();
     }
