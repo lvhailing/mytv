@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="610dp"
-    android:layout_height="290dp"
+    android:layout_width="@dimen/d_1220dp"
+    android:layout_height="@dimen/d_580dp"
     android:orientation="horizontal">
 
     <LinearLayout
-        android:layout_width="360dp"
+        android:layout_width="@dimen/d_720dp"
         android:layout_height="match_parent"
         android:background="@color/blue"
         android:orientation="horizontal">
@@ -17,16 +17,16 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="250dp"
+        android:layout_width="@dimen/d_500dp"
         android:layout_height="match_parent"
         android:background="@color/dialog_bg">
 
         <TextView
             android:id="@+id/tv_more_time"
-            android:layout_width="195dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/d_390dp"
+            android:layout_height="@dimen/d_80dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="92dp"
+            android:layout_marginTop="@dimen/d_184dp"
             android:background="#4a4b50"
             android:focusable="true"
             android:gravity="center"
@@ -36,11 +36,11 @@
 
         <TextView
             android:id="@+id/tv_exit"
-            android:layout_width="195dp"
-            android:layout_height="40dp"
+            android:layout_width="@dimen/d_390dp"
+            android:layout_height="@dimen/d_80dp"
             android:layout_below="@id/tv_more_time"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="@dimen/d_50dp"
             android:background="@drawable/gradient_blue"
             android:focusable="true"
             android:gravity="center"

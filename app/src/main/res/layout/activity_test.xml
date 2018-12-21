@@ -12,20 +12,20 @@
 
         <EditText
             android:id="@+id/et"
-            android:layout_width="100dp"
+            android:layout_width="@dimen/d_200dp"
             android:layout_height="wrap_content" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/d_40dp"
             android:onClick="captcha"
             android:text="验证码" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="@dimen/d_40dp"
             android:onClick="login"
             android:text="登录" />
     </LinearLayout>
@@ -41,10 +41,10 @@
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/d_200dp"
+        android:layout_height="@dimen/d_200dp"
         android:layout_below="@id/tv"
         android:layout_centerInParent="true"
-        android:layout_margin="20dp" />
+        android:layout_margin="@dimen/d_40dp" />
 
 </RelativeLayout>

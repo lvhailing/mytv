@@ -9,12 +9,12 @@
 
     <TextView
         android:id="@+id/tv_toast_text"
-        android:layout_width="170dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/d_340dp"
+        android:layout_height="@dimen/d_120dp"
         android:background="@drawable/bg_rect_toast"
         android:gravity="center"
-        android:paddingLeft="7dp"
-        android:paddingRight="7dp"
+        android:paddingLeft="@dimen/d_14dp"
+        android:paddingRight="@dimen/d_14dp"
         android:textColor="@android:color/white"
         android:textSize="19sp" />
 

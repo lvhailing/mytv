@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="165dp"
-    android:layout_height="104dp"
-    android:layout_margin="6dp"
+    android:layout_width="@dimen/d_330dp"
+    android:layout_height="@dimen/d_208dp"
+    android:layout_margin="@dimen/d_12dp"
     android:focusable="true"
-    android:padding="2dp">
+    android:padding="@dimen/d_4dp">
 
     <ImageView
         android:id="@+id/iv"

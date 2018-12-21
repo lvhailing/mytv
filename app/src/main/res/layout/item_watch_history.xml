@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="164dp"
-    android:layout_height="128dp"
+    android:layout_width="@dimen/d_328dp"
+    android:layout_height="@dimen/d_256dp"
     android:focusable="true"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_pic"
-        android:layout_width="165dp"
-        android:layout_height="104dp"
-        android:padding="2dp">
+        android:layout_width="@dimen/d_330dp"
+        android:layout_height="@dimen/d_208dp"
+        android:padding="@dimen/d_4dp">
 
         <ImageView
             android:id="@+id/iv"
