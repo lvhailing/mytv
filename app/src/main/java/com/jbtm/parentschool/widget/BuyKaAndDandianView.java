@@ -52,11 +52,6 @@ public class BuyKaAndDandianView extends LinearLayout {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setFocusable(false);
 
-        list = new ArrayList<>();
-        list.add(new WatchHistoryModel(1, "美国课程", "aa", 30));
-        list.add(new WatchHistoryModel(1, "美国课程", "aa", 40));
-        list.add(new WatchHistoryModel(1, "美国课程", "aa", 50));
-        list.add(new WatchHistoryModel(1, "美国课程", "aa", 60));
         adapter = new WatchHistoryAdapter(mContext, list);
         recyclerView.setAdapter(adapter);
     }

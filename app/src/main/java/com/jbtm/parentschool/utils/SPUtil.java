@@ -74,4 +74,12 @@ public class SPUtil {
     public static String getToken() {
         return getSp(MyApplication.instance).getString("token", "");
     }
+
+    public static void putPhone(String token) {
+        getSp(MyApplication.instance).edit().putString("phone", token).commit();
+    }
+
+    public static String getPhone() {
+        return getSp(MyApplication.instance).getString("phone", "");
+    }
 }

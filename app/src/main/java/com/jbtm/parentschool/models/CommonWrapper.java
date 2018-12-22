@@ -10,5 +10,5 @@ import java.util.List;
 public class CommonWrapper {
     public List<WatchHistoryModel> courses;
     public VersionModel new_version;
-    public DetailCourseModel course;
+    public CourseModel course;
 }

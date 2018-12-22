@@ -17,8 +17,25 @@ import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.PersonalInformationActivity;
 import com.jbtm.parentschool.dialog.ExitAppDialog;
 import com.jbtm.parentschool.dialog.ExitLoginDialog;
+import com.jbtm.parentschool.models.CommonModel;
+import com.jbtm.parentschool.models.CommonWrapper;
 import com.jbtm.parentschool.models.PayModel;
+import com.jbtm.parentschool.models.VersionModel;
+import com.jbtm.parentschool.network.MyObserverAdapter;
+import com.jbtm.parentschool.network.MyRemoteFactory;
+import com.jbtm.parentschool.network.MyRequestProxy;
+import com.jbtm.parentschool.network.model.ResultModel;
+import com.jbtm.parentschool.update.version.UpdateManager;
+import com.jbtm.parentschool.utils.RequestUtil;
+import com.jbtm.parentschool.utils.SPUtil;
 import com.jbtm.parentschool.utils.ToastUtil;
+import com.jbtm.parentschool.utils.Util;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class PersonalLoginYesView extends RelativeLayout implements View.OnClickListener {
@@ -50,14 +67,11 @@ public class PersonalLoginYesView extends RelativeLayout implements View.OnClick
 
         btn_login_out.setOnClickListener(this);
         btn_check_update.setOnClickListener(this);
-    }
 
-    public void setData(String phone, String version) {
         //手机号
-        tv_my_phone.setText("我的手机号:" + phone);
-
+        tv_my_phone.setText("我的手机号:" + SPUtil.getPhone());
         //最新版本
-        tv_version.setText("已是最新版本:" + version);
+        tv_version.setText("已更新到:" + Util.getVersionName());
     }
 
     @Override
@@ -67,9 +81,38 @@ public class PersonalLoginYesView extends RelativeLayout implements View.OnClick
                 showExitLoginDialog();
                 break;
             case R.id.btn_check_update:    //版本更新
-                ToastUtil.showCustom("版本更新");
+                checkUpdate();
                 break;
         }
+    }
+
+    //检查更新
+    private void checkUpdate() {
+        Map<String, Object> params = Util.getVersionCodeAndName(mContext);
+        RequestUtil.getBasicMap(params);
+
+        MyRemoteFactory.getInstance().getProxy(MyRequestProxy.class)
+                .checkVersion(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>() {
+                    @Override
+                    public void onMyError(Throwable e) {
+                        ToastUtil.showCustom("调接口失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(ResultModel<CommonWrapper> result) {
+                        if (result.result != null && result.result.new_version != null) {
+                            //弹出升级对话框
+                            VersionModel versionModel = result.result.new_version;
+                            new UpdateManager().checkVersion(mContext, versionModel);
+                        } else {
+                            //已是最新版本
+                            ToastUtil.showCustom("已是最新版本");
+                        }
+                    }
+                });
     }
 
     private void showExitLoginDialog() {

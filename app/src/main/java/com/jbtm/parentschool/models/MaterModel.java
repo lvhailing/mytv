@@ -5,7 +5,7 @@ package com.jbtm.parentschool.models;
  * 课程对象
  */
 
-public class DetailMaterModel {
+public class MaterModel {
     public int ma_id;
     public long course_id;
     public String ma_title;
@@ -14,7 +14,7 @@ public class DetailMaterModel {
     public int trial;
     public String ma_time_format;
 
-    public DetailMaterModel(String ma_title, String ma_time_format) {
+    public MaterModel(String ma_title, String ma_time_format) {
         this.ma_title = ma_title;
         this.ma_time_format = ma_time_format;
     }

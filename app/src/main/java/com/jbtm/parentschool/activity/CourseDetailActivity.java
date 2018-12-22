@@ -16,7 +16,7 @@ import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.adapter.CourseDetailAdapter;
 import com.jbtm.parentschool.models.CommonModel;
 import com.jbtm.parentschool.models.CommonWrapper;
-import com.jbtm.parentschool.models.DetailCourseModel;
+import com.jbtm.parentschool.models.CourseModel;
 import com.jbtm.parentschool.network.MyObserverAdapter;
 import com.jbtm.parentschool.network.MyRemoteFactory;
 import com.jbtm.parentschool.network.MyRequestProxy;
@@ -121,7 +121,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                         closeProgressDialog();
 
                         if (result.result != null && result.result.course != null) {
-                            DetailCourseModel courseModel = result.result.course;
+                            CourseModel courseModel = result.result.course;
                             //设置基本数据
                             setBaseData(courseModel);
 
@@ -142,7 +142,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     }
 
     //设置基本数据
-    private void setBaseData(DetailCourseModel course) {
+    private void setBaseData(CourseModel course) {
         if (!TextUtils.isEmpty(course.photo)) {
             setImageView(iv_course, course.photo);
         }
@@ -158,7 +158,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     }
 
     //设置选集
-    private void setMaters(DetailCourseModel course) {
+    private void setMaters(CourseModel course) {
         CourseDetailAdapter adapter = new CourseDetailAdapter(this, course.maters);
         recyclerView.setAdapter(adapter);
     }

@@ -5,13 +5,21 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
+import com.jbtm.parentschool.models.OrderWrapper;
 import com.jbtm.parentschool.models.PayModel;
+import com.jbtm.parentschool.models.WatchHistoryModel;
+import com.jbtm.parentschool.network.MyObserverAdapter;
+import com.jbtm.parentschool.network.MyRemoteFactory;
+import com.jbtm.parentschool.network.MyRequestProxy;
+import com.jbtm.parentschool.network.model.ResultModel;
+import com.jbtm.parentschool.utils.RequestUtil;
+import com.jbtm.parentschool.utils.SPUtil;
 import com.jbtm.parentschool.utils.ToastUtil;
 import com.jbtm.parentschool.widget.BuyKaAndDandianView;
 import com.jbtm.parentschool.widget.BuyKaView;
@@ -20,11 +28,17 @@ import com.jbtm.parentschool.widget.PersonalLoginNoView;
 import com.jbtm.parentschool.widget.PersonalLoginYesView;
 import com.jbtm.parentschool.widget.WatchHistoryView;
 
+import java.util.List;
+import java.util.Map;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
 /**
  * Created by junde on 2018/12/7.
  */
 
-public class PersonalInformationActivity extends AppCompatActivity implements View.OnClickListener {
+public class PersonalInformationActivity extends BaseActivity implements View.OnClickListener {
     private PersonalLoginYesView v_personal_login_yes;
     private PersonalLoginNoView v_personal_login_no;
     private BuyKaAndDandianView v_buy_ka_and_dandian;
@@ -91,7 +105,6 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
         }
     }
 
-    private boolean personalFlag;
     private int buyIndex = 0;
 
     private void listenTvFocus(TextView v) {
@@ -105,8 +118,7 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                 if (b) {
                     switch (view.getId()) {
                         case R.id.tv_menu_personal: //个人信息
-                            personalFlag = !personalFlag;
-                            if (personalFlag) {
+                            if (TextUtils.isEmpty(SPUtil.getToken())) {
                                 //个人信息：未登录显示
                                 setVisible(v_personal_login_no);
                             } else {
@@ -115,24 +127,8 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                             }
                             break;
                         case R.id.tv_menu_buy: //订购信息
-                            buyIndex++;
-                            if (buyIndex == 1) {
-                                //订购信息：订了卡和单点
-                                setVisible(v_buy_ka_and_dandian);
-                                v_buy_ka_and_dandian.setKaInfo(new PayModel("包全年套餐", "100天"));
-                            } else if (buyIndex == 2) {
-                                //订购信息：仅订了单点
-                                setVisible(v_buy_ka_and_dandian);
-                                v_buy_ka_and_dandian.setKaInfo(null);
-                            } else if (buyIndex == 3) {
-                                //订购信息：仅订了卡
-                                setVisible(v_buy_ka);
-                                v_buy_ka.setKaInfo(new PayModel("包全年套餐", "100天"));
-                            } else if (buyIndex == 4) {
-                                //订购信息：都没订
-                                setVisible(v_buy_nothing);
-                                buyIndex = 0;
-                            }
+//                            setMenuBuy();
+                            setMenuBuyPresent();
                             break;
                         case R.id.tv_menu_watch_history: //观看记录
                             //观看记录
@@ -142,6 +138,74 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
                 }
             }
         });
+    }
+
+    //获取订购信息的数据，呈现在界面上
+    private void setMenuBuyPresent() {
+        Map<String, Object> params = RequestUtil.getBasicMapNoBusinessParams();
+
+        MyRemoteFactory.getInstance().getProxy(MyRequestProxy.class)
+                .getMyOrders(params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MyObserverAdapter<ResultModel<OrderWrapper>>() {
+                    @Override
+                    public void onMyError(Throwable e) {
+                        ToastUtil.showCustom("调接口失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(ResultModel<OrderWrapper> result) {
+                        //套餐包业务
+                        List<PayModel> myPackages = result.result.my_packages;
+                        //单点业务
+                        List<WatchHistoryModel> myCourses = result.result.my_courses;
+
+                        boolean hasKa = myPackages != null && myPackages.size() > 0;
+                        boolean hasDandian = myCourses != null && myCourses.size() > 0;
+
+                        if (hasKa && hasDandian) {
+                            //订购信息：订了卡和单点
+                            setVisible(v_buy_ka_and_dandian);
+                            v_buy_ka_and_dandian.setKaInfo(myPackages.get(0));
+                            v_buy_ka_and_dandian.setDandianInfo(myCourses);
+                        } else if (hasDandian) {
+                            //订购信息：仅订了单点
+                            setVisible(v_buy_ka_and_dandian);
+                            v_buy_ka_and_dandian.setKaInfo(null);
+                            v_buy_ka_and_dandian.setDandianInfo(myCourses);
+                        } else if (hasKa) {
+                            //订购信息：仅订了卡
+                            setVisible(v_buy_ka);
+                            v_buy_ka.setKaInfo(myPackages.get(0));
+                        } else {
+                            //订购信息：都没订
+                            setVisible(v_buy_nothing);
+                        }
+                    }
+                });
+    }
+
+    //将本地写死的数据，呈现在界面上
+    private void setMenuBuy() {
+        buyIndex++;
+        if (buyIndex == 1) {
+            //订购信息：订了卡和单点
+            setVisible(v_buy_ka_and_dandian);
+            v_buy_ka_and_dandian.setKaInfo(new PayModel("包全年套餐", "100天"));
+        } else if (buyIndex == 2) {
+            //订购信息：仅订了单点
+            setVisible(v_buy_ka_and_dandian);
+            v_buy_ka_and_dandian.setKaInfo(null);
+        } else if (buyIndex == 3) {
+            //订购信息：仅订了卡
+            setVisible(v_buy_ka);
+            v_buy_ka.setKaInfo(new PayModel("包全年套餐", "100天"));
+        } else if (buyIndex == 4) {
+            //订购信息：都没订
+            setVisible(v_buy_nothing);
+            buyIndex = 0;
+        }
     }
 
     private void setTextSize(TextView view, boolean b) {
@@ -172,8 +236,9 @@ public class PersonalInformationActivity extends AppCompatActivity implements Vi
     }
 
     public void gotoLogin() {
-        //个人信息：未登录显示
-        setVisible(v_personal_login_no);
+        //退出登录，应关闭之前所有界面，重新打开登录页
+        SPUtil.putToken("");
+        PersonalInformationActivity.startActivity(this, 1);
     }
 
     @Override

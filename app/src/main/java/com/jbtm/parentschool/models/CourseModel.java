@@ -7,7 +7,7 @@ import java.util.List;
  * 详情页整体对象
  */
 
-public class DetailCourseModel {
+public class CourseModel {
     public int course_id;
     public String title;
     public String expert_name;
@@ -21,5 +21,5 @@ public class DetailCourseModel {
     public boolean is_order;
     public int progress;
     public String publish_y;
-    public List<DetailMaterModel> maters;
+    public List<MaterModel> maters;
 }

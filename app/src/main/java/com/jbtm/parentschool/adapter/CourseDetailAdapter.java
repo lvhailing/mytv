@@ -14,25 +14,24 @@ import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.CourseDetailActivity;
-import com.jbtm.parentschool.activity.VideoActivity;
-import com.jbtm.parentschool.models.DetailMaterModel;
+import com.jbtm.parentschool.models.MaterModel;
 import com.jbtm.parentschool.utils.ToastUtil;
 
 import java.util.List;
 
 public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapter.ViewHolder> {
-    private List<DetailMaterModel> list;
+    private List<MaterModel> list;
     private Context mContext;
     private float scaleValue = 1.1f;
     private int scaleTime = 200;
 
-    public CourseDetailAdapter(Context context, List<DetailMaterModel> list) {
+    public CourseDetailAdapter(Context context, List<MaterModel> list) {
         super();
         mContext = context;
         this.list = list;
     }
 
-    public void setData(List<DetailMaterModel> list) {
+    public void setData(List<MaterModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }

@@ -9,6 +9,8 @@ import android.util.Base64;
 import com.jbtm.parentschool.MyApplication;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by lvhailing on 2018/12/16.
@@ -33,7 +35,7 @@ public class Util {
             return phoneNum.matches(telRegex);
     }
 
-    public static int getVersionName() {
+    public static int getVersionCode() {
         PackageInfo pInfo = null;
         try {
             pInfo = MyApplication.instance.getPackageManager().getPackageInfo(MyApplication.instance.getPackageName(), 0);
@@ -44,19 +46,32 @@ public class Util {
         }
     }
 
-    public static String getBase64(String str) {
-        String result = "";
-        if (str != null) {
-            try {
-                result = new String(Base64.encode(str.getBytes("utf-8"), Base64.NO_WRAP), "utf-8");
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+    public static String getVersionName() {
+        PackageInfo pInfo = null;
+        try {
+            pInfo = MyApplication.instance.getPackageManager().getPackageInfo(MyApplication.instance.getPackageName(), 0);
+            return pInfo.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return "";
         }
-        return result;
     }
 
-    public static String getBase64(byte[] bytes) {
-        return new String(Base64.encode(bytes, Base64.DEFAULT));
+    public static Map<String, Object> getVersionCodeAndName(Context context) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        String version = "";
+        int code = 0;
+        PackageManager packageManager = context.getPackageManager();
+        PackageInfo packInfo;
+        try {
+            packInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            version = packInfo.versionName;
+            code = packInfo.versionCode;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        result.put("versionName", version);
+        result.put("versionCode", code);
+        return result;
     }
 }

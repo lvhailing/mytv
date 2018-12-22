@@ -2,7 +2,6 @@ package com.jbtm.parentschool.utils;
 
 import com.google.gson.Gson;
 import com.jbtm.parentschool.aes.Security;
-import com.jbtm.parentschool.utils.Util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +17,7 @@ public class RequestUtil {
         Map<String, Object> params = new HashMap<>();
         try {
             String data = "";
-            String md5 = Security.sign(data, Util.getVersionName());
+            String md5 = Security.sign(data, Util.getVersionCode());
             params.put("data", "");
             params.put("accept_sign", "");
         } catch (Exception e) {
@@ -31,7 +30,7 @@ public class RequestUtil {
         String json = new Gson().toJson(params);
         try {
             String data = Security.encrypt(json);
-            String md5 = Security.sign(data, Util.getVersionName());
+            String md5 = Security.sign(data, Util.getVersionCode());
             params.put("data", data);
             params.put("accept_sign", md5);
         } catch (Exception e) {

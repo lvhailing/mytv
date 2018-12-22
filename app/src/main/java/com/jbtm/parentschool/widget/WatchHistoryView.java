@@ -5,27 +5,32 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
-import com.jbtm.parentschool.adapter.HomeAdapter;
 import com.jbtm.parentschool.adapter.WatchHistoryAdapter;
+import com.jbtm.parentschool.models.CommonWrapper;
+import com.jbtm.parentschool.models.HomeWrapper;
 import com.jbtm.parentschool.models.WatchHistoryModel;
+import com.jbtm.parentschool.network.MyObserverAdapter;
+import com.jbtm.parentschool.network.MyRemoteFactory;
+import com.jbtm.parentschool.network.MyRequestProxy;
+import com.jbtm.parentschool.network.model.ResultModel;
+import com.jbtm.parentschool.utils.RequestUtil;
 import com.jbtm.parentschool.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 
 public class WatchHistoryView extends LinearLayout {
     private RecyclerView recyclerView;
     private Context mContext;
-    private List<WatchHistoryModel> list;
 
     public WatchHistoryView(Context context) {
         super(context);
@@ -49,18 +54,31 @@ public class WatchHistoryView extends LinearLayout {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setFocusable(false);
 
-        list = new ArrayList<>();
-        list.add(new WatchHistoryModel(1, "美国课程", "aa", 30));
-        list.add(new WatchHistoryModel(1, "美国课程", "aa", 40));
-        list.add(new WatchHistoryModel(1, "美国课程", "aa", 50));
-        list.add(new WatchHistoryModel(1, "美国课程", "aa", 60));
-        list.add(new WatchHistoryModel(1, "美国课程", "aa", 70));
-        list.add(new WatchHistoryModel(1, "美国课程", "aa", 80));
-        WatchHistoryAdapter adapter = new WatchHistoryAdapter(mContext, list);
-        recyclerView.setAdapter(adapter);
+        getHistory();
     }
 
-    public void setData(List<WatchHistoryModel> list) {
-        this.list = list;
+    //获取播放记录
+    private void getHistory() {
+        Map<String, Object> map = RequestUtil.getBasicMapNoBusinessParams();
+
+        MyRemoteFactory.getInstance().getProxy(MyRequestProxy.class)
+                .getHistory(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>() {
+                    @Override
+                    public void onMyError(Throwable e) {
+                        ToastUtil.showCustom("调接口失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(ResultModel<CommonWrapper> result) {
+                        if (result.result != null) {
+                            List<WatchHistoryModel> courses = result.result.courses;
+                            WatchHistoryAdapter adapter = new WatchHistoryAdapter(mContext, courses);
+                            recyclerView.setAdapter(adapter);
+                        }
+                    }
+                });
     }
 }

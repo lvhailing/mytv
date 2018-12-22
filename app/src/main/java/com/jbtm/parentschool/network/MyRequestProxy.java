@@ -4,6 +4,7 @@ package com.jbtm.parentschool.network;
 import com.jbtm.parentschool.models.CommonModel;
 import com.jbtm.parentschool.models.CommonWrapper;
 import com.jbtm.parentschool.models.HomeWrapper;
+import com.jbtm.parentschool.models.OrderWrapper;
 import com.jbtm.parentschool.network.model.DataModel;
 import com.jbtm.parentschool.network.model.DataWrapper;
 import com.jbtm.parentschool.network.model.ResultModel;
@@ -74,4 +75,19 @@ public interface MyRequestProxy {
     @POST("tv/pay/order-qry")
     @FormUrlEncoded
     Observable<ResultModel> getPayResult(@FieldMap Map<String, Object> params);
+
+    //获取历史观看记录
+    @POST("tv/center/history")
+    @FormUrlEncoded
+    Observable<ResultModel<CommonWrapper>> getHistory(@FieldMap Map<String, Object> params);
+
+    //获取我的订购信息
+    @POST("tv/center/my-orders")
+    @FormUrlEncoded
+    Observable<ResultModel<OrderWrapper>> getMyOrders(@FieldMap Map<String, Object> params);
+
+    //获取我的订购信息
+    @POST("tv/index/check-version")
+    @FormUrlEncoded
+    Observable<ResultModel<CommonWrapper>> checkVersion(@FieldMap Map<String, Object> params);
 }
