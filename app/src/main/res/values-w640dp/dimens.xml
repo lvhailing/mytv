@@ -56,6 +56,7 @@
     <dimen name="d_264dp">88dp</dimen>
     <dimen name="d_268dp">89dp</dimen>
     <dimen name="d_294dp">98dp</dimen>
+    <dimen name="d_300dp">100dp</dimen>
     <dimen name="d_308dp">103dp</dimen>
     <dimen name="d_328dp">109dp</dimen>
     <dimen name="d_330dp">110dp</dimen>

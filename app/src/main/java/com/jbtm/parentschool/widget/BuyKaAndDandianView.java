@@ -24,7 +24,6 @@ public class BuyKaAndDandianView extends LinearLayout {
     private TextView tv_ka;
     private LinearLayout ll_dandian;
     private Context mContext;
-    private List<WatchHistoryModel> list;
     private WatchHistoryAdapter adapter;
 
     public BuyKaAndDandianView(Context context) {
@@ -52,7 +51,7 @@ public class BuyKaAndDandianView extends LinearLayout {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setFocusable(false);
 
-        adapter = new WatchHistoryAdapter(mContext, list);
+        adapter = new WatchHistoryAdapter(mContext, null);
         recyclerView.setAdapter(adapter);
     }
 
@@ -67,7 +66,6 @@ public class BuyKaAndDandianView extends LinearLayout {
     }
 
     public void setDandianInfo(List<WatchHistoryModel> list) {
-        this.list = list;
-        adapter.notifyDataSetChanged();
+        adapter.setData(list);
     }
 }

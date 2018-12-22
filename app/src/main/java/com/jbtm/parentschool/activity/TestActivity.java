@@ -72,7 +72,7 @@ public class TestActivity extends AppCompatActivity {
                     @Override
                     public void onMySuccess(ResultModel<CommonModel> result) {
 
-                        SPUtil.putToken(result.result.access_token);
+                        SPUtil.setToken(result.result.access_token);
 
                         ToastUtil.showCustom(result.result.access_token);
                     }

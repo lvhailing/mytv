@@ -32,8 +32,8 @@
 
     <LinearLayout
         android:id="@+id/ll_title_buy"
-        android:layout_width="@dimen/d_54dp"
-        android:layout_height="@dimen/d_54dp"
+        android:layout_width="@dimen/d_74dp"
+        android:layout_height="@dimen/d_74dp"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/d_20dp"
         android:layout_toLeftOf="@id/v_title_vertical_line"

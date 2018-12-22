@@ -13,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.jbtm.parentschool.R;
+import com.jbtm.parentschool.activity.CourseDetailActivity;
 import com.jbtm.parentschool.activity.VideoActivity;
 import com.jbtm.parentschool.models.WatchHistoryModel;
 import com.jbtm.parentschool.utils.ToastUtil;
@@ -45,7 +47,9 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
-        viewHolder.tv_progress.setText("已观看" + list.get(position).progress);
+        viewHolder.tv_progress.setText("已观看" + list.get(position).progress + "%");
+
+        setImageView(viewHolder.iv, list.get(position).photo);
 
         listenViewFocus(viewHolder.itemView, viewHolder.v_bg);
         listenViewClick(viewHolder.itemView, position);
@@ -60,7 +64,6 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
         public ImageView iv;
         private ImageView v_bg;    //边框
         private TextView tv_progress;
-        private RelativeLayout rl_pic;
         private View itemView;
 
         public ViewHolder(View itemView) {
@@ -70,7 +73,6 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
             iv = itemView.findViewById(R.id.iv);
             v_bg = itemView.findViewById(R.id.v_bg);
             tv_progress = itemView.findViewById(R.id.tv_progress);
-            rl_pic = itemView.findViewById(R.id.rl_pic);
         }
     }
 
@@ -79,7 +81,7 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
             @Override
             public void onClick(View v) {
                 ToastUtil.showCustom(list.get(position).title);
-                VideoActivity.startActivity(mContext,"");
+                CourseDetailActivity.startActivity(mContext, list.get(position).course_id);
             }
         });
     }
@@ -137,5 +139,11 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
                 }
             }
         });
+    }
+
+    public void setImageView(ImageView imageView, String url) {
+        Glide.with(mContext)
+                .load(url)
+                .into(imageView);
     }
 }

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.adapter.HomeAdapter;
 import com.jbtm.parentschool.dialog.ExitAppDialog;
@@ -45,7 +43,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private int scaleTime = 200;
     private LinearLayout ll_title_me; // 点击跳转至个人信息
     private LinearLayout ll_title_buy; // 点击跳转课程详情
-    private RelativeLayout rl_jx_2items;   //精选的两个item
+    private LinearLayout ll_jx_2items;   //精选的两个item
     private RelativeLayout rl_jx_item_1;   //精选的两个item
     private RelativeLayout rl_jx_item_2;   //精选的两个item
     private TextView tv_menu_jx;
@@ -87,7 +85,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         tv_menu_4 = findViewById(R.id.tv_menu_4);
         tv_menu_5 = findViewById(R.id.tv_menu_5);
 
-        rl_jx_2items = findViewById(R.id.rl_jx_2items);
+        ll_jx_2items = findViewById(R.id.ll_jx_2items);
         rl_jx_item_1 = findViewById(R.id.rl_jx_item_1);
         rl_jx_item_2 = findViewById(R.id.rl_jx_item_2);
 
@@ -243,14 +241,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
             public void onFocusChange(View view, boolean b) {
                 if (view.getTag() != null && view.getTag().equals("jx") && b) {
                     //是精选tab 并且获得了焦点
-                    rl_jx_2items.setVisibility(View.VISIBLE);
+                    ll_jx_2items.setVisibility(View.VISIBLE);
                     setMenuJx();
                     Log.i("aaa", "精选tab被开启");
                     return;
                 }
                 if (b) {
-                    if (rl_jx_2items.getVisibility() == View.VISIBLE) {
-                        rl_jx_2items.setVisibility(View.GONE);
+                    if (ll_jx_2items.getVisibility() == View.VISIBLE) {
+                        ll_jx_2items.setVisibility(View.GONE);
                         Log.i("aaa", "精选tab被关闭");
                     }
                     if (view.getId() == R.id.tv_menu_1) {

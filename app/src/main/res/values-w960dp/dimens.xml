@@ -56,6 +56,7 @@
     <dimen name="d_264dp">132dp</dimen>
     <dimen name="d_268dp">134dp</dimen>
     <dimen name="d_294dp">147dp</dimen>
+    <dimen name="d_300dp">150dp</dimen>
     <dimen name="d_308dp">154dp</dimen>
     <dimen name="d_328dp">164dp</dimen>
     <dimen name="d_330dp">165dp</dimen>

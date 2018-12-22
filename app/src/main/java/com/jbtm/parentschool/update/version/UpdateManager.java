@@ -7,6 +7,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.text.TextUtils;
 
+import com.jbtm.parentschool.activity.PersonalInformationActivity;
+import com.jbtm.parentschool.dialog.ExitLoginDialog;
+import com.jbtm.parentschool.dialog.UpdateDialog;
 import com.jbtm.parentschool.models.VersionModel;
 
 public class UpdateManager {
@@ -25,10 +28,27 @@ public class UpdateManager {
 
         this.context = context;
 
-        //update_type：升级类型（1非强制 2强制）
-        showDialog(version, version.update_type != 1);
+        showUpdateDialog(version);
     }
 
+    private void showUpdateDialog(final VersionModel version) {
+        //update_type：升级类型（1非强制 2强制）
+        final UpdateDialog dialog = new UpdateDialog(context, version.download_msg, version.update_type != 1);
+        dialog.show();
+        dialog.setOnMyClickListener(new UpdateDialog.MyClickListener() {
+            @Override
+            public void sure() {
+                dialog.dismiss();
+                startDownload(version.download_url);
+//                startDownload("https://download.dgstaticresources.net/fusion/android/app-c6-release.apk");
+            }
+
+            @Override
+            public void cancel() {
+                dialog.dismiss();
+            }
+        });
+    }
 
     private void showDialog(final VersionModel version, boolean isForce) {
         String versionDesc = TextUtils.isEmpty(version.download_msg) ? "有新版本，请马上更新" : version.download_msg;
@@ -41,6 +61,7 @@ public class UpdateManager {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startDownload(version.download_url);
+//                        startDownload("https://download.dgstaticresources.net/fusion/android/app-c6-release.apk");
                     }
 
                 });

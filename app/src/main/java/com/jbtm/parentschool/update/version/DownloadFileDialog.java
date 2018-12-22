@@ -63,7 +63,7 @@ public class DownloadFileDialog extends Dialog {
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         dialogWindow.setGravity(Gravity.CENTER);
         int[] deviceWH = DownloadUtil.getDeviceWH(context);
-        lp.width = deviceWH[0]; // 宽度
+        lp.width = (int) (deviceWH[0] * 0.65);  // 宽度
         dialogWindow.setAttributes(lp);
 
         tvProgress = (TextView) findViewById(R.id.tvProgress);

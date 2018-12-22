@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -46,6 +45,8 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
     private BuyNothingView v_buy_nothing;
     private WatchHistoryView v_watch_history;
 
+    private OrderWrapper orderWrapper;
+
     private int from;   //0（默认值）从顶部flag来。1未登录，从登录来
 
     public static void startActivity(Context context, int from) {
@@ -60,6 +61,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         setContentView(R.layout.activity_personal_infomation);
 
         initView();
+        getOrder();
     }
 
     private void initView() {
@@ -102,7 +104,22 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         } else {
             //已登录，则默认选中个人信息
             tv_menu_personal.requestFocus();
+            setVisible(v_personal_login_yes);
         }
+
+        tv_menu_buy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setOrder();
+            }
+        });
+
+        tv_menu_watch_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setVisible(v_watch_history);
+            }
+        });
     }
 
     private int buyIndex = 0;
@@ -127,8 +144,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                             }
                             break;
                         case R.id.tv_menu_buy: //订购信息
-//                            setMenuBuy();
-                            setMenuBuyPresent();
+                            setOrder();
                             break;
                         case R.id.tv_menu_watch_history: //观看记录
                             //观看记录
@@ -140,8 +156,8 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         });
     }
 
-    //获取订购信息的数据，呈现在界面上
-    private void setMenuBuyPresent() {
+    //获取订购信息
+    private void getOrder() {
         Map<String, Object> params = RequestUtil.getBasicMapNoBusinessParams();
 
         MyRemoteFactory.getInstance().getProxy(MyRequestProxy.class)
@@ -156,35 +172,46 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
 
                     @Override
                     public void onMySuccess(ResultModel<OrderWrapper> result) {
-                        //套餐包业务
-                        List<PayModel> myPackages = result.result.my_packages;
-                        //单点业务
-                        List<WatchHistoryModel> myCourses = result.result.my_courses;
-
-                        boolean hasKa = myPackages != null && myPackages.size() > 0;
-                        boolean hasDandian = myCourses != null && myCourses.size() > 0;
-
-                        if (hasKa && hasDandian) {
-                            //订购信息：订了卡和单点
-                            setVisible(v_buy_ka_and_dandian);
-                            v_buy_ka_and_dandian.setKaInfo(myPackages.get(0));
-                            v_buy_ka_and_dandian.setDandianInfo(myCourses);
-                        } else if (hasDandian) {
-                            //订购信息：仅订了单点
-                            setVisible(v_buy_ka_and_dandian);
-                            v_buy_ka_and_dandian.setKaInfo(null);
-                            v_buy_ka_and_dandian.setDandianInfo(myCourses);
-                        } else if (hasKa) {
-                            //订购信息：仅订了卡
-                            setVisible(v_buy_ka);
-                            v_buy_ka.setKaInfo(myPackages.get(0));
-                        } else {
-                            //订购信息：都没订
-                            setVisible(v_buy_nothing);
-                        }
+                        orderWrapper = result.result;
                     }
                 });
     }
+
+    //将订购信息，呈现在界面上
+    private void setOrder() {
+        if (orderWrapper == null) {
+            //订购信息：都没订
+            setVisible(v_buy_nothing);
+            return;
+        }
+        //套餐包业务
+        List<PayModel> myPackages = orderWrapper.my_packages;
+        //单点业务
+        List<WatchHistoryModel> myCourses = orderWrapper.my_courses;
+
+        boolean hasKa = myPackages != null && myPackages.size() > 0;
+        boolean hasDandian = myCourses != null && myCourses.size() > 0;
+
+        if (hasKa && hasDandian) {
+            //订购信息：订了卡和单点
+            setVisible(v_buy_ka_and_dandian);
+            v_buy_ka_and_dandian.setKaInfo(myPackages.get(0));
+            v_buy_ka_and_dandian.setDandianInfo(myCourses);
+        } else if (hasDandian) {
+            //订购信息：仅订了单点
+            setVisible(v_buy_ka_and_dandian);
+            v_buy_ka_and_dandian.setKaInfo(null);
+            v_buy_ka_and_dandian.setDandianInfo(myCourses);
+        } else if (hasKa) {
+            //订购信息：仅订了卡
+            setVisible(v_buy_ka);
+            v_buy_ka.setKaInfo(myPackages.get(0));
+        } else {
+            //订购信息：都没订
+            setVisible(v_buy_nothing);
+        }
+    }
+
 
     //将本地写死的数据，呈现在界面上
     private void setMenuBuy() {
@@ -237,7 +264,8 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
 
     public void gotoLogin() {
         //退出登录，应关闭之前所有界面，重新打开登录页
-        SPUtil.putToken("");
+        SPUtil.setPhone("");
+        SPUtil.setToken("");
         PersonalInformationActivity.startActivity(this, 1);
     }
 

@@ -9,7 +9,7 @@
         android:layout_width="@dimen/d_268dp"
         android:layout_height="@dimen/d_308dp"
         android:layout_gravity="end"
-        android:layout_marginRight="@dimen/d_268dp"
+        android:layout_marginRight="@dimen/d_256dp"
         android:background="@mipmap/buy_nothing_arrow" />
 
     <TextView

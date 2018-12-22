@@ -128,10 +128,11 @@
             android:paddingRight="@dimen/d_120dp"
             android:paddingTop="@dimen/d_30dp">
 
-            <RelativeLayout
-                android:id="@+id/rl_jx_2items"
+            <LinearLayout
+                android:id="@+id/ll_jx_2items"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <include
                     android:id="@+id/rl_jx_item_1"
@@ -145,9 +146,9 @@
                     layout="@layout/item_home"
                     android:layout_width="@dimen/d_690dp"
                     android:layout_height="@dimen/d_294dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="end"/>
-            </RelativeLayout>
+                    android:layout_marginLeft="@dimen/d_36dp"
+                    android:layout_gravity="end" />
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_course"

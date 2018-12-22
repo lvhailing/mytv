@@ -5,12 +5,12 @@ package com.jbtm.parentschool.models;
  */
 
 public class WatchHistoryModel {
-    public long course_id;
+    public int course_id;
     public String title;
     public String photo;
     public int progress;
 
-    public WatchHistoryModel(long course_id, String title, String photo, int progress) {
+    public WatchHistoryModel(int course_id, String title, String photo, int progress) {
         this.course_id = course_id;
         this.title = title;
         this.photo = photo;

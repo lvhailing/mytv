@@ -8,7 +8,6 @@ import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
@@ -179,7 +178,8 @@ public class PersonalLoginNoView extends RelativeLayout {
                     @Override
                     public void onMySuccess(ResultModel<CommonModel> result) {
                         if (result.result != null) {
-                            SPUtil.putToken(result.result.access_token);
+                            SPUtil.setPhone(result.result.phone);
+                            SPUtil.setToken(result.result.access_token);
                             ToastUtil.showCustom("登录成功：" + result.result.access_token);
                             if (from == 1) {
                                 //从未登录来登录成功后去首页

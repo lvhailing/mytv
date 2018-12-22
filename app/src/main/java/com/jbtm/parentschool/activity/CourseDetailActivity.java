@@ -152,7 +152,12 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         if (course.tags != null && course.tags.size() > 0) {
             tv_flag3.setText(course.tags.get(0));
         }
-        rl_buy.setVisibility(course.charge == 0 ? View.GONE : View.VISIBLE);    //0：免费
+        if (course.is_order || course.charge == 0) {
+            //已购买过、免费，均不展示
+            rl_buy.setVisibility(View.GONE);    //0：免费
+        } else {
+            rl_buy.setVisibility(View.VISIBLE);    //0：免费
+        }
         tv_exporter.setText("主讲专家：" + course.expert_name);
         tv_summary.setText("简介：" + course.summary);
         tv_time_progress.setText("上次观看到：" + course.progress + "%");

@@ -67,7 +67,7 @@ public class SPUtil {
         editor.commit();
     }
 
-    public static void putToken(String token) {
+    public static void setToken(String token) {
         getSp(MyApplication.instance).edit().putString("token", token).commit();
     }
 
@@ -75,7 +75,7 @@ public class SPUtil {
         return getSp(MyApplication.instance).getString("token", "");
     }
 
-    public static void putPhone(String token) {
+    public static void setPhone(String token) {
         getSp(MyApplication.instance).edit().putString("phone", token).commit();
     }
 
