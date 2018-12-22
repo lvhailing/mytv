@@ -7,11 +7,11 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
+import com.jbtm.parentschool.activity.PayActivity;
 import com.jbtm.parentschool.models.PayModel;
 
 
@@ -26,6 +26,7 @@ public class PayTypeView extends LinearLayout {
     private TextView tv_description;
 
     private int payType = 1;  //1包年，2包月，3单点
+    private String price = "";    //当前套餐金额
     private Context mContext;
 
     private int deepColor;  //聚焦字体颜色
@@ -77,6 +78,11 @@ public class PayTypeView extends LinearLayout {
         return payType;
     }
 
+    public String getPrice() {
+        //获取套餐金额
+        return price;
+    }
+
     public void setFocus(boolean hasFocus) {
         //背景处理
         if (hasFocus) {
@@ -121,6 +127,12 @@ public class PayTypeView extends LinearLayout {
                 tv_origin_money.setTextColor(normalColor);
             }
         }
+
+        //二维码交互
+        if (hasFocus) {
+            //获得焦点时，刷新支付文案
+            ((PayActivity) mContext).refreshPayText(String.valueOf(price));
+        }
     }
 
     public void setData(PayModel payModel) {
@@ -130,6 +142,7 @@ public class PayTypeView extends LinearLayout {
         }
         //价格
         tv_money.setText(payModel.price);
+        price = payModel.price;
 
         //原价格
         if (payType != 3 && !TextUtils.isEmpty(payModel.original_price)) {

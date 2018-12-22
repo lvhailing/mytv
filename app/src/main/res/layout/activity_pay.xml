@@ -120,11 +120,19 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/d_56dp">
 
+                    <ProgressBar
+                        android:id="@+id/pb"
+                        android:layout_width="@dimen/d_130dp"
+                        android:layout_height="@dimen/d_130dp"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone"
+                        tools:visibility="visible" />
+
                     <ImageView
                         android:id="@+id/iv_qrcode"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@mipmap/qr_code" />
+                        tools:background="@mipmap/qr_code" />
 
                     <View
                         android:id="@+id/v_pay_bg"
@@ -145,13 +153,14 @@
                 </RelativeLayout>
 
                 <TextView
+                    android:id="@+id/tv_pay_result"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/d_22dp"
-                    android:text="付款成功！"
                     android:textColor="#2C3130"
-                    android:textSize="19sp" />
+                    android:textSize="19sp"
+                    tools:text="付款成功！" />
             </LinearLayout>
 
             <LinearLayout

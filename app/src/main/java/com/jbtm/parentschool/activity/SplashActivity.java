@@ -22,6 +22,8 @@ public class SplashActivity extends AppCompatActivity {
 
         ImageView imageView = findViewById(R.id.iv);
 
+        SPUtil.setToken("e6516bbee198e9d61ae07bc08ebb961f");
+
         Glide.with(this).load(R.mipmap.splash).into(imageView);
 
         new Handler().postDelayed(new Runnable() {

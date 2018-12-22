@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jbtm.parentschool.R;
+import com.jbtm.parentschool.utils.ToastUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -119,6 +120,7 @@ public class DownloadFileDialog extends Dialog {
                 }
             } catch (Exception e) {
                 Log.i("tag", "download error: " + e.getMessage());
+                ToastUtil.showCustom(e.getMessage());
                 e.printStackTrace();
             }
             return file;

@@ -5,6 +5,7 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
+import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -102,20 +103,12 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
                             .scaleX(1.05f)
                             .scaleY(1.05f)
                             .setDuration(scaleTime)
-                            .setListener(new ViewPropertyAnimatorListener() {
+                            .setListener(new ViewPropertyAnimatorListenerAdapter() {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onAnimationStart(View view) {
                                     //防止被其他view z轴方向覆盖
                                     UIUtil.bringToFront(view);
-                                }
-
-                                @Override
-                                public void onAnimationEnd(View view) {
-                                }
-
-                                @Override
-                                public void onAnimationCancel(View view) {
                                 }
                             })
                             .start();
@@ -123,20 +116,12 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
                     ViewCompat.animate(v)
                             .scaleX(1)
                             .scaleY(1)
-                            .setListener(new ViewPropertyAnimatorListener() {
+                            .setListener(new ViewPropertyAnimatorListenerAdapter() {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onAnimationStart(View view) {
                                     //防止z轴方向，覆盖其他view
                                     UIUtil.bringToBackground(view);
-                                }
-
-                                @Override
-                                public void onAnimationEnd(View view) {
-                                }
-
-                                @Override
-                                public void onAnimationCancel(View view) {
                                 }
                             })
                             .start();

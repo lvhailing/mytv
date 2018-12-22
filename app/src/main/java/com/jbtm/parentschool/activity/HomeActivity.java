@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
+import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -280,21 +281,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                             .scaleX(1.05f)
                             .scaleY(1.05f)
                             .setDuration(scaleTime)
-                            .setListener(new ViewPropertyAnimatorListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                            .setListener(new ViewPropertyAnimatorListenerAdapter() {
                                 @Override
                                 public void onAnimationStart(View view) {
                                     view.findViewById(R.id.v_bg).setVisibility(View.VISIBLE);
-                                    //防止被其他view z轴方向覆盖
-                                    UIUtil.bringToFront(view);
-                                }
-
-                                @Override
-                                public void onAnimationEnd(View view) {
-                                }
-
-                                @Override
-                                public void onAnimationCancel(View view) {
                                 }
                             })
                             .start();
@@ -302,21 +292,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                     ViewCompat.animate(v)
                             .scaleX(1)
                             .scaleY(1)
-                            .setListener(new ViewPropertyAnimatorListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                            .setListener(new ViewPropertyAnimatorListenerAdapter() {
                                 @Override
                                 public void onAnimationStart(View view) {
                                     view.findViewById(R.id.v_bg).setVisibility(View.GONE);
-                                    //防止z轴方向，覆盖其他view
-                                    UIUtil.bringToBackground(view);
-                                }
-
-                                @Override
-                                public void onAnimationEnd(View view) {
-                                }
-
-                                @Override
-                                public void onAnimationCancel(View view) {
                                 }
                             })
                             .start();
