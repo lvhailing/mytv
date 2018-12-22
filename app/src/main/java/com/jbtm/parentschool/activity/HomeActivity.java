@@ -31,6 +31,7 @@ import com.jbtm.parentschool.network.MyRequestProxy;
 import com.jbtm.parentschool.network.model.ResultModel;
 import com.jbtm.parentschool.utils.RequestUtil;
 import com.jbtm.parentschool.utils.ToastUtil;
+import com.jbtm.parentschool.utils.UIUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -278,16 +279,16 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 //获取焦点时变化
                 if (hasFocus) {
                     ViewCompat.animate(v)
-                            .scaleX(1.1f)
-                            .scaleY(1.1f)
+                            .scaleX(1.05f)
+                            .scaleY(1.05f)
                             .setDuration(scaleTime)
                             .setListener(new ViewPropertyAnimatorListener() {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onAnimationStart(View view) {
                                     view.findViewById(R.id.v_bg).setVisibility(View.VISIBLE);
-                                    view.bringToFront();
-                                    view.setElevation(100f);   //防止被其他view z轴方向覆盖
+                                    //防止被其他view z轴方向覆盖
+                                    UIUtil.bringToFront(view);
                                 }
 
                                 @Override
@@ -308,7 +309,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                                 @Override
                                 public void onAnimationStart(View view) {
                                     view.findViewById(R.id.v_bg).setVisibility(View.GONE);
-                                    view.setElevation(0f); //防止z轴方向，覆盖其他view
+                                    //防止z轴方向，覆盖其他view
+                                    UIUtil.bringToBackground(view);
                                 }
 
                                 @Override

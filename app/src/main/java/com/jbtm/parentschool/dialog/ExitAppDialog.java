@@ -88,7 +88,7 @@ public class ExitAppDialog extends Dialog {
                 //获取焦点时变化
                 if (hasFocus) {
                     ViewCompat.animate(v)
-                            .scaleX(1.1f)
+                            .scaleX(1.05f)
                             .setDuration(200)
                             .start();
                 } else {

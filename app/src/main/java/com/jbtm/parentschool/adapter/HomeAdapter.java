@@ -15,13 +15,13 @@ import com.bumptech.glide.Glide;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.CourseDetailActivity;
 import com.jbtm.parentschool.models.HomeCourseModel;
+import com.jbtm.parentschool.utils.UIUtil;
 
 import java.util.List;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private Context mContext;
     private List<HomeCourseModel> courseList;
-    private float scaleValue = 1.25f;
     private int scaleTime = 200;
 
     public HomeAdapter(Context context, List<HomeCourseModel> courseList) {
@@ -84,16 +84,16 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 //获取焦点时变化
                 if (hasFocus) {
                     ViewCompat.animate(v)
-                            .scaleX(scaleValue)
-                            .scaleY(scaleValue)
+                            .scaleX(1.05f)
+                            .scaleY(1.05f)
                             .setDuration(scaleTime)
                             .setListener(new ViewPropertyAnimatorListener() {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onAnimationStart(View view) {
                                     v_bg.setVisibility(View.VISIBLE);
-                                    view.bringToFront();
-                                    view.setElevation(100f);   //防止被其他view z轴方向覆盖
+                                    //防止被其他view z轴方向覆盖
+                                    UIUtil.bringToFront(view);
                                 }
 
                                 @Override
@@ -114,7 +114,8 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                                 @Override
                                 public void onAnimationStart(View view) {
                                     v_bg.setVisibility(View.GONE);
-                                    view.setElevation(0f); //防止z轴方向，覆盖其他view
+                                    //防止z轴方向，覆盖其他view
+                                    UIUtil.bringToBackground(view);
                                 }
 
                                 @Override

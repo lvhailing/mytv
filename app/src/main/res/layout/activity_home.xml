@@ -136,8 +136,8 @@
                 <include
                     android:id="@+id/rl_jx_item_1"
                     layout="@layout/item_home"
-                    android:layout_width="345dp"
-                    android:layout_height="147dp"
+                    android:layout_width="@dimen/d_690dp"
+                    android:layout_height="@dimen/d_294dp"
                     android:layout_margin="0dp" />
 
                 <include

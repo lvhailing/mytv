@@ -16,13 +16,13 @@ import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.CourseDetailActivity;
 import com.jbtm.parentschool.models.MaterModel;
 import com.jbtm.parentschool.utils.ToastUtil;
+import com.jbtm.parentschool.utils.UIUtil;
 
 import java.util.List;
 
 public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapter.ViewHolder> {
     private List<MaterModel> list;
     private Context mContext;
-    private float scaleValue = 1.1f;
     private int scaleTime = 200;
 
     public CourseDetailAdapter(Context context, List<MaterModel> list) {
@@ -90,15 +90,15 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
                 //获取焦点时变化
                 if (hasFocus) {
                     ViewCompat.animate(v)
-                            .scaleX(scaleValue)
-                            .scaleY(scaleValue)
+                            .scaleX(1.05f)
+                            .scaleY(1.05f)
                             .setDuration(scaleTime)
                             .setListener(new ViewPropertyAnimatorListener() {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onAnimationStart(View view) {
-                                    view.bringToFront();
-                                    view.setElevation(100f);   //防止被其他view z轴方向覆盖
+                                    //防止被其他view z轴方向覆盖
+                                    UIUtil.bringToFront(view);
                                 }
 
                                 @Override
@@ -118,7 +118,8 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onAnimationStart(View view) {
-                                    view.setElevation(0f); //防止z轴方向，覆盖其他view
+                                    //防止z轴方向，覆盖其他view
+                                    UIUtil.bringToBackground(view);
                                 }
 
                                 @Override

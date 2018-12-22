@@ -17,13 +17,13 @@ import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.VideoActivity;
 import com.jbtm.parentschool.models.WatchHistoryModel;
 import com.jbtm.parentschool.utils.ToastUtil;
+import com.jbtm.parentschool.utils.UIUtil;
 
 import java.util.List;
 
 public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapter.ViewHolder> {
     private List<WatchHistoryModel> list;
     private Context mContext;
-    private float scaleValue = 1.1f;
     private int scaleTime = 200;
 
     public WatchHistoryAdapter(Context context, List<WatchHistoryModel> list) {
@@ -91,16 +91,16 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
                 //获取焦点时变化
                 if (hasFocus) {
                     ViewCompat.animate(v)
-                            .scaleX(scaleValue)
-                            .scaleY(scaleValue)
+                            .scaleX(1.05f)
+                            .scaleY(1.05f)
                             .setDuration(scaleTime)
                             .setListener(new ViewPropertyAnimatorListener() {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override
                                 public void onAnimationStart(View view) {
                                     v_bg.setVisibility(View.VISIBLE);
-                                    view.bringToFront();
-                                    view.setElevation(100f);   //防止被其他view z轴方向覆盖
+                                    //防止被其他view z轴方向覆盖
+                                    UIUtil.bringToFront(view);
                                 }
 
                                 @Override
@@ -121,7 +121,8 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
                                 @Override
                                 public void onAnimationStart(View view) {
                                     v_bg.setVisibility(View.GONE);
-                                    view.setElevation(0f); //防止z轴方向，覆盖其他view
+                                    //防止z轴方向，覆盖其他view
+                                    UIUtil.bringToBackground(view);
                                 }
 
                                 @Override

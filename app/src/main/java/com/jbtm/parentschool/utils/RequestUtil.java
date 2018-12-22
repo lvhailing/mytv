@@ -16,10 +16,10 @@ public class RequestUtil {
     public static Map<String, Object> getBasicMapNoBusinessParams() {
         Map<String, Object> params = new HashMap<>();
         try {
-            String data = "";
+            String data = Security.encrypt("");
             String md5 = Security.sign(data, Util.getVersionCode());
-            params.put("data", "");
-            params.put("accept_sign", "");
+            params.put("data", data);
+            params.put("accept_sign", md5);
         } catch (Exception e) {
             e.printStackTrace();
         }
