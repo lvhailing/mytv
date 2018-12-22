@@ -13,7 +13,7 @@ public class CourseModel {
     public String expert_name;
     public String photo;
     public String price;
-    public int charge;
+    public int charge;  //免费是0
     public List<String> tags;
     public String summary;
     public int type;

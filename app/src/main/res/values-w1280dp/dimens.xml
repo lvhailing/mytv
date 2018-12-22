@@ -64,6 +64,7 @@
     <dimen name="d_360dp">240dp</dimen>
     <dimen name="d_390dp">260dp</dimen>
     <dimen name="d_464dp">309dp</dimen>
+    <dimen name="d_480dp">320dp</dimen>
     <dimen name="d_500dp">333dp</dimen>
     <dimen name="d_520dp">347dp</dimen>
     <dimen name="d_546dp">364dp</dimen>

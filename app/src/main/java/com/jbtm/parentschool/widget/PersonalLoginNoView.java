@@ -224,7 +224,8 @@ public class PersonalLoginNoView extends RelativeLayout {
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        timer.cancel();
-        Log.i("aaa", "onDetachedFromWindow time cancel");
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 }

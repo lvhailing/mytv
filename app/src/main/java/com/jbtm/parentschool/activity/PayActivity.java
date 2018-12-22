@@ -259,7 +259,9 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                         closeProgressDialog();
                         ToastUtil.showCustom(result.msg);
                         //成获取到支付结果
-                        timer.cancel();
+                        if (timer != null) {
+                            timer.cancel();
+                        }
                         showPaySuccess();
                     }
                 });
@@ -341,6 +343,8 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        timer.cancel();
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 }

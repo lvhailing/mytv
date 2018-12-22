@@ -152,14 +152,15 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         if (course.tags != null && course.tags.size() > 0) {
             tv_flag3.setText(course.tags.get(0));
         }
+        rl_buy.setVisibility(course.charge == 0 ? View.GONE : View.VISIBLE);    //0：免费
         tv_exporter.setText("主讲专家：" + course.expert_name);
         tv_summary.setText("简介：" + course.summary);
-        tv_summary.setText("上次观看到：" + course.progress + "%");
+        tv_time_progress.setText("上次观看到：" + course.progress + "%");
     }
 
     //设置选集
     private void setMaters(CourseModel course) {
-        CourseDetailAdapter adapter = new CourseDetailAdapter(this, course.maters);
+        CourseDetailAdapter adapter = new CourseDetailAdapter(this, course);
         recyclerView.setAdapter(adapter);
     }
 

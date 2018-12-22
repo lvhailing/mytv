@@ -42,4 +42,7 @@ dependencies {
 
     //zxing
     compile 'com.google.zxing:core:3.3.0'
+
+    //腾讯bugly
+    compile 'com.tencent.bugly:crashreport:2.1.5'
 }
