@@ -4,20 +4,18 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
-import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.CourseDetailActivity;
-import com.jbtm.parentschool.activity.VideoActivity;
+import com.jbtm.parentschool.activity.PersonalInformationActivity;
 import com.jbtm.parentschool.models.WatchHistoryModel;
 import com.jbtm.parentschool.utils.ToastUtil;
 import com.jbtm.parentschool.utils.UIUtil;
@@ -28,11 +26,13 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
     private List<WatchHistoryModel> list;
     private Context mContext;
     private int scaleTime = 200;
+    private int from;   //0，从观看记录来。1，从订购信息来
 
-    public WatchHistoryAdapter(Context context, List<WatchHistoryModel> list) {
+    public WatchHistoryAdapter(Context context, List<WatchHistoryModel> list, int from) {
         super();
         mContext = context;
         this.list = list;
+        this.from = from;
     }
 
     public void setData(List<WatchHistoryModel> list) {
@@ -52,7 +52,7 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
 
         setImageView(viewHolder.iv, list.get(position).photo);
 
-        listenViewFocus(viewHolder.itemView, viewHolder.v_bg);
+        listenViewFocus(viewHolder.itemView, viewHolder.v_bg, position);
         listenViewClick(viewHolder.itemView, position);
     }
 
@@ -87,7 +87,7 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
         });
     }
 
-    private void listenViewFocus(View itemView, final ImageView v_bg) {
+    private void listenViewFocus(View itemView, final ImageView v_bg, final int position) {
         itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(final View v, final boolean hasFocus) {
@@ -107,6 +107,9 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
                                 }
                             })
                             .start();
+                    if (position % 4 == 0) {
+                        setNextFocus(v);
+                    }
                 } else {
                     ViewCompat.animate(v)
                             .scaleX(1)
@@ -126,7 +129,17 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
         });
     }
 
-    public void setImageView(ImageView imageView, String url) {
+    private void setNextFocus(View v) {
+        int id;
+        if (from == 1) {
+            id = ((PersonalInformationActivity) mContext).findViewById(R.id.tv_menu_buy).getId();
+        } else {
+            id = ((PersonalInformationActivity) mContext).findViewById(R.id.tv_menu_watch_history).getId();
+        }
+        v.setNextFocusLeftId(id);
+    }
+
+    private void setImageView(ImageView imageView, String url) {
         Glide.with(mContext)
                 .load(url)
                 .into(imageView);

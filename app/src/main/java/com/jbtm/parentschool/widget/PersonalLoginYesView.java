@@ -72,6 +72,16 @@ public class PersonalLoginYesView extends RelativeLayout implements View.OnClick
         tv_my_phone.setText("我的手机号:" + SPUtil.getPhone());
         //最新版本
         tv_version.setText("已更新到:" + Util.getVersionName());
+
+        btn_login_out.setOnFocusChangeListener(new OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    int id = ((PersonalInformationActivity) mContext).findViewById(R.id.tv_menu_personal).getId();
+                    btn_login_out.setNextFocusLeftId(id);
+                }
+            }
+        });
     }
 
     @Override

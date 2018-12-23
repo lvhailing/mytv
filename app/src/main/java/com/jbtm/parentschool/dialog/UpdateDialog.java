@@ -53,9 +53,6 @@ public class UpdateDialog extends Dialog {
         tv_sure.setOnClickListener(new clickListener());
         tv_cancel.setOnClickListener(new clickListener());
 
-        listenFocus(tv_sure);
-        listenFocus(tv_cancel);
-
         Window dialogWindow = getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         DisplayMetrics d = context.getResources().getDisplayMetrics();
@@ -96,25 +93,5 @@ public class UpdateDialog extends Dialog {
                     break;
             }
         }
-    }
-
-    private void listenFocus(View view) {
-        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(final View v, final boolean hasFocus) {
-                Log.i("aaa", "llll " + hasFocus);
-                //获取焦点时变化
-                if (hasFocus) {
-                    ViewCompat.animate(v)
-                            .scaleX(1.05f)
-                            .setDuration(200)
-                            .start();
-                } else {
-                    ViewCompat.animate(v)
-                            .scaleX(1)
-                            .start();
-                }
-            }
-        });
     }
 }

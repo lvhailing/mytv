@@ -75,7 +75,7 @@ public class WatchHistoryView extends LinearLayout {
                     public void onMySuccess(ResultModel<CommonWrapper> result) {
                         if (result.result != null) {
                             List<WatchHistoryModel> courses = result.result.courses;
-                            WatchHistoryAdapter adapter = new WatchHistoryAdapter(mContext, courses);
+                            WatchHistoryAdapter adapter = new WatchHistoryAdapter(mContext, courses,0);
                             recyclerView.setAdapter(adapter);
                         }
                     }

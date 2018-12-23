@@ -174,7 +174,7 @@
                     android:id="@+id/iv_zfb"
                     android:layout_width="@dimen/d_100dp"
                     android:layout_height="@dimen/d_100dp"
-                    android:background="@drawable/selector_zfb"
+                    android:background="@drawable/zfb_selected"
                     android:focusable="true" />
 
                 <ImageView
@@ -182,7 +182,7 @@
                     android:layout_width="@dimen/d_100dp"
                     android:layout_height="@dimen/d_100dp"
                     android:layout_marginLeft="@dimen/d_60dp"
-                    android:background="@drawable/selector_wx"
+                    android:background="@drawable/wx_normal"
                     android:focusable="true" />
             </LinearLayout>
         </LinearLayout>

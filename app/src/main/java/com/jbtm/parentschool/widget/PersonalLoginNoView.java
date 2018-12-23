@@ -182,7 +182,7 @@ public class PersonalLoginNoView extends RelativeLayout {
                             SPUtil.setToken(result.result.access_token);
                             ToastUtil.showCustom("登录成功：" + result.result.access_token);
                             if (from == 1) {
-                                //从未登录来登录成功后去首页
+                                //登录成功，去首页
                                 HomeActivity.startActivity(mContext);
                                 ((PersonalInformationActivity) mContext).finish();
                             }

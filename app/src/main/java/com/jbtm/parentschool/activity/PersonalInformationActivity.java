@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
+import com.jbtm.parentschool.dialog.ExitAppDialog;
 import com.jbtm.parentschool.models.OrderWrapper;
 import com.jbtm.parentschool.models.PayModel;
 import com.jbtm.parentschool.models.WatchHistoryModel;
@@ -48,6 +51,12 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
     private OrderWrapper orderWrapper;
 
     private int from;   //0（默认值）从顶部flag来。1未登录，从登录来
+    private TextView tv_menu_personal;
+    private TextView tv_menu_buy;
+    private TextView tv_menu_watch_history;
+    public static String loginOutBroadcast = "com.jbtm.parentschool.loginOutBroadcast";
+    private long lastTime;
+    private int currentFocus;
 
     public static void startActivity(Context context, int from) {
         Intent intent = new Intent(context, PersonalInformationActivity.class);
@@ -74,16 +83,18 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         v_buy_nothing = findViewById(R.id.v_buy_nothing);
         v_watch_history = findViewById(R.id.v_watch_history);
 
-        LinearLayout ll_title_me = findViewById(R.id.ll_title_me);
-        LinearLayout ll_title_buy = findViewById(R.id.ll_title_buy);
-        TextView tv_menu_personal = findViewById(R.id.tv_menu_personal);
-        TextView tv_menu_buy = findViewById(R.id.tv_menu_buy);
-        TextView tv_menu_watch_history = findViewById(R.id.tv_menu_watch_history);
+        final LinearLayout ll_title_me = findViewById(R.id.ll_title_me);
+        final LinearLayout ll_title_buy = findViewById(R.id.ll_title_buy);
+        tv_menu_personal = findViewById(R.id.tv_menu_personal);
+        tv_menu_buy = findViewById(R.id.tv_menu_buy);
+        tv_menu_watch_history = findViewById(R.id.tv_menu_watch_history);
 
+        //focus listener
         listenTvFocus(tv_menu_personal);
         listenTvFocus(tv_menu_buy);
         listenTvFocus(tv_menu_watch_history);
 
+        //click listener
         ll_title_me.setOnClickListener(this);
         ll_title_buy.setOnClickListener(this);
 
@@ -107,34 +118,51 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
             setVisible(v_personal_login_yes);
         }
 
-        tv_menu_buy.setOnClickListener(new View.OnClickListener() {
+        //设置头部个人信息flag的左键、下键聚焦的menu
+        ll_title_me.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                setOrder();
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    //下键
+                    int id = getCurrentMenu().getId();
+                    ll_title_me.setNextFocusDownId(id);
+                    ll_title_me.setNextFocusLeftId(id);
+                }
             }
         });
 
-        tv_menu_watch_history.setOnClickListener(new View.OnClickListener() {
+        //设置头部购买flag的下键聚焦的menu
+        ll_title_buy.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                setVisible(v_watch_history);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    //下键
+                    int id = getCurrentMenu().getId();
+                    ll_title_buy.setNextFocusDownId(id);
+                }
             }
         });
     }
 
     private int buyIndex = 0;
 
+    //focus listener
     private void listenTvFocus(TextView v) {
         v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
+
                 //设置焦点文字大小
                 setTextSize((TextView) view, b);
+
+                //设置焦点文字背景颜色
+                setTextBg((TextView) view, b);
 
                 //获取到焦点时刷新界面
                 if (b) {
                     switch (view.getId()) {
                         case R.id.tv_menu_personal: //个人信息
+                            currentFocus = 1;
                             if (TextUtils.isEmpty(SPUtil.getToken())) {
                                 //个人信息：未登录显示
                                 setVisible(v_personal_login_no);
@@ -144,9 +172,12 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                             }
                             break;
                         case R.id.tv_menu_buy: //订购信息
+                            currentFocus = 2;
                             setOrder();
+//                            setMenuBuy();
                             break;
                         case R.id.tv_menu_watch_history: //观看记录
+                            currentFocus = 3;
                             //观看记录
                             setVisible(v_watch_history);
                             break;
@@ -154,6 +185,18 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                 }
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_title_me:
+                ToastUtil.showCustom("已经在本页");
+                break;
+            case R.id.ll_title_buy:
+                PayActivity.startActivity(this);
+                break;
+        }
     }
 
     //获取订购信息
@@ -212,7 +255,6 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         }
     }
 
-
     //将本地写死的数据，呈现在界面上
     private void setMenuBuy() {
         buyIndex++;
@@ -243,6 +285,21 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         }
     }
 
+    //聚焦或失焦时，设置menu背景
+    private void setTextBg(TextView view, boolean b) {
+        if (b) {
+            //清空所有menu bg
+            tv_menu_personal.setBackground(null);
+            tv_menu_buy.setBackground(null);
+            tv_menu_watch_history.setBackground(null);
+            //为聚焦menu设置bg
+            view.setBackground(getResources().getDrawable(R.drawable.bg_rect_green_focused));
+        } else {
+            //为失焦menu设置痕迹
+            view.setBackground(getResources().getDrawable(R.drawable.bg_rect_green_selected));
+        }
+    }
+
     private void setVisible(View view) {
         setGone(v_personal_login_yes);
         setGone(v_personal_login_no);
@@ -267,17 +324,60 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         SPUtil.setPhone("");
         SPUtil.setToken("");
         PersonalInformationActivity.startActivity(this, 1);
+        sendLoginOutBroadcast();
+        finish();
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.ll_title_me:
-                ToastUtil.showCustom("已经在本页");
-                break;
-            case R.id.ll_title_buy:
-                PayActivity.startActivity(this);
-                break;
+    private void sendLoginOutBroadcast() {
+        //首页、详情页、购买页退出
+        Intent intent = new Intent();
+        intent.setAction(loginOutBroadcast);
+        sendBroadcast(intent);
+    }
+
+    //获取当前聚焦、或最后一个聚焦过的menu
+    private TextView getCurrentMenu() {
+        TextView textView;
+        if (currentFocus == 1) {
+            textView = findViewById(R.id.tv_menu_personal);
+        } else if (currentFocus == 2) {
+            textView = findViewById(R.id.tv_menu_buy);
+        } else {
+            textView = findViewById(R.id.tv_menu_watch_history);
         }
+        return textView;
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && from == 1) {
+            //按了返回键，并且是从未登录来
+            long nowTime = System.currentTimeMillis();
+            if (nowTime - lastTime < 1500) {
+                //双击了返回键，退出应用
+                showExitAppDialog();
+            } else {
+                lastTime = System.currentTimeMillis();
+                ToastUtil.showCustom("再按退出应用");
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void showExitAppDialog() {
+        final ExitAppDialog dialog = new ExitAppDialog(this);
+        dialog.show();
+        dialog.setOnMyClickListener(new ExitAppDialog.MyClickListener() {
+            @Override
+            public void moreTime() {
+                dialog.dismiss();
+            }
+
+            @Override
+            public void exit() {
+                dialog.dismiss();
+                finish();
+            }
+        });
     }
 }

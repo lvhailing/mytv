@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -78,6 +79,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
 
         initView();
         initData();
+        registerReceiver(); //退出登录时该界面退出
     }
 
     private void initView() {
@@ -321,18 +323,74 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                 dealPayUrl(v, hasFocus);
 
                 if (v instanceof PayTypeView) {
-                    //焦点变化时：处理各子view背景字体
                     PayTypeView viewModel = (PayTypeView) v;
-                    viewModel.setFocus(hasFocus);
+
+                    //焦点变化时：处理各子view背景字体
+                    dealKaBg(viewModel, hasFocus);
 
                     //焦点变化时：处理箭头
-                    dealArrow(hasFocus, viewModel.getPayType());
+//                    dealArrow(hasFocus, viewModel.getPayType());
 
                     //焦点变化时：处理各子view动画
-                    dealFocusAnim(v, hasFocus);
+//                    dealFocusAnim(v, hasFocus,200);
+
+                } else if (v instanceof ImageView) {
+                    //焦点变化时：设置支付宝、微信的图片bg
+                    ImageView iv = (ImageView) v;
+                    dealKaBg(iv, hasFocus);
                 }
             }
         });
+    }
+
+    //聚焦或失焦时，设置图片bg
+    private void dealKaBg(ImageView iv, boolean b) {
+        if (b) {
+            //清空所有图片 bg
+            iv_wx.setBackgroundResource(R.drawable.wx_normal);
+            iv_zfb.setBackgroundResource(R.drawable.zfb_normal);
+            //为聚焦图片设置bg
+            if (iv.getId() == R.id.iv_wx) {
+                //微信
+                iv_wx.setBackgroundResource(R.drawable.wx_selected);
+            } else {
+                //支付宝
+                iv_zfb.setBackgroundResource(R.drawable.zfb_selected);
+            }
+        } else {
+            if (iv.getId() == R.id.iv_wx) {
+                //微信
+                iv_wx.setBackgroundResource(R.drawable.wx_selected);
+            } else {
+                //支付宝
+                iv_zfb.setBackgroundResource(R.drawable.zfb_selected);
+            }
+        }
+    }
+
+    //聚焦或失焦时，设置套餐bg
+    private void dealKaBg(PayTypeView viewModel, boolean b) {
+        if (b) {
+            //清空所有套餐bg
+            yearView.setFocus(false);
+            monthView.setFocus(false);
+            dandianView.setFocus(false);
+            dealFocusAnim(yearView, false, 0);
+            dealFocusAnim(monthView, false, 0);
+            dealFocusAnim(dandianView, false, 0);
+            dealArrow(false, yearView.getPayType());
+            dealArrow(false, monthView.getPayType());
+            dealArrow(false, dandianView.getPayType());    
+            //为聚焦套餐设置bg
+            viewModel.setFocus(true);
+            dealArrow(true, viewModel.getPayType());
+            dealFocusAnim(viewModel, true, 0);
+        } else {
+            //为失焦套餐设置痕迹
+            viewModel.setFocus(true);
+            dealFocusAnim(viewModel, true, 0);
+            dealArrow(true, viewModel.getPayType());
+        }
     }
 
     //焦点变化时：获取二维码地址并展示
@@ -360,12 +418,12 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     }
 
     //处理焦点时动画
-    private void dealFocusAnim(View v, boolean hasFocus) {
-        if (hasFocus) {
+    private void dealFocusAnim(View v, boolean hasFocus, int scaleTime) {
+        if (hasFocus && v.getScaleX() != 0) {
             ViewCompat.animate(v)
                     .scaleX(1.05f)
 //                    .scaleY(1.05f)
-                    .setDuration(200)
+                    .setDuration(scaleTime)
                     .start();
         } else {
             ViewCompat.animate(v)

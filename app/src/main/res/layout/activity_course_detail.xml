@@ -147,6 +147,8 @@
                         android:text="全屏"
                         android:textColor="#fff"
                         android:textSize="16sp" />
+
+                    <requestFocus />
                 </RelativeLayout>
 
                 <RelativeLayout

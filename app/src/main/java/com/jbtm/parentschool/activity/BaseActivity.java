@@ -1,16 +1,21 @@
 package com.jbtm.parentschool.activity;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 
 public class BaseActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
+    private MyReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,20 @@ public class BaseActivity extends AppCompatActivity {
                 .into(imageView);
     }
 
+    protected void registerReceiver() {
+        receiver = new MyReceiver();
+
+        IntentFilter intentFilter = new IntentFilter(PersonalInformationActivity.loginOutBroadcast);
+        registerReceiver(receiver, intentFilter);
+    }
+
+    public class MyReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Toast.makeText(context, "收到广播", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    }
 
     @Override
     protected void onDestroy() {
@@ -57,5 +76,6 @@ public class BaseActivity extends AppCompatActivity {
             closeProgressDialog();
             mProgressDialog = null;
         }
+        unregisterReceiver(receiver);
     }
 }

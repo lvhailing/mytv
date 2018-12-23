@@ -65,6 +65,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
 
         initView();
         initData();
+        registerReceiver(); //退出登录时该界面退出
     }
 
     private void initView() {

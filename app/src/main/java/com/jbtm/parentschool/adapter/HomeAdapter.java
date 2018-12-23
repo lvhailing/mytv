@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.CourseDetailActivity;
+import com.jbtm.parentschool.activity.HomeActivity;
+import com.jbtm.parentschool.activity.PersonalInformationActivity;
 import com.jbtm.parentschool.models.HomeCourseModel;
 import com.jbtm.parentschool.utils.UIUtil;
 
@@ -43,13 +45,13 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(final ViewHolder viewHolder, int position) {
         Glide.with(mContext)
-                .load(courseList.get(i).photo)
+                .load(courseList.get(position).photo)
                 .into(viewHolder.iv);
 
-        listenViewFocus(viewHolder.itemView, viewHolder.v_bg);
-        listenViewClick(viewHolder.itemView, i);
+        listenViewFocus(viewHolder.itemView, viewHolder.v_bg, position);
+        listenViewClick(viewHolder.itemView, position);
     }
 
     @Override
@@ -78,7 +80,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
         });
     }
 
-    private void listenViewFocus(View itemView, final ImageView v_bg) {
+    private void listenViewFocus(View itemView, final ImageView v_bg, final int position) {
         itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(final View v, final boolean hasFocus) {
@@ -98,6 +100,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                                 }
                             })
                             .start();
+                    if (position % 4 == 0) {
+                        setNextFocus(v);
+                    }
                 } else {
                     ViewCompat.animate(v)
                             .scaleX(1)
@@ -115,5 +120,10 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 }
             }
         });
+    }
+
+    private void setNextFocus(View v) {
+        int id = ((HomeActivity) mContext).getCurrentMenu().getId();
+        v.setNextFocusLeftId(id);
     }
 }

@@ -14,7 +14,6 @@ import com.jbtm.parentschool.adapter.WatchHistoryAdapter;
 import com.jbtm.parentschool.models.PayModel;
 import com.jbtm.parentschool.models.WatchHistoryModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -51,7 +50,7 @@ public class BuyKaAndDandianView extends LinearLayout {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setFocusable(false);
 
-        adapter = new WatchHistoryAdapter(mContext, null);
+        adapter = new WatchHistoryAdapter(mContext, null, 1);
         recyclerView.setAdapter(adapter);
     }
 
