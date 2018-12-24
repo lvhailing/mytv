@@ -194,8 +194,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         setImageView(iv2, recommendList.get(1).photo);
 
         if (recommendList.size() > 2) {
-            //设置recyclerView
-            adapter.setData(recommendList);
+            //设置recyclerView，排除精选的两个
+            adapter.setData(recommendList.subList(2, recommendList.size()));
         }
     }
 

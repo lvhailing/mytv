@@ -90,4 +90,9 @@ public interface MyRequestProxy {
     @POST("tv/index/check-version")
     @FormUrlEncoded
     Observable<ResultModel<CommonWrapper>> checkVersion(@FieldMap Map<String, Object> params);
+
+    //上传播放进度记录
+    @POST("tv/index/progress")
+    @FormUrlEncoded
+    Observable<ResultModel> updateProgress(@FieldMap Map<String, Object> params);
 }

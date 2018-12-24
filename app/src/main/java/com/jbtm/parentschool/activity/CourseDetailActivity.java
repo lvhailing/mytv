@@ -49,6 +49,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     private RecyclerView recyclerView;
 
     private int materId;    //默认播放第一集
+    private String materTitle;    //课程名称
     private int courseId;   //课程id
     private String coursePrice;   //课程价格
 
@@ -133,6 +134,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                             if (courseModel.maters != null && courseModel.maters.size() > 0
                                     && courseModel.maters.get(0) != null) {
                                 materId = courseModel.maters.get(0).ma_id;
+                                materTitle = courseModel.maters.get(0).ma_title;
                             }
 
                             //课程价格
@@ -190,7 +192,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     }
 
     //去请求播放地址
-    public void getPlayUrl(int materId) {
+    public void getPlayUrl(final int materId) {
         Map<String, Object> params = new HashMap<>();
         params.put("ma_id", materId);
         RequestUtil.getBasicMap(params);
@@ -212,7 +214,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                         if (result.result != null && result.result.ma_url != null) {
                             //去播放页面
                             String url = result.result.ma_url;
-                            VideoActivity.startActivity(CourseDetailActivity.this, url);
+                            VideoActivity.startActivity(CourseDetailActivity.this, materId,url,materTitle);
                         }
                     }
                 });
