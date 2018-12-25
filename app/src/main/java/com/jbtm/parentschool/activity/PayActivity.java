@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.view.ViewCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -49,7 +48,9 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private ImageView iv_wx;
     private ImageView iv_qrcode;
     private ImageView iv_pay_success;
-    private TextView tv_pay_result;
+    private TextView tv_pay_result_left;
+    private TextView tv_pay_result_mid;
+    private TextView tv_pay_result_right;
     private View v_pay_bg;
     private ProgressBar pb;
     private int from;   //0（默认值）从顶部flag来，则包年聚焦。1从单点购买来，则单点聚焦
@@ -99,7 +100,9 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         iv_month_arrow = findViewById(R.id.iv_month_arrow);
         iv_dandian_arrow = findViewById(R.id.iv_dandian_arrow);
         ll_dandian_arrow = findViewById(R.id.ll_dandian_arrow);
-        tv_pay_result = findViewById(R.id.tv_pay_result);
+        tv_pay_result_left = findViewById(R.id.tv_pay_result_left);
+        tv_pay_result_mid = findViewById(R.id.tv_pay_result_mid);
+        tv_pay_result_right = findViewById(R.id.tv_pay_result_right);
         iv_zfb = findViewById(R.id.iv_zfb);
         iv_wx = findViewById(R.id.iv_wx);
         iv_qrcode = findViewById(R.id.iv_qrcode);
@@ -290,7 +293,11 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
 
     //套餐焦点变换时，刷新付款金额
     public void refreshPayText(String price) {
-        UIUtil.setPayResultStyle(tv_pay_result, "扫码支付" + price + "元");
+        tv_pay_result_left.setText("扫码支付");
+        tv_pay_result_mid.setText(price);
+        setVisible(tv_pay_result_mid);
+        setVisible(tv_pay_result_right);
+//        UIUtil.setPayResultStyle(tv_pay_result, "扫码支付" + price + "元");
     }
 
     //套餐焦点变换时，刷新二维码和加载条
@@ -312,7 +319,9 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
 
     //付款成功后刷新二维码
     private void showPaySuccess() {
-        tv_pay_result.setText("付款成功！");
+        setGone(tv_pay_result_mid);
+        setGone(tv_pay_result_right);
+        tv_pay_result_left.setText("付款成功！");
         setVisible(v_pay_bg);
         setVisible(iv_pay_success);
         setInvisible(pb);
@@ -383,7 +392,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
             dealFocusAnim(dandianView, false, 0);
             dealArrow(false, yearView.getPayType());
             dealArrow(false, monthView.getPayType());
-            dealArrow(false, dandianView.getPayType());    
+            dealArrow(false, dandianView.getPayType());
             //为聚焦套餐设置bg
             viewModel.setFocus(true);
             dealArrow(true, viewModel.getPayType());
@@ -424,7 +433,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private void dealFocusAnim(View v, boolean hasFocus, int scaleTime) {
         if (hasFocus && v.getScaleX() != 0) {
             ViewCompat.animate(v)
-                    .scaleX(Constants.scaleValue)
+                    .scaleX(Constants.scaleValueSmall)
 //                    .scaleY(Constants.scaleValue)
                     .setDuration(scaleTime)
                     .start();

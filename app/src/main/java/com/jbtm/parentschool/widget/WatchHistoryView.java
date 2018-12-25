@@ -29,8 +29,8 @@ import io.reactivex.schedulers.Schedulers;
 
 
 public class WatchHistoryView extends LinearLayout {
-    private RecyclerView recyclerView;
     private Context mContext;
+    private WatchHistoryAdapter adapter;
 
     public WatchHistoryView(Context context) {
         super(context);
@@ -47,38 +47,17 @@ public class WatchHistoryView extends LinearLayout {
     private void init() {
         View view = View.inflate(mContext, R.layout.view_watch_history, this);
 
-        recyclerView = view.findViewById(R.id.rv_history);
+        RecyclerView recyclerView = view.findViewById(R.id.rv_history);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 4);
         gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setFocusable(false);
-
-        getHistory();
+        adapter = new WatchHistoryAdapter(mContext, null, 0);
+        recyclerView.setAdapter(adapter);
     }
 
-    //获取播放记录
-    private void getHistory() {
-        Map<String, Object> map = RequestUtil.getBasicMapNoBusinessParams();
-
-        MyRemoteFactory.getInstance().getProxy(MyRequestProxy.class)
-                .getHistory(map)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>() {
-                    @Override
-                    public void onMyError(Throwable e) {
-                        ToastUtil.showCustom("调接口失败");
-                    }
-
-                    @Override
-                    public void onMySuccess(ResultModel<CommonWrapper> result) {
-                        if (result.result != null) {
-                            List<WatchHistoryModel> courses = result.result.courses;
-                            WatchHistoryAdapter adapter = new WatchHistoryAdapter(mContext, courses,0);
-                            recyclerView.setAdapter(adapter);
-                        }
-                    }
-                });
+    public void setData(List<WatchHistoryModel> list) {
+        adapter.setData(list);
     }
 }

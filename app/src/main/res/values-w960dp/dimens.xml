@@ -95,6 +95,7 @@
     <dimen name="s_46sp">23sp</dimen>
     <dimen name="s_48sp">24sp</dimen>
     <dimen name="s_50sp">25sp</dimen>
+    <dimen name="s_56sp">28sp</dimen>
     <dimen name="s_58sp">29sp</dimen>
     <dimen name="s_60sp">30sp</dimen>
 </resources>

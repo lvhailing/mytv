@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
+import com.jbtm.parentschool.adapter.WatchHistoryAdapter;
 import com.jbtm.parentschool.dialog.ExitAppDialog;
+import com.jbtm.parentschool.models.CommonWrapper;
 import com.jbtm.parentschool.models.OrderWrapper;
 import com.jbtm.parentschool.models.PayModel;
 import com.jbtm.parentschool.models.WatchHistoryModel;
@@ -47,10 +49,11 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
     private PersonalLoginNoView v_personal_login_no;
     private BuyKaAndDandianView v_buy_ka_and_dandian;
     private BuyKaView v_buy_ka;
-    private BuyNothingView v_buy_nothing;
+    private BuyNothingView v_buy_nothing;   //无订购信息 或 无观看记录
     private WatchHistoryView v_watch_history;
 
     private OrderWrapper orderWrapper;
+    private CommonWrapper historyWrapper;
 
     private int from;   //0（默认值）从顶部flag来。1未登录，从登录来
     private TextView tv_menu_personal;
@@ -73,6 +76,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
 
         initView();
         getOrder();
+        getHistory();
     }
 
     private void initView() {
@@ -165,13 +169,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                     switch (view.getId()) {
                         case R.id.tv_menu_personal: //个人信息
                             currentFocus = 1;
-                            if (TextUtils.isEmpty(SPUtil.getToken())) {
-                                //个人信息：未登录显示
-                                setVisible(v_personal_login_no);
-                            } else {
-                                //个人信息：已登录显示
-                                setVisible(v_personal_login_yes);
-                            }
+                            setPersonalInfo();
                             break;
                         case R.id.tv_menu_buy: //订购信息
                             currentFocus = 2;
@@ -181,7 +179,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                         case R.id.tv_menu_watch_history: //观看记录
                             currentFocus = 3;
                             //观看记录
-                            setVisible(v_watch_history);
+                            setHistory();
                             break;
                     }
                 }
@@ -222,10 +220,43 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                 });
     }
 
+    //获取播放记录
+    private void getHistory() {
+        Map<String, Object> map = RequestUtil.getBasicMapNoBusinessParams();
+
+        MyRemoteFactory.getInstance().getProxy(MyRequestProxy.class)
+                .getHistory(map)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>() {
+                    @Override
+                    public void onMyError(Throwable e) {
+                        ToastUtil.showCustom("调接口失败");
+                    }
+
+                    @Override
+                    public void onMySuccess(ResultModel<CommonWrapper> result) {
+                        historyWrapper = result.result;
+                    }
+                });
+    }
+
+    //将个人信息，呈现在界面上
+    private void setPersonalInfo() {
+        if (TextUtils.isEmpty(SPUtil.getToken())) {
+            //：未登录显示
+            setVisible(v_personal_login_no);
+        } else {
+            //个人信息：已登录显示
+            setVisible(v_personal_login_yes);
+        }
+    }
+
     //将订购信息，呈现在界面上
     private void setOrder() {
         if (orderWrapper == null) {
             //订购信息：都没订
+            v_buy_nothing.setType(1);
             setVisible(v_buy_nothing);
             return;
         }
@@ -257,6 +288,18 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         }
     }
 
+    //将观看记录信息，呈现在界面上
+    private void setHistory() {
+        if (historyWrapper == null || historyWrapper.courses == null) {
+            //没有观看记录
+            v_buy_nothing.setType(2);
+            setVisible(v_buy_nothing);
+            return;
+        }
+        setVisible(v_watch_history);
+        v_watch_history.setData(historyWrapper.courses);
+    }
+
     //将本地写死的数据，呈现在界面上
     private void setMenuBuy() {
         buyIndex++;
@@ -274,6 +317,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
             v_buy_ka.setKaInfo(new PayModel("包全年套餐", "100天"));
         } else if (buyIndex == 4) {
             //订购信息：都没订
+            v_buy_nothing.setType(1);
             setVisible(v_buy_nothing);
             buyIndex = 0;
         }
