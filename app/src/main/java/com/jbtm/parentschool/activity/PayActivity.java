@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.models.CommonModel;
 import com.jbtm.parentschool.models.HomeWrapper;
@@ -57,6 +58,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private int mKaType = 1;    //1包年，2包月，3单点。默认包年套餐
     private int mPayType = 2;    //1微信，2支付宝。默认支付宝
     private CountDownTimer timer;   //轮询器，每10秒轮询一次支付结果
+    private int orderId;    //每次生成二维码后也会对应生成一个orderId，轮询时去最新的orderId
 
 
     public static void startActivity(Context context) {
@@ -230,14 +232,15 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                             refreshQrCode(true);
 
                             //开启轮询，获取支付结果
-                            startCountDown(result.result.order_id);
+                            orderId = result.result.order_id;
+                            startCountDown();
                         }
                     }
                 });
     }
 
     //开启轮询，获取支付结果
-    private void startCountDown(final int orderId) {
+    private void startCountDown() {
         if (timer == null) {
             timer = new CountDownTimer(30 * 60_000, 10_000) {
                 @Override
@@ -421,8 +424,8 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private void dealFocusAnim(View v, boolean hasFocus, int scaleTime) {
         if (hasFocus && v.getScaleX() != 0) {
             ViewCompat.animate(v)
-                    .scaleX(1.05f)
-//                    .scaleY(1.05f)
+                    .scaleX(Constants.scaleValue)
+//                    .scaleY(Constants.scaleValue)
                     .setDuration(scaleTime)
                     .start();
         } else {

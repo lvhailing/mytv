@@ -67,6 +67,7 @@
         android:layout_marginLeft="@dimen/d_64dp"
         android:layout_marginTop="@dimen/d_10dp"
         android:text="已购课程"
+        android:textStyle="bold"
         android:textColor="@color/textColor"
         android:textSize="21sp" />
 

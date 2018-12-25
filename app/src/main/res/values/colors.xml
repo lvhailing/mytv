@@ -6,21 +6,22 @@
 
     <color name="white">#ffffff</color>
     <color name="blue">#6bdcd8</color>
-    <color name="green">#39B6B0</color>
+    <color name="green">#13aca4</color>
     <color name="gray_low">#6F7C94</color>
     <color name="gray_mid">#606D89</color>
     <color name="gray_mid_selected">#828da2</color>
     <color name="gray_deep">#3F4E71</color>
-    <color name="gray_bg">#3f4f70</color>
+
+    <color name="gray_bg">#2d374a</color>
     <color name="gray_top_left">#677083</color>
     <color name="gray_top_right">#3f495b</color>
     <color name="gray_btm_left">#556079</color>
     <color name="gray_btm_right">#495877</color>
-    <color name="textColor">#FFEFEF</color>
-    <color name="textColorHint">#CCFFEFEF</color>
+    <color name="textColor">#EFEFEF</color>
+    <color name="textColorHint">#DDEFEFEF</color>
     <color name="textColorDeep">#6D4611</color>
     <color name="textColorOrange">#E3C17B</color>
-    <color name="dialog_bg">#ee414141</color>
+    <color name="dialog_bg">#cc414141</color>
     <color name="transparent">#00000000</color>
     <color name="bg_line">#32EFEFEF</color>
 </resources>

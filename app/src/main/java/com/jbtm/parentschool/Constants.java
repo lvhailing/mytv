@@ -12,4 +12,11 @@ public class Constants {
 
     //网络失败错误提示
     public static final String ERRO_NETWORK_MSG = "接口异常";
+
+    //动画幅度scale值
+    public static final float scaleValue = 1.13f;
+
+    //动画时长scale值
+    public static final int scaleTime = 200;
+
 }

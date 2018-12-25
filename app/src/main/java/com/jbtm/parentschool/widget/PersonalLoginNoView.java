@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.HomeActivity;
 import com.jbtm.parentschool.activity.PersonalInformationActivity;
@@ -199,7 +200,7 @@ public class PersonalLoginNoView extends RelativeLayout {
         animatorList.add(scaleY);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setInterpolator(new DecelerateInterpolator(1));
-        animatorSet.setDuration(200);
+        animatorSet.setDuration(Constants.scaleTime);
         animatorSet.playTogether(animatorList);
         animatorSet.start();
     }
@@ -212,7 +213,7 @@ public class PersonalLoginNoView extends RelativeLayout {
         animatorList.add(scaleBackY);
         AnimatorSet animatorSet = new AnimatorSet();
         animatorSet.setInterpolator(new DecelerateInterpolator(1));
-        animatorSet.setDuration(200);
+        animatorSet.setDuration(Constants.scaleTime);
         animatorSet.playTogether(animatorList);
         animatorSet.start();
     }

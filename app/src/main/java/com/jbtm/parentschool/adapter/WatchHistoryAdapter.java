@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.CourseDetailActivity;
 import com.jbtm.parentschool.activity.PersonalInformationActivity;
@@ -25,7 +26,6 @@ import java.util.List;
 public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapter.ViewHolder> {
     private List<WatchHistoryModel> list;
     private Context mContext;
-    private int scaleTime = 200;
     private int from;   //0，从观看记录来。1，从订购信息来
 
     public WatchHistoryAdapter(Context context, List<WatchHistoryModel> list, int from) {
@@ -94,9 +94,9 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
                 //获取焦点时变化
                 if (hasFocus) {
                     ViewCompat.animate(v)
-                            .scaleX(1.05f)
-                            .scaleY(1.05f)
-                            .setDuration(scaleTime)
+                            .scaleX(Constants.scaleValue)
+                            .scaleY(Constants.scaleValue)
+                            .setDuration(Constants.scaleTime)
                             .setListener(new ViewPropertyAnimatorListenerAdapter() {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override

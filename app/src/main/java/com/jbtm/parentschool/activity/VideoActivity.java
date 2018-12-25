@@ -61,7 +61,7 @@ public class VideoActivity extends AppCompatActivity {
 //        String url = "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4";
 //        String title = "美国课程";
 
-        jzvdStd.setUp(url, title == null ? "" : title, JzvdStd.SCREEN_WINDOW_LIST);
+        jzvdStd.setUp(url == null ? "" : url, title == null ? "" : title, JzvdStd.SCREEN_WINDOW_LIST);
         jzvdStd.startVideo();
 
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);

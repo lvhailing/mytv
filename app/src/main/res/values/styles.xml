@@ -9,7 +9,7 @@
     </style>
 
     <style name="TextNormalStyle">
-        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColor">@color/textColorHint</item>
         <item name="android:textSize">19sp</item>
     </style>
 

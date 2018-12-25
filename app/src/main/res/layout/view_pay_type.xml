@@ -52,7 +52,7 @@
                 android:layout_gravity="center_horizontal"
                 android:includeFontPadding="false"
                 android:text="（原价233元）"
-                android:textColor="@color/textColor"
+                android:textColor="@color/textColorHint"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
@@ -91,12 +91,12 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/d_12dp"
-                    android:background="@drawable/bg_rect_discountl"
+                    android:background="@drawable/bg_rect_discount"
                     android:orientation="horizontal"
-                    android:paddingBottom="@dimen/d_2dp"
+                    android:paddingBottom="@dimen/d_4dp"
                     android:paddingLeft="@dimen/d_18dp"
                     android:paddingRight="@dimen/d_18dp"
-                    android:paddingTop="@dimen/d_2dp">
+                    android:paddingTop="@dimen/d_4dp">
 
                     <ImageView
                         android:layout_width="@dimen/d_22dp"
@@ -124,7 +124,7 @@
                 android:layout_marginTop="@dimen/d_8dp"
                 android:includeFontPadding="false"
                 android:text="所有视频都可以观看"
-                android:textColor="@color/textColor"
+                android:textColor="@color/textColorHint"
                 android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>

@@ -2,6 +2,7 @@ package com.jbtm.parentschool.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.dialog.ExitAppDialog;
 import com.jbtm.parentschool.models.OrderWrapper;
@@ -280,8 +282,10 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
     private void setTextSize(TextView view, boolean b) {
         if (b) {
             view.setTextSize(20);
+            view.setTextColor(Color.argb(255, 255, 255, 255));
         } else {
             view.setTextSize(19);
+            view.setTextColor(Color.argb(205, 239, 239, 239));
         }
     }
 

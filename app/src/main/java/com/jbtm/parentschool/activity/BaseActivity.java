@@ -76,6 +76,8 @@ public class BaseActivity extends AppCompatActivity {
             closeProgressDialog();
             mProgressDialog = null;
         }
-        unregisterReceiver(receiver);
+        if (receiver != null) {
+            unregisterReceiver(receiver);
+        }
     }
 }

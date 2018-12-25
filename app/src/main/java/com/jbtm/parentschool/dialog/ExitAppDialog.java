@@ -2,6 +2,7 @@ package com.jbtm.parentschool.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.util.DisplayMetrics;
@@ -12,6 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
 
 public class ExitAppDialog extends Dialog {
@@ -80,18 +82,21 @@ public class ExitAppDialog extends Dialog {
         }
     }
 
-    private void listenFocus(View view) {
+    private void listenFocus(TextView view) {
         view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(final View v, final boolean hasFocus) {
-                Log.i("aaa", "llll " + hasFocus);
                 //获取焦点时变化
                 if (hasFocus) {
+                    v.setBackground(context.getResources().getDrawable(R.drawable.exit_gradient_blue));
+                    ((TextView) v).setTextColor(context.getResources().getColor(R.color.white));
                     ViewCompat.animate(v)
-                            .scaleX(1.05f)
-                            .setDuration(200)
+                            .scaleX(Constants.scaleValue)
+                            .setDuration(Constants.scaleTime)
                             .start();
                 } else {
+                    v.setBackground(context.getResources().getDrawable(R.drawable.exit_gradient_gray));
+                    ((TextView) v).setTextColor(context.getResources().getColor(R.color.textColor));
                     ViewCompat.animate(v)
                             .scaleX(1)
                             .start();

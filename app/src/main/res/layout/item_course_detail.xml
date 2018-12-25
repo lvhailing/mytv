@@ -23,7 +23,7 @@
         android:layout_margin="@dimen/d_24dp"
         android:layout_toRightOf="@id/iv_mater"
         android:text="美国教育"
-        android:textColor="#efefef"
+        android:textColor="@color/textColor"
         android:textSize="14sp" />
 
     <TextView
@@ -34,6 +34,6 @@
         android:layout_margin="@dimen/d_24dp"
         android:layout_toRightOf="@id/iv_mater"
         android:text="12:12:12"
-        android:textColor="#efefef"
+        android:textColor="@color/textColorHint"
         android:textSize="12sp" />
 </RelativeLayout>

@@ -20,11 +20,11 @@ public class SplashActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        ImageView imageView = findViewById(R.id.iv);
+//        ImageView imageView = findViewById(R.id.iv);
 
 //        SPUtil.setToken("e6516bbee198e9d61ae07bc08ebb961f");
 
-        Glide.with(this).load(R.mipmap.splash).into(imageView);
+//        Glide.with(this).load(R.mipmap.splash).into(imageView);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -38,6 +38,6 @@ public class SplashActivity extends AppCompatActivity {
                 }
                 finish();
             }
-        }, 1000);
+        }, 2000);
     }
 }

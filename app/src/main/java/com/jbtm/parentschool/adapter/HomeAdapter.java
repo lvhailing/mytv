@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.CourseDetailActivity;
 import com.jbtm.parentschool.activity.HomeActivity;
@@ -25,7 +26,6 @@ import java.util.List;
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     private Context mContext;
     private List<HomeCourseModel> courseList;
-    private int scaleTime = 200;
 
     public HomeAdapter(Context context, List<HomeCourseModel> courseList) {
         super();
@@ -87,9 +87,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
                 //获取焦点时变化
                 if (hasFocus) {
                     ViewCompat.animate(v)
-                            .scaleX(1.05f)
-                            .scaleY(1.05f)
-                            .setDuration(scaleTime)
+                            .scaleX(Constants.scaleValue)
+                            .scaleY(Constants.scaleValue)
+                            .setDuration(Constants.scaleTime)
                             .setListener(new ViewPropertyAnimatorListenerAdapter() {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                                 @Override

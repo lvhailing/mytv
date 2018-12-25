@@ -2,6 +2,7 @@ package com.jbtm.parentschool.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.adapter.HomeAdapter;
 import com.jbtm.parentschool.dialog.ExitAppDialog;
@@ -36,7 +38,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private long lastTime;
-    private int scaleTime = 200;
     private LinearLayout ll_jx_2items;   //精选的两个item
     private RelativeLayout rl_jx_item_1;   //精选的两个item
     private RelativeLayout rl_jx_item_2;   //精选的两个item
@@ -188,6 +189,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         if (recommendList.size() == 1) {
             iv2.setVisibility(View.GONE);
             setImageView(iv1, recommendList.get(0).photo);
+            rl_jx_item_2.setFocusable(false);
+            adapter.setData(null);
             return;
         }
         setImageView(iv1, recommendList.get(0).photo);
@@ -314,9 +317,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 //获取焦点时变化
                 if (hasFocus) {
                     ViewCompat.animate(v)
-                            .scaleX(1.05f)
-                            .scaleY(1.05f)
-                            .setDuration(scaleTime)
+                            .scaleX(Constants.scaleValue)
+                            .scaleY(Constants.scaleValue)
+                            .setDuration(Constants.scaleTime)
                             .setListener(new ViewPropertyAnimatorListenerAdapter() {
                                 @Override
                                 public void onAnimationStart(View view) {
@@ -383,8 +386,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private void setTextSize(TextView view, boolean b) {
         if (b) {
             view.setTextSize(20);
+            view.setTextColor(Color.argb(255, 255, 255, 255));
         } else {
             view.setTextSize(19);
+            view.setTextColor(Color.argb(205, 239, 239, 239));
         }
     }
 }

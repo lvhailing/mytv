@@ -42,6 +42,7 @@ public class UIUtil {
         ss.setSpan(sizeSpan, 4, str.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         ss.setSpan(styleSpan, 4, str.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         ss.setSpan(colorSpan, 4, str.length() - 1, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        tv.setIncludeFontPadding(false);
         tv.setText(ss);
     }
 }

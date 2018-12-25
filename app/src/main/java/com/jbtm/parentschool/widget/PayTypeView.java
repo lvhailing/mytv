@@ -89,12 +89,17 @@ public class PayTypeView extends LinearLayout {
             //聚焦
             ll_left.setBackground(gradientYellow);
             ll_right.setBackground(gradientYellow);
+            if (payType != 3) {
+                //非单点
+                ll_discount.setBackground(mContext.getResources().getDrawable(R.drawable.bg_rect_discount));
+            }
         } else {
             //失焦
             if (payType != 3) {
                 //是单点
                 ll_left.setBackgroundColor(mContext.getResources().getColor(R.color.gray_btm_left));
                 ll_right.setBackgroundColor(mContext.getResources().getColor(R.color.gray_btm_right));
+                ll_discount.setBackground(null);
             } else {
                 //是包年 或包月
                 ll_left.setBackgroundColor(mContext.getResources().getColor(R.color.gray_top_left));
