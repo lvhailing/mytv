@@ -165,10 +165,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="@dimen/d_4dp"
+                        android:layout_marginBottom="@dimen/d_6dp"
                         android:textColor="#2C3130"
                         android:textSize="@dimen/s_38sp"
-                        tools:text="扫码支付" />
+                        android:text="扫码支付" />
 
                     <TextView
                         android:id="@+id/tv_pay_result_mid"
@@ -177,7 +177,8 @@
                         android:layout_alignParentBottom="true"
                         android:layout_toRightOf="@id/tv_pay_result_left"
                         android:textColor="@color/green"
-                        android:textSize="@dimen/s_56sp"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/s_50sp"
                         tools:text="98" />
 
                     <TextView
@@ -185,11 +186,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="@dimen/d_4dp"
+                        android:layout_marginBottom="@dimen/d_6dp"
                         android:layout_toRightOf="@id/tv_pay_result_mid"
                         android:textColor="#2C3130"
                         android:textSize="@dimen/s_38sp"
-                        tools:text="元" />
+                        android:text="元" />
                 </RelativeLayout>
             </LinearLayout>
 

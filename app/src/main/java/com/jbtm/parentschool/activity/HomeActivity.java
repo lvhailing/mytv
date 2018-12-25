@@ -317,8 +317,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 //获取焦点时变化
                 if (hasFocus) {
                     ViewCompat.animate(v)
-                            .scaleX(Constants.scaleValue)
-                            .scaleY(Constants.scaleValue)
+                            .scaleX(Constants.scaleValueSmall)
+                            .scaleY(Constants.scaleValueSmall)
                             .setDuration(Constants.scaleTime)
                             .setListener(new ViewPropertyAnimatorListenerAdapter() {
                                 @Override

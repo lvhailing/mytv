@@ -4,7 +4,8 @@
     <dimen name="d_1dp">0.33dp</dimen>
     <dimen name="d_2dp">0.75dp</dimen>
     <dimen name="d_3dp">1dp</dimen>
-    <dimen name="d_4dp">1dp</dimen>
+    <dimen name="d_4dp">1.3dp</dimen>
+    <dimen name="d_6dp">2dp</dimen>
     <dimen name="d_8dp">2.7dp</dimen>
     <dimen name="d_10dp">3dp</dimen>
     <dimen name="d_12dp">4dp</dimen>

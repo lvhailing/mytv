@@ -45,8 +45,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="正面管教"
+                    android:includeFontPadding="false"
                     android:textColor="#efefef"
-                    android:textSize="@dimen/s_50sp"
+                    android:textSize="@dimen/s_46sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -54,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_title"
-                    android:layout_marginTop="@dimen/d_22dp"
+                    android:layout_marginTop="@dimen/d_18dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -62,12 +63,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="107分钟"
+                        android:includeFontPadding="false"
                         android:textColor="#efefef"
                         android:textSize="@dimen/s_28sp" />
 
                     <View
                         android:layout_width="@dimen/d_2dp"
-                        android:layout_height="@dimen/d_22dp"
+                        android:layout_height="@dimen/d_20dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/d_20dp"
                         android:background="#efefef" />
@@ -78,12 +80,13 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/d_20dp"
                         android:text="2018年"
+                        android:includeFontPadding="false"
                         android:textColor="#efefef"
                         android:textSize="@dimen/s_28sp" />
 
                     <View
                         android:layout_width="@dimen/d_2dp"
-                        android:layout_height="@dimen/d_22dp"
+                        android:layout_height="@dimen/d_20dp"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/d_20dp"
                         android:background="#efefef" />
@@ -94,6 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/d_20dp"
                         android:text="美国帮"
+                        android:includeFontPadding="false"
                         android:textColor="#efefef"
                         android:textSize="@dimen/s_28sp" />
                 </LinearLayout>
@@ -103,7 +107,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ll_1"
-                    android:layout_marginTop="@dimen/d_22dp"
+                    android:includeFontPadding="false"
+                    android:layout_marginTop="@dimen/d_18dp"
                     android:text="主讲专家：唐丽丽"
                     android:textColor="@color/textColorHint"
                     android:textSize="@dimen/s_28sp" />
@@ -113,9 +118,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_exporter"
-                    android:layout_marginTop="@dimen/d_22dp"
+                    android:layout_marginTop="@dimen/d_18dp"
                     android:ellipsize="end"
+                    android:includeFontPadding="false"
                     android:maxLines="2"
+                    android:lineSpacingMultiplier="1.5"
                     android:text="简介：孩子爱发脾气？经常气的你暴跳如雷？自己也爱发脾气？
 家里经常鸡飞狗跳？90%的家庭问题都是来源于情绪孩子爱发脾气？经常气的你暴跳如雷？自己也爱发脾气？
 家里经常鸡飞狗跳？90%的家庭问题都是来源于情绪"
@@ -127,7 +134,7 @@
                     android:layout_width="@dimen/d_192dp"
                     android:layout_height="@dimen/d_88dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/d_52dp"
+                    android:layout_marginBottom="@dimen/d_50dp"
                     android:background="@drawable/selector_play"
                     android:focusable="true">
 
@@ -156,7 +163,7 @@
                     android:layout_width="@dimen/d_192dp"
                     android:layout_height="@dimen/d_88dp"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/d_52dp"
+                    android:layout_marginBottom="@dimen/d_50dp"
                     android:layout_marginLeft="@dimen/d_222dp"
                     android:background="@drawable/selector_buy"
                     android:focusable="true"
@@ -189,8 +196,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="@dimen/d_26dp"
-                        android:layout_height="@dimen/d_26dp"
+                        android:layout_width="@dimen/d_24dp"
+                        android:layout_height="@dimen/d_24dp"
                         android:layout_gravity="center_vertical"
                         android:background="@mipmap/time_progress" />
 
@@ -201,6 +208,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/d_14dp"
                         android:text="上次观看到66%"
+                        android:includeFontPadding="false"
                         android:textColor="@color/textColorHint"
                         android:textSize="@dimen/s_24sp" />
                 </LinearLayout>

@@ -40,8 +40,12 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/d_22dp"
-            android:orientation="horizontal">
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/d_22dp"
+            android:paddingRight="@dimen/d_22dp"
+            android:paddingTop="@dimen/d_22dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -58,6 +62,19 @@
                 android:textSize="@dimen/s_46sp"
                 android:textStyle="bold"
                 tools:text="26天5小时分钟" />
+
+            <TextView
+                android:id="@+id/tv_buy_again"
+                android:layout_width="@dimen/d_120dp"
+                android:layout_height="@dimen/d_60dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/d_38dp"
+                android:background="@drawable/gradient_yellow"
+                android:focusable="true"
+                android:gravity="center"
+                android:textColor="@color/textColorDeep"
+                android:textSize="@dimen/s_34sp"
+                android:text="续费" />
         </LinearLayout>
     </LinearLayout>
 
@@ -67,9 +84,9 @@
         android:layout_marginLeft="@dimen/d_64dp"
         android:layout_marginTop="@dimen/d_10dp"
         android:text="已购课程"
-        android:textStyle="bold"
         android:textColor="@color/textColor"
-        android:textSize="@dimen/s_42sp" />
+        android:textSize="@dimen/s_42sp"
+        android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_dandian"

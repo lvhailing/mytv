@@ -62,11 +62,13 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private int orderId;    //每次生成二维码后也会对应生成一个orderId，轮询时去最新的orderId
 
 
+    //头部logo点击，套餐购买
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, PayActivity.class);
         context.startActivity(intent);
     }
 
+    //单点购买
     public static void startActivity(Context context, int from, int courseId, String coursePrice) {
         Intent intent = new Intent(context, PayActivity.class);
         intent.putExtra("from", from);
