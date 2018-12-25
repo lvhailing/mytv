@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:text="恭喜您已订购"
                 android:textColor="@color/textColor"
-                android:textSize="30sp"
+                android:textSize="@dimen/s_60sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textColorOrange"
-                android:textSize="30sp"
+                android:textSize="@dimen/s_60sp"
                 android:textStyle="bold"
                 tools:text="家长学堂包年业务" />
         </LinearLayout>
@@ -46,14 +46,14 @@
                 android:layout_height="wrap_content"
                 android:text="剩余时间："
                 android:textColor="@color/textColor"
-                android:textSize="17sp" />
+                android:textSize="@dimen/s_34sp" />
 
             <TextView
                 android:id="@+id/tv_valid_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/textColor"
-                android:textSize="23sp"
+                android:textSize="@dimen/s_46sp"
                 android:textStyle="bold"
                 tools:text="26天5小时分钟" />
         </LinearLayout>

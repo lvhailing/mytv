@@ -53,7 +53,7 @@
             android:gravity="center"
             android:text="再看一会儿"
             android:textColor="@color/textColor"
-            android:textSize="18sp" />
+            android:textSize="@dimen/s_36sp" />
 
         <TextView
             android:id="@+id/tv_exit"
@@ -67,6 +67,6 @@
             android:gravity="center"
             android:text="退出不看了"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="@dimen/s_36sp" />
     </RelativeLayout>
 </LinearLayout>

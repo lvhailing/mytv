@@ -18,7 +18,7 @@
             android:layout_marginTop="@dimen/d_72dp"
             android:text="确定退出当前登录账号？"
             android:textColor="@color/textColor"
-            android:textSize="19sp"
+            android:textSize="@dimen/s_38sp"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -37,7 +37,7 @@
                 android:gravity="center"
                 android:text="确定"
                 android:textColor="@color/textColor"
-                android:textSize="18sp" />
+                android:textSize="@dimen/s_36sp" />
 
             <TextView
                 android:id="@+id/tv_cancel"
@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:text="取消"
                 android:textColor="@color/textColor"
-                android:textSize="18sp" />
+                android:textSize="@dimen/s_36sp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

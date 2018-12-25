@@ -159,7 +159,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/d_22dp"
                     android:textColor="#2C3130"
-                    android:textSize="19sp"
+                    android:textSize="@dimen/s_38sp"
                     tools:text="付款成功！" />
             </LinearLayout>
 

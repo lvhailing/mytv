@@ -19,7 +19,7 @@
             android:layout_marginTop="@dimen/d_72dp"
             android:text="有新版本，请更新"
             android:textColor="@color/textColor"
-            android:textSize="19sp" />
+            android:textSize="@dimen/s_38sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
                 android:gravity="center"
                 android:text="取消"
                 android:textColor="@color/textColor"
-                android:textSize="18sp" />
+                android:textSize="@dimen/s_36sp" />
 
             <TextView
                 android:id="@+id/tv_sure"
@@ -49,7 +49,7 @@
                 android:gravity="center"
                 android:text="更新"
                 android:textColor="@color/textColor"
-                android:textSize="18sp" />
+                android:textSize="@dimen/s_36sp" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

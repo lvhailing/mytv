@@ -20,5 +20,5 @@
         android:layout_marginTop="@dimen/d_24dp"
         android:text="您还没有订购，请到VIP订购进行办理"
         android:textColor="@color/textColor"
-        android:textSize="20sp" />
+        android:textSize="@dimen/s_40sp" />
 </LinearLayout>

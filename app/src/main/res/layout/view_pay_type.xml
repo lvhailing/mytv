@@ -30,7 +30,7 @@
                     android:includeFontPadding="false"
                     android:text="38"
                     android:textColor="@color/textColorOrange"
-                    android:textSize="29sp"
+                    android:textSize="@dimen/s_58sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -42,7 +42,7 @@
                     android:includeFontPadding="false"
                     android:text="元"
                     android:textColor="@color/textColorOrange"
-                    android:textSize="19sp" />
+                    android:textSize="@dimen/s_38sp" />
             </LinearLayout>
 
             <TextView
@@ -53,7 +53,7 @@
                 android:includeFontPadding="false"
                 android:text="（原价233元）"
                 android:textColor="@color/textColorHint"
-                android:textSize="12sp" />
+                android:textSize="@dimen/s_24sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -83,7 +83,7 @@
                     android:includeFontPadding="false"
                     android:text="月卡"
                     android:textColor="@color/textColorOrange"
-                    android:textSize="22sp" />
+                    android:textSize="@dimen/s_44sp" />
 
                 <LinearLayout
                     android:id="@+id/ll_discount"
@@ -112,7 +112,7 @@
                         android:includeFontPadding="false"
                         android:text="限时特惠"
                         android:textColor="#EDD59D"
-                        android:textSize="12sp" />
+                        android:textSize="@dimen/s_24sp" />
                 </LinearLayout>
             </LinearLayout>
 

@@ -33,5 +33,5 @@
         android:layout_height="wrap_content"
         android:text="观看不足7%"
         android:textColor="@color/textColorHint"
-        android:textSize="12sp" />
+        android:textSize="@dimen/s_24sp" />
 </LinearLayout>

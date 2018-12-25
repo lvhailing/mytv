@@ -24,7 +24,7 @@
         android:layout_toRightOf="@id/iv_mater"
         android:text="美国教育"
         android:textColor="@color/textColor"
-        android:textSize="14sp" />
+        android:textSize="@dimen/s_28sp" />
 
     <TextView
         android:id="@+id/tv_time"
@@ -35,5 +35,5 @@
         android:layout_toRightOf="@id/iv_mater"
         android:text="12:12:12"
         android:textColor="@color/textColorHint"
-        android:textSize="12sp" />
+        android:textSize="@dimen/s_24sp" />
 </RelativeLayout>

@@ -10,12 +10,12 @@
 
     <style name="TextNormalStyle">
         <item name="android:textColor">@color/textColorHint</item>
-        <item name="android:textSize">19sp</item>
+        <item name="android:textSize">@dimen/s_38sp</item>
     </style>
 
     <style name="TextBoldText" parent="@android:style/Widget.TextView">
         <item name="android:textColor">@color/textColor</item>
-        <item name="android:textSize">19sp</item>
+        <item name="android:textSize">@dimen/s_38sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
