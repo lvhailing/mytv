@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
@@ -14,9 +15,11 @@ import android.widget.TextView;
 
 import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
+import com.jbtm.parentschool.adapter.HomeAdapter;
 import com.jbtm.parentschool.adapter.WatchHistoryAdapter;
 import com.jbtm.parentschool.dialog.ExitAppDialog;
 import com.jbtm.parentschool.models.CommonWrapper;
+import com.jbtm.parentschool.models.HomeWrapper;
 import com.jbtm.parentschool.models.OrderWrapper;
 import com.jbtm.parentschool.models.PayModel;
 import com.jbtm.parentschool.models.WatchHistoryModel;
@@ -27,6 +30,7 @@ import com.jbtm.parentschool.network.model.ResultModel;
 import com.jbtm.parentschool.utils.RequestUtil;
 import com.jbtm.parentschool.utils.SPUtil;
 import com.jbtm.parentschool.utils.ToastUtil;
+import com.jbtm.parentschool.utils.Util;
 import com.jbtm.parentschool.widget.BuyKaAndDandianView;
 import com.jbtm.parentschool.widget.BuyKaView;
 import com.jbtm.parentschool.widget.BuyNothingView;
@@ -62,6 +66,8 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
     public static String loginOutBroadcast = "com.jbtm.parentschool.loginOutBroadcast";
     private long lastTime;
     private int currentFocus;
+    private TextView tv_title_time;
+    private CountDownTimer timer;   //系统时间
 
     public static void startActivity(Context context, int from) {
         Intent intent = new Intent(context, PersonalInformationActivity.class);
@@ -77,11 +83,13 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         initView();
         getOrder();
         getHistory();
+        startClock();
     }
 
     private void initView() {
         getSupportActionBar().hide();
 
+        tv_title_time = findViewById(R.id.tv_title_time);
         v_personal_login_yes = findViewById(R.id.v_personal_login_yes);
         v_personal_login_no = findViewById(R.id.v_personal_login_no);
         v_buy_ka_and_dandian = findViewById(R.id.v_buy_ka_and_dandian);
@@ -210,7 +218,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                 .subscribe(new MyObserverAdapter<ResultModel<OrderWrapper>>() {
                     @Override
                     public void onMyError(Throwable e) {
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
@@ -231,7 +239,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                 .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>() {
                     @Override
                     public void onMyError(Throwable e) {
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
@@ -325,10 +333,10 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
 
     private void setTextSize(TextView view, boolean b) {
         if (b) {
-            view.setTextSize(20);
+//            view.setTextSize(20);
             view.setTextColor(Color.argb(255, 255, 255, 255));
         } else {
-            view.setTextSize(19);
+//            view.setTextSize(19);
             view.setTextColor(Color.argb(205, 239, 239, 239));
         }
     }
@@ -427,5 +435,45 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                 finish();
             }
         });
+    }
+
+    private void startClock() {
+        if (timer == null) {
+            timer = new CountDownTimer(3 * 60 * 60_000, 10_000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    //改变时间
+                    tv_title_time.setText(Util.getClockTime());
+                }
+
+                @Override
+                public void onFinish() {
+                }
+            };
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (timer != null) {
+            timer.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer = null;
+        }
     }
 }

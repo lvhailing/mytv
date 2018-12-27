@@ -117,7 +117,7 @@ public class MyRemoteFactory {
                 FormBody.Builder bodyBuilder = new FormBody.Builder();
                 bodyBuilder
                         .add("device_type", "4")
-                        .add("api_version", Util.getVersionCode() + "")
+                        .add("api_version", Util.getVersionName())
                         .add("accept_token", SPUtil.getToken());
                 if (request.body() instanceof FormBody) {
                     FormBody body = (FormBody) request.body();

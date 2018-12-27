@@ -19,7 +19,7 @@
         android:focusable="true"
         android:text="22:22"
         android:textColor="@color/textColor"
-        android:textSize="20sp" />
+        android:textSize="@dimen/s_40sp" />
 
     <View
         android:id="@+id/v_title_vertical_line"

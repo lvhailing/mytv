@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v7.widget.GridLayoutManager;
@@ -28,8 +29,10 @@ import com.jbtm.parentschool.network.MyRequestProxy;
 import com.jbtm.parentschool.network.model.ResultModel;
 import com.jbtm.parentschool.utils.RequestUtil;
 import com.jbtm.parentschool.utils.ToastUtil;
+import com.jbtm.parentschool.utils.Util;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +45,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private RelativeLayout rl_jx_item_1;   //精选的两个item
     private RelativeLayout rl_jx_item_2;   //精选的两个item
     private TextView tv_menu_jx;
+    private TextView tv_title_time;
     private TextView tv_menu_1;
     private TextView tv_menu_2;
     private TextView tv_menu_3;
@@ -52,6 +56,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private HomeAdapter adapter;
     private HomeWrapper homeWrapper;
     private int currentFocus;
+    private CountDownTimer timer;   //系统时间
 
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, HomeActivity.class);
@@ -66,6 +71,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         initView();
         initData();
         registerReceiver(); //退出登录时该界面退出
+        startClock();
     }
 
     private void initView() {
@@ -76,6 +82,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         final LinearLayout ll_title_me = findViewById(R.id.ll_title_me);
         final LinearLayout ll_title_buy = findViewById(R.id.ll_title_buy);
         RecyclerView recyclerView = findViewById(R.id.rv_course);
+        tv_title_time = findViewById(R.id.tv_title_time);
         tv_menu_jx = findViewById(R.id.tv_menu_jx);
         tv_menu_1 = findViewById(R.id.tv_menu_1);
         tv_menu_2 = findViewById(R.id.tv_menu_2);
@@ -157,7 +164,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
@@ -385,11 +392,51 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     private void setTextSize(TextView view, boolean b) {
         if (b) {
-            view.setTextSize(20);
+//            view.setTextSize(20);
             view.setTextColor(Color.argb(255, 255, 255, 255));
         } else {
-            view.setTextSize(19);
+//            view.setTextSize(19);
             view.setTextColor(Color.argb(205, 239, 239, 239));
+        }
+    }
+
+    private void startClock() {
+        if (timer == null) {
+            timer = new CountDownTimer(3 * 60 * 60_000, 10_000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    //改变时间
+                    tv_title_time.setText(Util.getClockTime());
+                }
+
+                @Override
+                public void onFinish() {
+                }
+            };
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (timer != null) {
+            timer.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer = null;
         }
     }
 }

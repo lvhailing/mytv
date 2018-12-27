@@ -18,6 +18,7 @@ import com.jbtm.parentschool.R;
 import com.jbtm.parentschool.activity.CourseDetailActivity;
 import com.jbtm.parentschool.activity.HomeActivity;
 import com.jbtm.parentschool.activity.PersonalInformationActivity;
+import com.jbtm.parentschool.models.HomeColumnModel;
 import com.jbtm.parentschool.models.HomeCourseModel;
 import com.jbtm.parentschool.utils.UIUtil;
 
@@ -34,6 +35,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     public void setData(List<HomeCourseModel> courseList) {
+        for (int i = 0; i < courseList.size(); i++) {
+            if (courseList.get(i) == null) {
+                courseList.remove(courseList.get(i));
+            }
+        }
         this.courseList = courseList;
         notifyDataSetChanged();
     }

@@ -3,6 +3,7 @@ package com.jbtm.parentschool.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -23,6 +24,7 @@ import com.jbtm.parentschool.network.MyRequestProxy;
 import com.jbtm.parentschool.network.model.ResultModel;
 import com.jbtm.parentschool.utils.RequestUtil;
 import com.jbtm.parentschool.utils.ToastUtil;
+import com.jbtm.parentschool.utils.Util;
 import com.jbtm.parentschool.widget.FullyGridLayoutManager;
 
 import java.util.HashMap;
@@ -39,6 +41,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     private ImageView iv_course;
     private TextView tv_title;
     private LinearLayout ll_1;
+    private TextView tv_title_time;
     private TextView tv_flag1;
     private TextView tv_flag2;
     private TextView tv_flag3;
@@ -52,6 +55,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     private String materTitle;    //课程名称
     private int courseId;   //课程id
     private String coursePrice;   //课程价格
+    private CountDownTimer timer;   //系统时间
 
     public static void startActivity(Context context, int courseId) {
         Intent intent = new Intent(context, CourseDetailActivity.class);
@@ -67,6 +71,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         initView();
         initData();
         registerReceiver(); //退出登录时该界面退出
+        startClock();
     }
 
     private void initView() {
@@ -77,6 +82,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         recyclerView = findViewById(R.id.rv_course);
 
         iv_course = (ImageView) findViewById(R.id.iv_course);
+        tv_title_time = findViewById(R.id.tv_title_time);
         tv_title = (TextView) findViewById(R.id.tv_title);
         ll_1 = (LinearLayout) findViewById(R.id.ll_1);
         tv_flag1 = (TextView) findViewById(R.id.tv_flag1);
@@ -115,7 +121,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
@@ -204,7 +210,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
@@ -219,4 +225,45 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                     }
                 });
     }
+
+    private void startClock() {
+        if (timer == null) {
+            timer = new CountDownTimer(3 * 60 * 60_000, 10_000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    //改变时间
+                    tv_title_time.setText(Util.getClockTime());
+                }
+
+                @Override
+                public void onFinish() {
+                }
+            };
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (timer != null) {
+            timer.cancel();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (timer != null) {
+            timer.start();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (timer != null) {
+            timer = null;
+        }
+    }
+
 }

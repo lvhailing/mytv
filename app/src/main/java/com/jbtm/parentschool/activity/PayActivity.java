@@ -23,7 +23,7 @@ import com.jbtm.parentschool.network.MyRequestProxy;
 import com.jbtm.parentschool.network.model.ResultModel;
 import com.jbtm.parentschool.utils.RequestUtil;
 import com.jbtm.parentschool.utils.ToastUtil;
-import com.jbtm.parentschool.utils.UIUtil;
+import com.jbtm.parentschool.utils.Util;
 import com.jbtm.parentschool.utils.ZXingUtil;
 import com.jbtm.parentschool.widget.PayTypeView;
 
@@ -48,6 +48,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private ImageView iv_wx;
     private ImageView iv_qrcode;
     private ImageView iv_pay_success;
+    private TextView tv_title_time;
     private TextView tv_pay_result_left;
     private TextView tv_pay_result_mid;
     private TextView tv_pay_result_right;
@@ -58,8 +59,10 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private int courseId;   //支付时 课程ID（点播方式必传）
     private int mKaType = 1;    //1包年，2包月，3单点。默认包年套餐
     private int mPayType = 2;    //1微信，2支付宝。默认支付宝
-    private CountDownTimer timer;   //轮询器，每10秒轮询一次支付结果
+    private CountDownTimer countDownTimer;   //轮询器，每10秒轮询一次支付结果
+    private CountDownTimer clockTimer;   //时钟
     private int orderId;    //每次生成二维码后也会对应生成一个orderId，轮询时去最新的orderId
+
 
 
     //头部logo点击，套餐购买
@@ -85,6 +88,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         initView();
         initData();
         registerReceiver(); //退出登录时该界面退出
+        startClock();
     }
 
     private void initView() {
@@ -102,6 +106,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         iv_month_arrow = findViewById(R.id.iv_month_arrow);
         iv_dandian_arrow = findViewById(R.id.iv_dandian_arrow);
         ll_dandian_arrow = findViewById(R.id.ll_dandian_arrow);
+        tv_title_time = findViewById(R.id.tv_title_time);
         tv_pay_result_left = findViewById(R.id.tv_pay_result_left);
         tv_pay_result_mid = findViewById(R.id.tv_pay_result_mid);
         tv_pay_result_right = findViewById(R.id.tv_pay_result_right);
@@ -138,7 +143,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
@@ -220,7 +225,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
@@ -246,8 +251,8 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
 
     //开启轮询，获取支付结果
     private void startCountDown() {
-        if (timer == null) {
-            timer = new CountDownTimer(30 * 60_000, 10_000) {
+        if (countDownTimer == null) {
+            countDownTimer = new CountDownTimer(30 * 60_000, 10_000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     //轮询支付接口
@@ -258,7 +263,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                 public void onFinish() {
                 }
             };
-            timer.start();
+            countDownTimer.start();
         }
     }
 
@@ -276,7 +281,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
@@ -284,9 +289,9 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                         closeProgressDialog();
                         ToastUtil.showCustom(result.msg);
                         //成获取到支付结果
-                        if (timer != null) {
-                            timer.cancel();
-                            timer = null;
+                        if (countDownTimer != null) {
+                            countDownTimer.cancel();
+                            countDownTimer = null;
                         }
                         showPaySuccess();
                     }
@@ -489,12 +494,52 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         }
     }
 
+    private void startClock() {
+        if (clockTimer == null) {
+            clockTimer = new CountDownTimer(3 * 60 * 60_000, 10_000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    //改变时间
+                    tv_title_time.setText(Util.getClockTime());
+                }
+
+                @Override
+                public void onFinish() {
+                }
+            };
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+        }
+        if (clockTimer != null) {
+            clockTimer.cancel();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (countDownTimer != null) {
+            countDownTimer.start();
+        }
+        if (clockTimer != null) {
+            clockTimer.start();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
+        if (countDownTimer != null) {
+            countDownTimer = null;
+        }
+        if (clockTimer != null) {
+            clockTimer = null;
         }
     }
 }

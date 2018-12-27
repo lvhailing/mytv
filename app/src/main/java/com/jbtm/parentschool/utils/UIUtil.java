@@ -22,6 +22,8 @@ public class UIUtil {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
             view.bringToFront();
             view.setElevation(10f);   //防止被其他view z轴方向覆盖
+        } else {
+            view.bringToFront();
         }
     }
 

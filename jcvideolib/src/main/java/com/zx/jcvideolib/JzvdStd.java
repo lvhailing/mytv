@@ -149,12 +149,13 @@ public class JzvdStd extends Jzvd {
     }
 
     public void changeStartButtonSize(int size) {
-        ViewGroup.LayoutParams lp = startButton.getLayoutParams();
-        lp.height = size;
-        lp.width = size;
-        lp = loadingProgressBar.getLayoutParams();
-        lp.height = size;
-        lp.width = size;
+        //改变加载框和播放按钮的大小
+//        ViewGroup.LayoutParams lp = startButton.getLayoutParams();
+//        lp.height = size;
+//        lp.width = size;
+//        lp = loadingProgressBar.getLayoutParams();
+//        lp.height = size;
+//        lp.width = size;
     }
 
     @Override
@@ -633,17 +634,17 @@ public class JzvdStd extends Jzvd {
     public void updateStartImage() {
         if (currentState == CURRENT_STATE_PLAYING) {
             startButton.setVisibility(VISIBLE);
-            startButton.setImageResource(R.drawable.jz_click_pause_selector);
+//            startButton.setImageResource(R.drawable.jz_click_pause_selector);
             replayTextView.setVisibility(GONE);
         } else if (currentState == CURRENT_STATE_ERROR) {
             startButton.setVisibility(INVISIBLE);
             replayTextView.setVisibility(GONE);
         } else if (currentState == CURRENT_STATE_AUTO_COMPLETE) {
             startButton.setVisibility(VISIBLE);
-            startButton.setImageResource(R.drawable.jz_click_replay_selector);
+//            startButton.setImageResource(R.drawable.jz_click_replay_selector);
             replayTextView.setVisibility(VISIBLE);
         } else {
-            startButton.setImageResource(R.drawable.jz_click_play_selector);
+//            startButton.setImageResource(R.drawable.jz_click_play_selector);
             replayTextView.setVisibility(GONE);
         }
     }

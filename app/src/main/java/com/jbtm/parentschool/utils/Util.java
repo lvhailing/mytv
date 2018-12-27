@@ -9,6 +9,7 @@ import android.util.Base64;
 import com.jbtm.parentschool.MyApplication;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,5 +74,13 @@ public class Util {
         result.put("versionName", version);
         result.put("versionCode", code);
         return result;
+    }
+
+    public static String getClockTime() {
+        Calendar c = Calendar.getInstance();
+        int mHour = c.get(Calendar.HOUR_OF_DAY);
+        int mMinute = c.get(Calendar.MINUTE);
+        int mSecond = c.get(Calendar.SECOND);
+        return mHour + ":" + mMinute + ":" + mSecond;
     }
 }

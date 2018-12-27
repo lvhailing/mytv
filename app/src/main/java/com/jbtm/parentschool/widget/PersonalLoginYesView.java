@@ -98,8 +98,7 @@ public class PersonalLoginYesView extends RelativeLayout implements View.OnClick
 
     //检查更新
     private void checkUpdate() {
-        Map<String, Object> params = Util.getVersionCodeAndName(mContext);
-        RequestUtil.getBasicMap(params);
+        Map<String, Object> params = RequestUtil.getBasicMapNoBusinessParams();
 
         MyRemoteFactory.getInstance().getProxy(MyRequestProxy.class)
                 .checkVersion(params)
@@ -108,7 +107,7 @@ public class PersonalLoginYesView extends RelativeLayout implements View.OnClick
                 .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>() {
                     @Override
                     public void onMyError(Throwable e) {
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override

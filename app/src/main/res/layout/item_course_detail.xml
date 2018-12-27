@@ -23,6 +23,9 @@
         android:layout_margin="@dimen/d_24dp"
         android:layout_toRightOf="@id/iv_mater"
         android:text="美国教育"
+        android:ellipsize="end"
+        android:includeFontPadding="false"
+        android:maxLines="2"
         android:textColor="@color/textColor"
         android:textSize="@dimen/s_28sp" />
 

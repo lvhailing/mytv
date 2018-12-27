@@ -55,7 +55,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_title"
-                    android:layout_marginTop="@dimen/d_18dp"
+                    android:layout_marginTop="@dimen/d_14dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -110,7 +110,7 @@
                     android:includeFontPadding="false"
                     android:layout_marginTop="@dimen/d_18dp"
                     android:text="主讲专家：唐丽丽"
-                    android:textColor="@color/textColorHint"
+                    android:textColor="@color/textColorHint2"
                     android:textSize="@dimen/s_28sp" />
 
                 <TextView
@@ -122,11 +122,11 @@
                     android:ellipsize="end"
                     android:includeFontPadding="false"
                     android:maxLines="2"
-                    android:lineSpacingMultiplier="1.5"
+                    android:lineSpacingMultiplier="1.3"
                     android:text="简介：孩子爱发脾气？经常气的你暴跳如雷？自己也爱发脾气？
 家里经常鸡飞狗跳？90%的家庭问题都是来源于情绪孩子爱发脾气？经常气的你暴跳如雷？自己也爱发脾气？
 家里经常鸡飞狗跳？90%的家庭问题都是来源于情绪"
-                    android:textColor="@color/textColorHint"
+                    android:textColor="@color/textColorHint2"
                     android:textSize="@dimen/s_28sp" />
 
                 <RelativeLayout
@@ -209,7 +209,7 @@
                         android:layout_marginLeft="@dimen/d_14dp"
                         android:text="上次观看到66%"
                         android:includeFontPadding="false"
-                        android:textColor="@color/textColorHint"
+                        android:textColor="@color/textColorHint2"
                         android:textSize="@dimen/s_24sp" />
                 </LinearLayout>
             </RelativeLayout>

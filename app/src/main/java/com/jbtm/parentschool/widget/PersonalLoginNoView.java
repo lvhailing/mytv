@@ -150,7 +150,7 @@ public class PersonalLoginNoView extends RelativeLayout {
                 .subscribe(new MyObserverAdapter<ResultModel>() {
                     @Override
                     public void onMyError(Throwable e) {
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
@@ -173,7 +173,7 @@ public class PersonalLoginNoView extends RelativeLayout {
                 .subscribe(new MyObserverAdapter<ResultModel<CommonModel>>() {
                     @Override
                     public void onMyError(Throwable e) {
-                        ToastUtil.showCustom("调接口失败");
+//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
