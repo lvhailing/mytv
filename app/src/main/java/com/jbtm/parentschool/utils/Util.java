@@ -78,9 +78,9 @@ public class Util {
 
     public static String getClockTime() {
         Calendar c = Calendar.getInstance();
-        int mHour = c.get(Calendar.HOUR_OF_DAY);
-        int mMinute = c.get(Calendar.MINUTE);
-        int mSecond = c.get(Calendar.SECOND);
-        return mHour + ":" + mMinute + ":" + mSecond;
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+//        int mSecond = c.get(Calendar.SECOND);
+        return hour + ":" + minute;
     }
 }
