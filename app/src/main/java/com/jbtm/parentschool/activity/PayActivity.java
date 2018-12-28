@@ -139,7 +139,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                 .getHomeData(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel<HomeWrapper>>() {
+                .subscribe(new MyObserverAdapter<ResultModel<HomeWrapper>>(PayActivity.this) {
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();
@@ -221,7 +221,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                 .makeOrder(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel<CommonModel>>() {
+                .subscribe(new MyObserverAdapter<ResultModel<CommonModel>>(PayActivity.this) {
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();
@@ -277,7 +277,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                 .getPayResult(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel>() {
+                .subscribe(new MyObserverAdapter<ResultModel>(PayActivity.this) {
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();

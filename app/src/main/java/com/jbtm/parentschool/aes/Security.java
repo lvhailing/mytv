@@ -66,7 +66,7 @@ public class Security {
      *
      * @throws NoSuchAlgorithmException
      */
-    public static String sign(String value, int version) throws NoSuchAlgorithmException {
+    public static String sign(String value, String version) throws NoSuchAlgorithmException {
         return MD5(value + version);
     }
 

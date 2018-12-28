@@ -117,7 +117,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                 .getDetailData(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>() {
+                .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>(CourseDetailActivity.this) {
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();
@@ -206,7 +206,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                 .getPlayUrl(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel<CommonModel>>() {
+                .subscribe(new MyObserverAdapter<ResultModel<CommonModel>>(CourseDetailActivity.this) {
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();

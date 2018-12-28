@@ -175,7 +175,7 @@ public class VideoActivity extends AppCompatActivity {
                 .updateProgress(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel>() {
+                .subscribe(new MyObserverAdapter<ResultModel>(VideoActivity.this) {
                     @Override
                     public void onMyError(Throwable e) {
 //                        ToastUtil.showCustom("调接口失败");

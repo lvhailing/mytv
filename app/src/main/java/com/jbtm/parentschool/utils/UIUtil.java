@@ -21,9 +21,7 @@ public class UIUtil {
         //5.0以下系统会崩溃
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT_WATCH) {
             view.bringToFront();
-            view.setElevation(10f);   //防止被其他view z轴方向覆盖
-        } else {
-            view.bringToFront();
+            view.setElevation(100f);   //防止被其他view z轴方向覆盖
         }
     }
 

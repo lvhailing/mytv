@@ -8,7 +8,10 @@ package com.jbtm.parentschool;
 public class Constants {
 
     //错误码列表
-    public static final int SUCCESS = 1;
+    public static final int SUCCESS = 1;    //正确值
+
+    //错误码列表
+    public static final int LOGIN_INVALID = -2;    //登录失效，去登录页
 
     //网络失败错误提示
     public static final String ERRO_NETWORK_MSG = "接口异常";
@@ -17,7 +20,7 @@ public class Constants {
     public static final float scaleValue = 1.15f;
 
     //动画幅度scale值
-    public static final float scaleValueSmall = 1.05f;
+    public static final float scaleValueSmall = 1.06f;
 
     //动画时长scale值
     public static final int scaleTime = 200;

@@ -101,7 +101,7 @@ public class PersonalLoginNoView extends RelativeLayout {
                 //去获取验证码
                 getCaptcha(et_phone.getText().toString());
 
-                timer = new CountDownTimer(10_000, 1000) {
+                timer = new CountDownTimer(30_000, 1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
                         tv_get_code.setEnabled(false);
@@ -147,7 +147,7 @@ public class PersonalLoginNoView extends RelativeLayout {
                 .sendCaptcha(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel>() {
+                .subscribe(new MyObserverAdapter<ResultModel>(mContext) {
                     @Override
                     public void onMyError(Throwable e) {
 //                        ToastUtil.showCustom("调接口失败");
@@ -170,7 +170,7 @@ public class PersonalLoginNoView extends RelativeLayout {
                 .login(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel<CommonModel>>() {
+                .subscribe(new MyObserverAdapter<ResultModel<CommonModel>>(mContext) {
                     @Override
                     public void onMyError(Throwable e) {
 //                        ToastUtil.showCustom("调接口失败");
@@ -181,7 +181,7 @@ public class PersonalLoginNoView extends RelativeLayout {
                         if (result.result != null) {
                             SPUtil.setPhone(result.result.phone);
                             SPUtil.setToken(result.result.access_token);
-                            ToastUtil.showCustom("登录成功：" + result.result.access_token);
+                            ToastUtil.showCustom("登录成功");
                             if (from == 1) {
                                 //登录成功，去首页
                                 HomeActivity.startActivity(mContext);

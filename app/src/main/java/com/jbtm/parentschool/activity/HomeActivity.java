@@ -160,7 +160,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 .getHomeData(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel<HomeWrapper>>() {
+                .subscribe(new MyObserverAdapter<ResultModel<HomeWrapper>>(HomeActivity.this) {
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();

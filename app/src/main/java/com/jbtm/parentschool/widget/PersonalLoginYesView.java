@@ -104,7 +104,7 @@ public class PersonalLoginYesView extends RelativeLayout implements View.OnClick
                 .checkVersion(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>() {
+                .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>(mContext) {
                     @Override
                     public void onMyError(Throwable e) {
 //                        ToastUtil.showCustom("调接口失败");

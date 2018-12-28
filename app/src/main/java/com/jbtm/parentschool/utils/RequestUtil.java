@@ -17,7 +17,7 @@ public class RequestUtil {
         Map<String, Object> params = new HashMap<>();
         try {
             String data = Security.encrypt("");
-            String md5 = Security.sign(data, Util.getVersionCode());
+            String md5 = Security.sign(data, Util.getVersionName());
             params.put("data", data);
             params.put("accept_sign", md5);
         } catch (Exception e) {
@@ -30,7 +30,7 @@ public class RequestUtil {
         String json = new Gson().toJson(params);
         try {
             String data = Security.encrypt(json);
-            String md5 = Security.sign(data, Util.getVersionCode());
+            String md5 = Security.sign(data, Util.getVersionName());
             params.put("data", data);
             params.put("accept_sign", md5);
         } catch (Exception e) {

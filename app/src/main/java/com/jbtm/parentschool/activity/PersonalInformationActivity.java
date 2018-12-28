@@ -7,19 +7,14 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
-import com.jbtm.parentschool.adapter.HomeAdapter;
-import com.jbtm.parentschool.adapter.WatchHistoryAdapter;
 import com.jbtm.parentschool.dialog.ExitAppDialog;
 import com.jbtm.parentschool.models.CommonWrapper;
-import com.jbtm.parentschool.models.HomeWrapper;
 import com.jbtm.parentschool.models.OrderWrapper;
 import com.jbtm.parentschool.models.PayModel;
 import com.jbtm.parentschool.models.WatchHistoryModel;
@@ -70,9 +65,14 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
     private CountDownTimer timer;   //系统时间
 
     public static void startActivity(Context context, int from) {
+        //0（默认值）从顶部flag来。1未登录，从登录来
         Intent intent = new Intent(context, PersonalInformationActivity.class);
         intent.putExtra("from", from);
         context.startActivity(intent);
+        if (from == 1) {
+            //未登录 先关闭所有历史界面，再打开登录页面
+            sendLoginOutBroadcast(context);
+        }
     }
 
     @Override
@@ -81,8 +81,11 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         setContentView(R.layout.activity_personal_infomation);
 
         initView();
-        getOrder();
-        getHistory();
+        if (from != 1) {
+            //已登录才去请求接口
+            getOrder();
+            getHistory();
+        }
         startClock();
     }
 
@@ -215,7 +218,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                 .getMyOrders(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel<OrderWrapper>>() {
+                .subscribe(new MyObserverAdapter<ResultModel<OrderWrapper>>(PersonalInformationActivity.this) {
                     @Override
                     public void onMyError(Throwable e) {
 //                        ToastUtil.showCustom("调接口失败");
@@ -236,7 +239,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                 .getHistory(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>() {
+                .subscribe(new MyObserverAdapter<ResultModel<CommonWrapper>>(PersonalInformationActivity.this) {
                     @Override
                     public void onMyError(Throwable e) {
 //                        ToastUtil.showCustom("调接口失败");
@@ -380,15 +383,15 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
         SPUtil.setPhone("");
         SPUtil.setToken("");
         PersonalInformationActivity.startActivity(this, 1);
-        sendLoginOutBroadcast();
+        sendLoginOutBroadcast(this);
         finish();
     }
 
-    private void sendLoginOutBroadcast() {
+    private static void sendLoginOutBroadcast(Context context) {
         //首页、详情页、购买页退出
         Intent intent = new Intent();
         intent.setAction(loginOutBroadcast);
-        sendBroadcast(intent);
+        context.sendBroadcast(intent);
     }
 
     //获取当前聚焦、或最后一个聚焦过的menu
