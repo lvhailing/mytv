@@ -5,7 +5,6 @@
     <color name="colorAccent">#3f4f70</color>
 
     <color name="white">#ffffff</color>
-    <color name="blue">#6bdcd8</color>
     <color name="green">#13aca4</color>
     <color name="gray_low">#6F7C94</color>
     <color name="gray_mid">#dd606D89</color>
@@ -22,7 +21,7 @@
     <color name="textColorHint2">#BBEFEFEF</color>
     <color name="textColorDeep">#6D4611</color>
     <color name="textColorOrange">#E3C17B</color>
-    <color name="dialog_bg">#cc414141</color>
+    <color name="dialog_exit_bg">#cc414141</color>
     <color name="transparent">#00000000</color>
     <color name="bg_line">#32EFEFEF</color>
 </resources>

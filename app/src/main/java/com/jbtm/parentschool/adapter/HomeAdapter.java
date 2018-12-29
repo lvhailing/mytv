@@ -35,6 +35,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
     }
 
     public void setData(List<HomeCourseModel> courseList) {
+        if (courseList == null) {
+            return;
+        }
         for (int i = 0; i < courseList.size(); i++) {
             if (courseList.get(i) == null) {
                 courseList.remove(courseList.get(i));
@@ -52,6 +55,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, int position) {
+        if (courseList.get(position) == null) {
+            return;
+        }
         Glide.with(mContext)
                 .load(courseList.get(position).photo)
                 .into(viewHolder.iv);

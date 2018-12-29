@@ -275,6 +275,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         v.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
+                if (homeWrapper == null) {
+                    return;
+                }
 
                 //设置焦点文字背景颜色
                 setTextBg((TextView) view, b);

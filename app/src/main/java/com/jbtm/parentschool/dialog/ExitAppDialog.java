@@ -2,11 +2,9 @@ package com.jbtm.parentschool.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.ViewCompat;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -88,14 +86,14 @@ public class ExitAppDialog extends Dialog {
             public void onFocusChange(final View v, final boolean hasFocus) {
                 //获取焦点时变化
                 if (hasFocus) {
-                    v.setBackground(context.getResources().getDrawable(R.drawable.exit_gradient_blue));
+                    v.setBackgroundColor(context.getResources().getColor(R.color.green));
                     ((TextView) v).setTextColor(context.getResources().getColor(R.color.white));
                     ViewCompat.animate(v)
                             .scaleX(Constants.scaleValue)
                             .setDuration(Constants.scaleTime)
                             .start();
                 } else {
-                    v.setBackground(context.getResources().getDrawable(R.drawable.exit_gradient_gray));
+                    v.setBackgroundColor(context.getResources().getColor(R.color.dialog_exit_btn));
                     ((TextView) v).setTextColor(context.getResources().getColor(R.color.textColor));
                     ViewCompat.animate(v)
                             .scaleX(1)

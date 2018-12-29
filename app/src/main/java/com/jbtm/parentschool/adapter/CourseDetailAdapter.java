@@ -100,8 +100,8 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
                 //获取焦点时变化
                 if (hasFocus) {
                     ViewCompat.animate(v)
-                            .scaleX(Constants.scaleValue)
-                            .scaleY(Constants.scaleValue)
+                            .scaleX(Constants.scaleValueMid)
+                            .scaleY(Constants.scaleValueMid)
                             .setDuration(Constants.scaleTime)
                             .setListener(new ViewPropertyAnimatorListenerAdapter() {
                                 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

@@ -70,6 +70,7 @@
     <dimen name="d_480dp">320dp</dimen>
     <dimen name="d_500dp">333dp</dimen>
     <dimen name="d_520dp">347dp</dimen>
+    <dimen name="d_532.5dp">355dp</dimen>
     <dimen name="d_546dp">364dp</dimen>
     <dimen name="d_580dp">387dp</dimen>
     <dimen name="d_600dp">400dp</dimen>

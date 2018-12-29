@@ -76,7 +76,7 @@ public class PersonalLoginNoView extends RelativeLayout {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    tv_get_code.setTextColor(mContext.getResources().getColor(R.color.textColorOrange));
+                    tv_get_code.setTextColor(mContext.getResources().getColor(R.color.green));
                     startAnim(tv_get_code);
                 } else {
                     tv_get_code.setTextColor(mContext.getResources().getColor(R.color.textColor));

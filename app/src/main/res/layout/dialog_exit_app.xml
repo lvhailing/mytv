@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="@dimen/d_720dp"
         android:layout_height="match_parent"
-        android:background="@color/blue">
+        android:background="@color/green">
 
         <TextView
             android:id="@+id/tv_1"
@@ -40,7 +40,7 @@
     <RelativeLayout
         android:layout_width="@dimen/d_500dp"
         android:layout_height="match_parent"
-        android:background="@color/dialog_bg">
+        android:background="@color/dialog_exit_bg">
 
         <TextView
             android:id="@+id/tv_more_time"
@@ -48,7 +48,7 @@
             android:layout_height="@dimen/d_80dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/d_184dp"
-            android:background="@drawable/exit_gradient_gray"
+            android:background="@color/dialog_exit_btn"
             android:focusable="true"
             android:gravity="center"
             android:text="再看一会儿"
@@ -62,7 +62,7 @@
             android:layout_below="@id/tv_more_time"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/d_50dp"
-            android:background="@drawable/exit_gradient_blue"
+            android:background="@color/green"
             android:focusable="true"
             android:gravity="center"
             android:text="退出不看了"

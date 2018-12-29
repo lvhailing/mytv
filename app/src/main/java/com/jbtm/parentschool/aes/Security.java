@@ -2,6 +2,8 @@ package com.jbtm.parentschool.aes;
 
 import android.util.Base64;
 
+import com.jbtm.parentschool.BuildConfig;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
@@ -20,7 +22,7 @@ import javax.crypto.spec.SecretKeySpec;
  */
 
 public class Security {
-    private static String aesKey = "PptUvr9TL7TC4qVtIJH9h3lpIVaC0OK7";
+    private static String aesKey = BuildConfig.my_key;
     public static byte[] ivBytes = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
     /**
