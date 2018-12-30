@@ -210,7 +210,6 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                     @Override
                     public void onMyError(Throwable e) {
                         closeProgressDialog();
-//                        ToastUtil.showCustom("调接口失败");
                     }
 
                     @Override
@@ -220,7 +219,7 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                         if (result.result != null && result.result.ma_url != null) {
                             //去播放页面
                             String url = result.result.ma_url;
-                            VideoActivity.startActivity(CourseDetailActivity.this, materId,url,materTitle);
+                            VideoActivity.startActivity(CourseDetailActivity.this, materId, url, materTitle);
                         }
                     }
                 });

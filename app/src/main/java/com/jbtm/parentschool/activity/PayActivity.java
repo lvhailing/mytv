@@ -64,7 +64,6 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     private int orderId;    //每次生成二维码后也会对应生成一个orderId，轮询时去最新的orderId
 
 
-
     //头部logo点击，套餐购买
     public static void startActivity(Context context) {
         Intent intent = new Intent(context, PayActivity.class);
@@ -161,8 +160,10 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                             monthView.setPayType(2);
                             monthView.setData(payModelList.get(1));
 
-                            //二维码支付结果文案处理，默认年卡价格
-                            refreshPayText(payModelList.get(0).price);
+                            if (from != 1) {
+                                //二维码支付结果文案处理，不是单点时。默认取年卡价格
+                                refreshPayText(payModelList.get(0).price);
+                            }
                         }
                     }
                 });

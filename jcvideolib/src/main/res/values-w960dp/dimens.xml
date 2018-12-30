@@ -70,7 +70,7 @@
     <dimen name="d_480dp">240dp</dimen>
     <dimen name="d_500dp">250dp</dimen>
     <dimen name="d_520dp">260dp</dimen>
-    <dimen name="d_532.5dp">266.2dp</dimen>
+    <dimen name="d_532.5dp">266.5dp</dimen>
     <dimen name="d_546dp">273dp</dimen>
     <dimen name="d_580dp">290dp</dimen>
     <dimen name="d_600dp">300dp</dimen>

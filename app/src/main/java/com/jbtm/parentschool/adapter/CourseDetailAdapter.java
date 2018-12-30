@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v4.view.ViewPropertyAnimatorListenerAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.jbtm.parentschool.models.CourseModel;
 import com.jbtm.parentschool.models.MaterModel;
 import com.jbtm.parentschool.utils.ToastUtil;
 import com.jbtm.parentschool.utils.UIUtil;
+import com.jbtm.parentschool.utils.Util;
 
 import java.util.List;
 
@@ -29,12 +31,21 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
     private List<MaterModel> list;
     private String photoUrl;
     private Context mContext;
+    private int picWidth;
+    private int picHeight;
 
     public CourseDetailAdapter(Context context, CourseModel course) {
         super();
         mContext = context;
         this.list = course.maters;
         this.photoUrl = course.photo;
+
+        //计算图片大小，解决模糊问题
+
+        int screenWidth = UIUtil.getScreenWidth((CourseDetailActivity) mContext);
+        int screenHeight = UIUtil.getScreenHeight((CourseDetailActivity) mContext);
+        picWidth = screenWidth * 235 / 1920;
+        picHeight = screenHeight * 147 / 1080;
     }
 
     public void setData(CourseModel course) {
@@ -132,8 +143,17 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
 
 
     private void setImageView(ImageView imageView, String url) {
-        Glide.with(mContext)
-                .load(url)
-                .into(imageView);
+        if (picWidth != 0 && picHeight != 0) {
+            //按屏幕宽高加载
+            Glide.with(mContext)
+                    .load(url)
+                    .override(picWidth, picHeight)
+                    .into(imageView);
+        } else {
+            //按默认宽高加载
+            Glide.with(mContext)
+                    .load(url)
+                    .into(imageView);
+        }
     }
 }

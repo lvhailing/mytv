@@ -80,7 +80,22 @@ public class Util {
         Calendar c = Calendar.getInstance();
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int minute = c.get(Calendar.MINUTE);
-//        int mSecond = c.get(Calendar.SECOND);
-        return hour + ":" + minute;
+//        int second = c.get(Calendar.SECOND);
+        StringBuilder sb = new StringBuilder();
+        if (hour < 10) {
+            sb.append("0");
+        }
+        sb.append(hour);
+        sb.append(":");
+        if (minute < 10) {
+            sb.append("0");
+        }
+        sb.append(minute);
+//        sb.append(":");
+//        if (second < 10) {
+//            sb.append("0");
+//        }
+//        sb.append(second);
+        return sb.toString();
     }
 }

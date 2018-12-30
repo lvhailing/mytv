@@ -1,5 +1,6 @@
 package com.jbtm.parentschool.utils;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.text.SpannableString;
@@ -7,8 +8,11 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.TextView;
+
+import com.jbtm.parentschool.activity.CourseDetailActivity;
 
 /**
  * Created by lvhailing on 2018/12/22.
@@ -45,4 +49,19 @@ public class UIUtil {
         tv.setIncludeFontPadding(false);
         tv.setText(ss);
     }
+
+    //获取屏幕实际宽度
+    public static int getScreenWidth(Activity activity) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.widthPixels;
+    }
+
+    //获取屏幕实际高度
+    public static int getScreenHeight(Activity activity) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.heightPixels;
+    }
+
 }

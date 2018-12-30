@@ -1,24 +1,23 @@
 package com.jbtm.parentschool.network;
 
 
+import com.jbtm.parentschool.BuildConfig;
+
 public class UrlRoot {
-    private final static int ENV_DEV = 1;
-    private final static int ENV_PRODUCT = 2;
+    private final static int ENV_DEV = 0;
+    private final static int ENV_PRODUCT = 1;
 
     // 主地址
     public static String ROOT_URL;
 
-    private static final int mEnvironment = 1;  //1测试环境，2正式环境
-
     static {
-        switch (mEnvironment) {
+        switch (BuildConfig.my_environment) {
             case ENV_DEV:
-                // 测试环境
+                // 0 测试环境
                 ROOT_URL = "http://test.v3wx.jzxt365.com/";
-//                ROOT_URL = "http://v.juhe.cn/";
                 break;
             case ENV_PRODUCT:
-                // 正式环境
+                // 1 正式环境
                 ROOT_URL = "http://v3wx.jzxt365.com/";
                 break;
             default:
