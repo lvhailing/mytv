@@ -41,11 +41,10 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
         this.photoUrl = course.photo;
 
         //计算图片大小，解决模糊问题
-
         int screenWidth = UIUtil.getScreenWidth((CourseDetailActivity) mContext);
         int screenHeight = UIUtil.getScreenHeight((CourseDetailActivity) mContext);
-        picWidth = screenWidth * 235 / 1920;
-        picHeight = screenHeight * 147 / 1080;
+        picWidth = screenWidth * 235 * 2 / 1920;
+        picHeight = screenHeight * 147 * 2 / 1080;
     }
 
     public void setData(CourseModel course) {
@@ -140,7 +139,6 @@ public class CourseDetailAdapter extends RecyclerView.Adapter<CourseDetailAdapte
             }
         });
     }
-
 
     private void setImageView(ImageView imageView, String url) {
         if (picWidth != 0 && picHeight != 0) {

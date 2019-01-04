@@ -234,7 +234,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" （课程还在持续更新哦~）"
+                android:text=" 课程还在持续更新哦~"
                 android:textColor="#efefef"
                 android:textSize="@dimen/s_36sp" />
         </LinearLayout>

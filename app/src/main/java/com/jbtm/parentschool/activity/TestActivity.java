@@ -1,7 +1,10 @@
 package com.jbtm.parentschool.activity;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +25,11 @@ import com.jbtm.parentschool.utils.SPUtil;
 import com.jbtm.parentschool.utils.ToastUtil;
 import com.jbtm.parentschool.utils.ZXingUtil;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +42,14 @@ public class TestActivity extends AppCompatActivity {
     private TextView textView;
     private ImageView imageView;
     private EditText editText;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            Bitmap bitmap = (Bitmap) msg.obj;
+            imageView.setImageBitmap(bitmap);
+            super.handleMessage(msg);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +60,33 @@ public class TestActivity extends AppCompatActivity {
         imageView = findViewById(R.id.iv);
         editText = findViewById(R.id.et);
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String url1 = "http://img0.imgtn.bdimg.com/it/u=2432380748,1284817624&fm=11&gp=0.jpg";
+                Bitmap bitmap = getImageBitmap(url1);
+                Message message = Message.obtain();
+                message.obj = bitmap;
+                handler.sendMessage(message);
+            }
+        }).start();
+    }
+
+    //用原生框架下载图片
+    public Bitmap getImageBitmap(String url) {
+        URL imgUrl;
+        Bitmap bitmap = null;
+        try {
+            imgUrl = new URL(url);
+            HttpURLConnection conn = (HttpURLConnection) imgUrl.openConnection();
+            conn.connect();
+            InputStream is = conn.getInputStream();
+            bitmap = BitmapFactory.decodeStream(is);
+            is.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 
     public void makeQrCode(View view) {
