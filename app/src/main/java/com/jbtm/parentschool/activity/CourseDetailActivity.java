@@ -40,14 +40,12 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
     private RelativeLayout rl_buy; //单点这一课
     private ImageView iv_course;
     private TextView tv_title;
-    private LinearLayout ll_1;
     private TextView tv_title_time;
     private TextView tv_flag1;
     private TextView tv_flag2;
     private TextView tv_flag3;
     private TextView tv_exporter;
     private TextView tv_summary;
-    private ImageView iv_buy;
     private TextView tv_time_progress;
     private RecyclerView recyclerView;
 
@@ -84,7 +82,6 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         iv_course = (ImageView) findViewById(R.id.iv_course);
         tv_title_time = findViewById(R.id.tv_title_time);
         tv_title = (TextView) findViewById(R.id.tv_title);
-        ll_1 = (LinearLayout) findViewById(R.id.ll_1);
         tv_flag1 = (TextView) findViewById(R.id.tv_flag1);
         tv_flag2 = (TextView) findViewById(R.id.tv_flag2);
         tv_flag3 = (TextView) findViewById(R.id.tv_flag3);
@@ -92,7 +89,6 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
         tv_summary = (TextView) findViewById(R.id.tv_summary);
         rl_play = (RelativeLayout) findViewById(R.id.rl_play);
         rl_buy = (RelativeLayout) findViewById(R.id.rl_buy);
-        iv_buy = (ImageView) findViewById(R.id.iv_buy);
         tv_time_progress = (TextView) findViewById(R.id.tv_time_progress);
 
         ll_title_me.setOnClickListener(this);

@@ -44,8 +44,8 @@
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="正面管教"
                     android:includeFontPadding="false"
+                    android:text="正面管教"
                     android:textColor="#efefef"
                     android:textSize="@dimen/s_46sp"
                     android:textStyle="bold" />
@@ -62,8 +62,8 @@
                         android:id="@+id/tv_flag1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="107分钟"
                         android:includeFontPadding="false"
+                        android:text="107分钟"
                         android:textColor="#efefef"
                         android:textSize="@dimen/s_28sp" />
 
@@ -79,8 +79,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/d_20dp"
-                        android:text="2018年"
                         android:includeFontPadding="false"
+                        android:text="2018年"
                         android:textColor="#efefef"
                         android:textSize="@dimen/s_28sp" />
 
@@ -96,8 +96,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/d_20dp"
-                        android:text="美国帮"
                         android:includeFontPadding="false"
+                        android:text="美国帮"
                         android:textColor="#efefef"
                         android:textSize="@dimen/s_28sp" />
                 </LinearLayout>
@@ -107,8 +107,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/ll_1"
-                    android:includeFontPadding="false"
                     android:layout_marginTop="@dimen/d_18dp"
+                    android:includeFontPadding="false"
                     android:text="主讲专家：唐丽丽"
                     android:textColor="@color/textColorHint2"
                     android:textSize="@dimen/s_28sp" />
@@ -121,8 +121,8 @@
                     android:layout_marginTop="@dimen/d_18dp"
                     android:ellipsize="end"
                     android:includeFontPadding="false"
-                    android:maxLines="2"
                     android:lineSpacingMultiplier="1.3"
+                    android:maxLines="2"
                     android:text="简介：孩子爱发脾气？经常气的你暴跳如雷？自己也爱发脾气？
 家里经常鸡飞狗跳？90%的家庭问题都是来源于情绪孩子爱发脾气？经常气的你暴跳如雷？自己也爱发脾气？
 家里经常鸡飞狗跳？90%的家庭问题都是来源于情绪"
@@ -171,7 +171,6 @@
                     tools:visibility="visible">
 
                     <ImageView
-                        android:id="@+id/iv_buy"
                         android:layout_width="@dimen/d_34dp"
                         android:layout_height="@dimen/d_34dp"
                         android:layout_centerVertical="true"
@@ -207,8 +206,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/d_14dp"
-                        android:text="上次观看到66%"
                         android:includeFontPadding="false"
+                        android:text="上次观看到66%"
                         android:textColor="@color/textColorHint2"
                         android:textSize="@dimen/s_24sp" />
                 </LinearLayout>
@@ -236,7 +235,9 @@
                 android:layout_height="wrap_content"
                 android:text=" 课程还在持续更新哦~"
                 android:textColor="#efefef"
-                android:textSize="@dimen/s_36sp" />
+                android:textSize="@dimen/s_36sp"
+                android:visibility="gone"
+                tools:visibility="visible" />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

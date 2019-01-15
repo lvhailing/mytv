@@ -81,7 +81,7 @@ public class WatchHistoryAdapter extends RecyclerView.Adapter<WatchHistoryAdapte
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtil.showCustom(list.get(position).title);
+//                ToastUtil.showCustom(list.get(position).title);
                 CourseDetailActivity.startActivity(mContext, list.get(position).course_id);
             }
         });

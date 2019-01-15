@@ -169,13 +169,11 @@ public class PayTypeView extends LinearLayout {
         }
 
         //描述
-        if (payType == 1) {
+        if (payType == 1 || payType == 2) {
             tv_description.setText("所有视频都可以观看");
             tv_description.setVisibility(VISIBLE);
-        } else if (payType == 2) {
-            tv_description.setVisibility(GONE);
         } else if (payType == 3) {
-            tv_description.setText("请到您喜欢的课程详情页进行购买");
+            tv_description.setText("办理年卡月卡更优惠");
             tv_description.setVisibility(VISIBLE);
         }
     }
