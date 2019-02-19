@@ -23,7 +23,6 @@ import com.jbtm.parentschool.network.MyRemoteFactory;
 import com.jbtm.parentschool.network.MyRequestProxy;
 import com.jbtm.parentschool.network.model.ResultModel;
 import com.jbtm.parentschool.utils.RequestUtil;
-import com.jbtm.parentschool.utils.ToastUtil;
 import com.jbtm.parentschool.utils.Util;
 import com.jbtm.parentschool.widget.FullyGridLayoutManager;
 
@@ -181,10 +180,10 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                 PersonalInformationActivity.startActivity(this, 0);
                 break;
             case R.id.ll_title_buy: //套餐购买
-                PayActivity.startActivity(this);
+                PayActivityXiaoMi.startActivity(this);
                 break;
             case R.id.rl_buy:  //单点购买
-                PayActivity.startActivity(this, 1, courseId, coursePrice);
+                PayActivityXiaoMi.startActivity(this, 1, courseId, coursePrice);
                 break;
             case R.id.rl_play:  //全屏播放
                 //去请求播放地址

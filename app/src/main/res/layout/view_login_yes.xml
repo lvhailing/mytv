@@ -71,7 +71,8 @@
                 android:focusable="true"
                 android:text="检测更新"
                 android:textColor="@color/textColor"
-                android:textSize="@dimen/s_36sp" />
+                android:textSize="@dimen/s_36sp"
+                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 

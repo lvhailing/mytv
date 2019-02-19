@@ -5,6 +5,7 @@ import com.jbtm.parentschool.models.CommonModel;
 import com.jbtm.parentschool.models.CommonWrapper;
 import com.jbtm.parentschool.models.HomeWrapper;
 import com.jbtm.parentschool.models.OrderWrapper;
+import com.jbtm.parentschool.models.PayModelXiaoMi;
 import com.jbtm.parentschool.network.model.DataModel;
 import com.jbtm.parentschool.network.model.DataWrapper;
 import com.jbtm.parentschool.network.model.ResultModel;
@@ -71,6 +72,11 @@ public interface MyRequestProxy {
     @FormUrlEncoded
     Observable<ResultModel<CommonModel>> makeOrder(@FieldMap Map<String, Object> params);
 
+    //创建订单（小米支付）
+    @POST("tv/pay/order")
+    @FormUrlEncoded
+    Observable<ResultModel<PayModelXiaoMi>> makeOrderXiaoMi(@FieldMap Map<String, Object> params);
+
     //获取支付结果
     @POST("tv/pay/order-qry")
     @FormUrlEncoded
@@ -86,7 +92,7 @@ public interface MyRequestProxy {
     @FormUrlEncoded
     Observable<ResultModel<OrderWrapper>> getMyOrders(@FieldMap Map<String, Object> params);
 
-    //获取我的订购信息
+    //检查版本
     @POST("tv/index/check-version")
     @FormUrlEncoded
     Observable<ResultModel<CommonWrapper>> checkVersion(@FieldMap Map<String, Object> params);

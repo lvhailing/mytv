@@ -7,6 +7,9 @@
         android:name="android.hardware.type.television"
         android:required="true" />
 
+    <!--小米支付-->
+    <uses-permission android:name="com.xiaomi.permission.AUTH_THIRDPAY" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -62,6 +65,7 @@
         <activity android:name=".activity.CourseDetailActivity" />
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.PayActivity" />
+        <activity android:name=".activity.PayActivityXiaoMi" />
         <activity android:name=".activity.TestActivity" />
 
         <!--某些机型可能有声音无画面，需要开启硬件加速-->

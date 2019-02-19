@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jbtm.parentschool.R;
-import com.jbtm.parentschool.activity.PayActivity;
+import com.jbtm.parentschool.activity.PayActivityXiaoMi;
 import com.jbtm.parentschool.models.PayModel;
 
 
@@ -136,7 +136,8 @@ public class PayTypeView extends LinearLayout {
         //二维码交互
         if (hasFocus) {
             //获得焦点时，刷新支付文案
-            ((PayActivity) mContext).refreshPayText(String.valueOf(price));
+//            ((PayActivity) mContext).refreshPayText(String.valueOf(price));
+            ((PayActivityXiaoMi) mContext).refreshPayText(String.valueOf(price));
         }
     }
 

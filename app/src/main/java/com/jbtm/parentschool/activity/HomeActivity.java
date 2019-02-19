@@ -227,7 +227,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 PersonalInformationActivity.startActivity(this, 0);
                 break;
             case R.id.ll_title_buy:
-                PayActivity.startActivity(this);
+                PayActivityXiaoMi.startActivity(this);
                 break;
             case R.id.rl_jx_item_1: //精选课程，大图第1张
                 CourseDetailActivity.startActivity(this, homeWrapper.recommend_list.get(0).course_id);

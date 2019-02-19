@@ -205,7 +205,7 @@ public class PersonalInformationActivity extends BaseActivity implements View.On
                 ToastUtil.showCustom("已经在本页");
                 break;
             case R.id.ll_title_buy:
-                PayActivity.startActivity(this);
+                PayActivityXiaoMi.startActivity(this);
                 break;
         }
     }

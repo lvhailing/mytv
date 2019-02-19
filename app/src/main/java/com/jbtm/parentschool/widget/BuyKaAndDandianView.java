@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.jbtm.parentschool.Constants;
 import com.jbtm.parentschool.R;
-import com.jbtm.parentschool.activity.PayActivity;
+import com.jbtm.parentschool.activity.PayActivityXiaoMi;
 import com.jbtm.parentschool.adapter.WatchHistoryAdapter;
 import com.jbtm.parentschool.models.PayModel;
 import com.jbtm.parentschool.models.WatchHistoryModel;
@@ -61,7 +61,7 @@ public class BuyKaAndDandianView extends LinearLayout {
         tv_buy_again.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                PayActivity.startActivity(mContext);
+                PayActivityXiaoMi.startActivity(mContext);
             }
         });
 
