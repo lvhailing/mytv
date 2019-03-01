@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.view.ViewCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,6 +29,7 @@ import com.xiaomi.mitv.osspay.sdk.data.PayOrder;
 import com.xiaomi.mitv.osspay.sdk.proxy.PayCallback;
 import com.xiaomi.mitv.osspay.sdk.proxy.ThirdPayProxy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +59,7 @@ public class PayActivityXiaoMi extends BaseActivity implements View.OnClickListe
     private int mKaType = 1;    //1包年，2包月，3单点。默认包年套餐
     private ThirdPayProxy thirdPayProxy;
     private CountDownTimer clockTimer;   //时钟
+    private List<Integer> successPayTypeList = new ArrayList<>();//已成功支付过的套餐，用于右侧的购买按钮/对号flag的展示
 
     //头部logo点击，套餐购买
     public static void startActivity(Context context) {
@@ -198,7 +201,7 @@ public class PayActivityXiaoMi extends BaseActivity implements View.OnClickListe
     private void getPayOrderInfo() {
         Map<String, Object> map = new HashMap<>();
         map.put("pay_type", 3);      //支付方式（1微信 2支付宝 3小米支付）
-        map.put("order_type", 2);  //订单类型（1包年 2包月 3点播）
+        map.put("order_type", mKaType);  //订单类型（1包年 2包月 3点播）
         if (courseId != 0) {
             //非点播不传
             map.put("content_id", courseId);      //课程ID（点播方式必传）
@@ -231,12 +234,19 @@ public class PayActivityXiaoMi extends BaseActivity implements View.OnClickListe
     }
 
     private void callXiaoMiApp(PayModelXiaoMi.MiParam pay) {
+        //此设置是确保能调起支付
+        thirdPayProxy.setUsePreview(false);
         //调起小米支付app
         thirdPayProxy.createOrderAndPay(pay.app_id, pay.cust_order_id, pay.product_name, pay.price, pay.order_desc, pay.extra_data, new PayCallback() {
 
             @Override
             public void onSuccess(PayOrder payOrder) {
                 showPaySuccess();
+
+                //放入支付成功的列表
+                if (!successPayTypeList.contains(mKaType)) {
+                    successPayTypeList.add(mKaType);
+                }
             }
 
             @Override
@@ -281,8 +291,11 @@ public class PayActivityXiaoMi extends BaseActivity implements View.OnClickListe
         itemView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(final View v, final boolean hasFocus) {
-                //焦点变化时：获取二维码地址并展示
+                //焦点变化时：刷新支付类型
                 dealKaType(v, hasFocus);
+
+                //焦点变化时：判断右侧该显示购买按钮还是支付成功按钮
+                dealRightBtn();
 
                 //焦点变化时：处理各子view背景字体
                 PayTypeView viewModel = (PayTypeView) v;
@@ -336,7 +349,7 @@ public class PayActivityXiaoMi extends BaseActivity implements View.OnClickListe
         }
     }
 
-    //焦点变化时：获取二维码地址并展示
+    //焦点变化时：刷新支付类型
     private void dealKaType(View v, boolean hasFocus) {
         if (hasFocus) {
             if (v.getId() == R.id.v_year) {
@@ -350,6 +363,19 @@ public class PayActivityXiaoMi extends BaseActivity implements View.OnClickListe
                 mKaType = 3;
             }
         }
+    }
+
+    //焦点变化时：判断右侧该显示购买按钮还是支付成功按钮
+    private void dealRightBtn() {
+        for (Integer item : successPayTypeList) {
+            if (mKaType == item) {
+                //右侧显示成功flag
+                showPaySuccess();
+                return;
+            }
+        }
+        //如果都没有，则显示购买按钮
+        showPayFail();
     }
 
     //处理焦点时动画
