@@ -135,7 +135,7 @@
             android:layout_marginRight="@dimen/d_30dp"
             android:layout_marginTop="@dimen/d_66dp"
             android:layout_toEndOf="@+id/back"
-            android:layout_toLeftOf="@+id/battery_time_layout"
+            android:layout_toLeftOf="@id/battery_time_layout"
             android:layout_toRightOf="@+id/back"
             android:ellipsize="end"
             android:maxLines="2"
