@@ -182,7 +182,8 @@ public class JZMediaSystem extends JZMediaInterface implements MediaPlayer.OnPre
             @Override
             public void run() {
                 if (JzvdMgr.getCurrentJzvd() != null) {
-                    if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                    //新版（如7.0）返回的播放码不再是3，而是903
+                    if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START || what == 903) {
                         if (JzvdMgr.getCurrentJzvd().currentState == Jzvd.CURRENT_STATE_PREPARING
                                 || JzvdMgr.getCurrentJzvd().currentState == Jzvd.CURRENT_STATE_PREPARING_CHANGING_URL) {
                             JzvdMgr.getCurrentJzvd().onPrepared();
