@@ -57,6 +57,8 @@ public class VideoActivity extends AppCompatActivity {
         materId = getIntent().getIntExtra("materId", 0);
         String url = getIntent().getStringExtra("url");
         String title = getIntent().getStringExtra("title");
+
+        //常见视频格式： mpeg/mpg/dat avi mov asf wmv 3gp mkv flv rmvb rm mtv amv dmv
 //        String url = "http://jzvd.nathen.cn/c6e3dc12a1154626b3476d9bf3bd7266/6b56c5f0dc31428083757a45764763b0-5287d2089db37e62345123a1be272f8b.mp4";
 //        String url = "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4";
 //        String url = "http://jbtm-test.oss-cn-beijing.aliyuncs.com/v3.0/20181227/20181227115636754.mp4";
