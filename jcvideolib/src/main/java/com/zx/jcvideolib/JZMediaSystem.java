@@ -29,14 +29,14 @@ public class JZMediaSystem extends JZMediaInterface implements MediaPlayer.OnPre
             mediaPlayer = new MediaPlayer();
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.setLooping(jzDataSource.looping);
-            mediaPlayer.setOnPreparedListener(JZMediaSystem.this);
-            mediaPlayer.setOnCompletionListener(JZMediaSystem.this);
-            mediaPlayer.setOnBufferingUpdateListener(JZMediaSystem.this);
+            mediaPlayer.setOnPreparedListener(this);
+            mediaPlayer.setOnCompletionListener(this);
+            mediaPlayer.setOnBufferingUpdateListener(this);
             mediaPlayer.setScreenOnWhilePlaying(true);
-            mediaPlayer.setOnSeekCompleteListener(JZMediaSystem.this);
-            mediaPlayer.setOnErrorListener(JZMediaSystem.this);
-            mediaPlayer.setOnInfoListener(JZMediaSystem.this);
-            mediaPlayer.setOnVideoSizeChangedListener(JZMediaSystem.this);
+            mediaPlayer.setOnSeekCompleteListener(this);
+            mediaPlayer.setOnErrorListener(this);
+            mediaPlayer.setOnInfoListener(this);
+            mediaPlayer.setOnVideoSizeChangedListener(this);
             Class<MediaPlayer> clazz = MediaPlayer.class;
             Method method = clazz.getDeclaredMethod("setDataSource", String.class, Map.class);
 //            if (dataSourceObjects.length > 2) {
@@ -114,17 +114,6 @@ public class JZMediaSystem extends JZMediaInterface implements MediaPlayer.OnPre
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
         mediaPlayer.start();
-        if (jzDataSource.getCurrentUrl().toString().toLowerCase().contains("mp3") ||
-                jzDataSource.getCurrentUrl().toString().toLowerCase().contains("wav")) {
-            JZMediaManager.instance().mainThreadHandler.post(new Runnable() {
-                @Override
-                public void run() {
-                    if (JzvdMgr.getCurrentJzvd() != null) {
-                        JzvdMgr.getCurrentJzvd().onPrepared();
-                    }
-                }
-            });
-        }
     }
 
     @Override
