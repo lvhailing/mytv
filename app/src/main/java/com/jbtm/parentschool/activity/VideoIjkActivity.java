@@ -108,14 +108,14 @@ public class VideoIjkActivity extends AppCompatActivity {
 
     //快进
     public void goFast() {
-        mPlayerView._onProgressSlide(0.05f);
+        mPlayerView._onProgressSlide(0.15f);
         mPlayerView._showControlBar(5000);
         mPlayerView._endGesture();
     }
 
     //快退
     public void backFast() {
-        mPlayerView._onProgressSlide(-0.05f);
+        mPlayerView._onProgressSlide(-0.15f);
         mPlayerView._showControlBar(5000);
         mPlayerView._endGesture();
     }
