@@ -70,7 +70,10 @@
 
         <!--某些机型可能有声音无画面，需要开启硬件加速-->
         <activity
-            android:name=".activity.VideoActivity"
+            android:name=".activity.VideoJzActivity"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name=".activity.VideoIjkActivity"
             android:hardwareAccelerated="true" />
     </application>
 </manifest>

@@ -1,1 +1,1 @@
-include ':app', ':jcvideolib'
+include ':app', ':jcvideolib', ':ijkvideolib', ':videolib'

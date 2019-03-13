@@ -30,6 +30,8 @@ dependencies {
     implementation files('libs/mitvpaysdk.jar')
     implementation files('libs/MiStats_SDK_Client_1_9_11.jar')
     implementation project(':jcvideolib')
+    implementation project(':ijkvideolib')
+
     implementation 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support:recyclerview-v7:26.1.0'
     //jiecao video

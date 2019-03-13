@@ -49,8 +49,8 @@
             android:paddingLeft="@dimen/d_12dp"
             android:paddingRight="@dimen/d_12dp"
             android:paddingTop="@dimen/d_8dp"
-            android:progressDrawable="@drawable/jz_bottom_seek_progress"
-            android:thumb="@drawable/jz_bottom_seek_thumb" />
+            android:progressDrawable="@drawable/bottom_seek_progress"
+            android:thumb="@drawable/bottom_seek_thumb" />
 
         <TextView
             android:id="@+id/current"
@@ -107,7 +107,7 @@
         android:layout_height="@dimen/d_4dp"
         android:layout_alignParentBottom="true"
         android:max="100"
-        android:progressDrawable="@drawable/jz_bottom_progress" />
+        android:progressDrawable="@drawable/bottom_progress" />
 
     <RelativeLayout
         android:id="@+id/layout_top"
@@ -179,7 +179,7 @@
         android:layout_width="@dimen/d_100dp"
         android:layout_height="@dimen/d_100dp"
         android:layout_centerInParent="true"
-        android:indeterminateDrawable="@drawable/jz_loading"
+        android:indeterminateDrawable="@drawable/loading"
         android:visibility="invisible" />
 
     <ImageView

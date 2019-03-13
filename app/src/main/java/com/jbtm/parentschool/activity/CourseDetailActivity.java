@@ -2,6 +2,7 @@ package com.jbtm.parentschool.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.widget.GridLayoutManager;
@@ -214,7 +215,13 @@ public class CourseDetailActivity extends BaseActivity implements View.OnClickLi
                         if (result.result != null && result.result.ma_url != null) {
                             //去播放页面
                             String url = result.result.ma_url;
-                            VideoActivity.startActivity(CourseDetailActivity.this, materId, url, materTitle);
+                            if (Build.VERSION.SDK_INT >= 23) {
+                                //7.0及以上走ijkplayer
+                                VideoIjkActivity.startActivity(CourseDetailActivity.this, materId, url, materTitle);
+                            } else {
+                                //7.0及以下走jzplayer
+                                VideoJzActivity.startActivity(CourseDetailActivity.this, materId, url, materTitle);
+                            }
                         }
                     }
                 });

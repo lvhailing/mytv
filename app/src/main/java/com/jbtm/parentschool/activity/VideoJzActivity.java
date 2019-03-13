@@ -25,8 +25,10 @@ import java.util.Map;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-
-public class VideoActivity extends AppCompatActivity {
+/**
+ * 饺子视频内核
+ */
+public class VideoJzActivity extends AppCompatActivity {
     private JzvdStd jzvdStd;
     protected AudioManager mAudioManager;
     private Handler handler = new Handler();
@@ -35,7 +37,7 @@ public class VideoActivity extends AppCompatActivity {
     private int materId; //章节id
 
     public static void startActivity(Context context, int materId, String url, String title) {
-        Intent intent = new Intent(context, VideoActivity.class);
+        Intent intent = new Intent(context, VideoJzActivity.class);
         intent.putExtra("materId", materId);
         intent.putExtra("url", url);
         intent.putExtra("title", title);
@@ -45,7 +47,7 @@ public class VideoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_video);
+        setContentView(R.layout.activity_video_jz);
 
         getSupportActionBar().hide();
 
@@ -178,7 +180,7 @@ public class VideoActivity extends AppCompatActivity {
                 .updateProgress(map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new MyObserverAdapter<ResultModel>(VideoActivity.this) {
+                .subscribe(new MyObserverAdapter<ResultModel>(VideoJzActivity.this) {
                     @Override
                     public void onMyError(Throwable e) {
 //                        ToastUtil.showCustom("调接口失败");
