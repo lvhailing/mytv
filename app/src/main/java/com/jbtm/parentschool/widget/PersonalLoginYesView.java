@@ -69,9 +69,9 @@ public class PersonalLoginYesView extends RelativeLayout implements View.OnClick
         btn_check_update.setOnClickListener(this);
 
         //手机号
-        tv_my_phone.setText("我的手机号:" + SPUtil.getPhone());
+        tv_my_phone.setText("我的手机号：" + SPUtil.getPhone());
         //最新版本
-        tv_version.setText("已更新到:" + Util.getVersionName());
+        tv_version.setText("已更新到：" + Util.getVersionName());
 
         btn_login_out.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
