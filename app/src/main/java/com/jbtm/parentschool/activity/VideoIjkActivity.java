@@ -123,11 +123,13 @@ public class VideoIjkActivity extends AppCompatActivity {
     //加声音
     public void volumeAdd() {
         mPlayerView._onVolumeSlide(0.1f);
+        mPlayerView._endGesture2();
         handler.removeCallbacksAndMessages(null);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mPlayerView._endGesture();
+                mPlayerView._hideTouchView();
+                mPlayerView._refreshHideRunnable();
             }
         }, 2000);
     }
@@ -135,11 +137,13 @@ public class VideoIjkActivity extends AppCompatActivity {
     //减声音
     public void volumeSub() {
         mPlayerView._onVolumeSlide(-0.1f);
+        mPlayerView._endGesture2();
         handler.removeCallbacksAndMessages(null);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                mPlayerView._endGesture();
+                mPlayerView._hideTouchView();
+                mPlayerView._refreshHideRunnable();
             }
         }, 2000);
     }

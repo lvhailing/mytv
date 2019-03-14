@@ -893,7 +893,7 @@ public class MyIjkPlayerView extends FrameLayout implements OnClickListener {
         }
     }
 
-    private void _refreshHideRunnable() {
+    public void _refreshHideRunnable() {
         mHandler.removeCallbacks(mHideBarRunnable);
         mHandler.postDelayed(mHideBarRunnable, 5000L);
     }
@@ -1172,7 +1172,7 @@ public class MyIjkPlayerView extends FrameLayout implements OnClickListener {
         mTvFastForward.setText(time);
     }
 
-    private void _hideTouchView() {
+    public void _hideTouchView() {
         if (mFlTouchLayout.getVisibility() == VISIBLE) {
             mTvFastForward.setVisibility(GONE);
             mTvVolume.setVisibility(GONE);
@@ -1303,6 +1303,21 @@ public class MyIjkPlayerView extends FrameLayout implements OnClickListener {
 
         _hideTouchView();
         _refreshHideRunnable();
+        mCurVolume = -1;
+        mCurBrightness = -1.0F;
+    }
+
+    public void _endGesture2() {
+        if (mTargetPosition >= 0L && mTargetPosition != (long) mVideoView.getCurrentPosition()) {
+            seekTo((int) mTargetPosition);
+            mPlayerSeek.setProgress((int) (mTargetPosition * 1000L / (long) mVideoView.getDuration()));
+            if (mIsEnableDanmaku) {
+                mDanmakuPlayerSeek.setProgress((int) (mTargetPosition * 1000L / (long) mVideoView.getDuration()));
+            }
+
+            mTargetPosition = -1L;
+        }
+
         mCurVolume = -1;
         mCurBrightness = -1.0F;
     }
