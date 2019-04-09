@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black"
-    android:descendantFocusability="blocksDescendants">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/black"
+                android:descendantFocusability="blocksDescendants">
 
     <FrameLayout
         android:id="@+id/surface_container"
@@ -21,7 +21,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="#000000"
-        android:scaleType="fitCenter" />
+        android:scaleType="fitCenter"/>
 
     <LinearLayout
         android:id="@+id/layout_bottom"
@@ -50,7 +50,7 @@
             android:paddingRight="@dimen/d_12dp"
             android:paddingTop="@dimen/d_8dp"
             android:progressDrawable="@drawable/bottom_seek_progress"
-            android:thumb="@drawable/bottom_seek_thumb" />
+            android:thumb="@drawable/bottom_seek_thumb"/>
 
         <TextView
             android:id="@+id/current"
@@ -59,7 +59,7 @@
             android:layout_marginLeft="@dimen/d_14dp"
             android:text="00:00"
             android:textColor="#efefef"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
             android:layout_margin="@dimen/d_4dp"
             android:text="/"
             android:textColor="#efefef"
-            android:textSize="14sp" />
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/total"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:textColor="#efefef"
             android:textSize="14sp"
-            tools:text="00:00" />
+            tools:text="00:00"/>
 
         <TextView
             android:id="@+id/clarity"
@@ -87,7 +87,7 @@
             android:textColor="#efefef"
             android:textSize="14sp"
             android:visibility="gone"
-            tools:text="clarity" />
+            tools:text="clarity"/>
 
         <ImageView
             android:id="@+id/fullscreen"
@@ -97,7 +97,7 @@
             android:paddingRight="14dp"
             android:scaleType="centerInside"
             android:src="@drawable/jz_enlarge"
-            android:visibility="gone" />
+            android:visibility="gone"/>
     </LinearLayout>
 
     <ProgressBar
@@ -107,7 +107,7 @@
         android:layout_height="@dimen/d_4dp"
         android:layout_alignParentBottom="true"
         android:max="100"
-        android:progressDrawable="@drawable/bottom_progress" />
+        android:progressDrawable="@drawable/bottom_progress"/>
 
     <RelativeLayout
         android:id="@+id/layout_top"
@@ -124,23 +124,7 @@
             android:layout_marginTop="@dimen/d_12dp"
             android:padding="@dimen/d_3dp"
             android:scaleType="centerInside"
-            android:src="@drawable/jz_click_back_selector" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/d_120dp"
-            android:layout_marginRight="@dimen/d_30dp"
-            android:layout_marginTop="@dimen/d_66dp"
-            android:layout_toEndOf="@+id/back"
-            android:layout_toLeftOf="@id/battery_time_layout"
-            android:layout_toRightOf="@+id/back"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/s_50sp" />
+            android:src="@drawable/jz_click_back_selector"/>
 
         <LinearLayout
             android:id="@+id/battery_time_layout"
@@ -160,7 +144,7 @@
                 android:layout_width="@dimen/d_26dp"
                 android:layout_height="@dimen/d_10dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/jz_battery_level_10" />
+                android:background="@drawable/jz_battery_level_10"/>
 
             <TextView
                 android:id="@+id/video_current_time"
@@ -170,8 +154,24 @@
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:textColor="#ffffffff"
-                android:textSize="12.0sp" />
+                android:textSize="12.0sp"/>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/d_120dp"
+            android:layout_marginRight="@dimen/d_30dp"
+            android:layout_marginTop="@dimen/d_66dp"
+            android:layout_toEndOf="@+id/back"
+            android:layout_toLeftOf="@id/battery_time_layout"
+            android:layout_toRightOf="@+id/back"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/s_50sp"/>
     </RelativeLayout>
 
     <ProgressBar
@@ -180,14 +180,14 @@
         android:layout_height="@dimen/d_100dp"
         android:layout_centerInParent="true"
         android:indeterminateDrawable="@drawable/loading"
-        android:visibility="invisible" />
+        android:visibility="invisible"/>
 
     <ImageView
         android:id="@+id/start"
         android:layout_width="@dimen/d_100dp"
         android:layout_height="@dimen/d_100dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/play_normal" />
+        android:background="@drawable/play_normal"/>
 
     <TextView
         android:id="@+id/replay_text"
@@ -198,7 +198,7 @@
         android:text="@string/replay"
         android:textColor="#efefef"
         android:textSize="20sp"
-        android:visibility="invisible" />
+        android:visibility="invisible"/>
 
     <LinearLayout
         android:id="@+id/retry_layout"
@@ -215,7 +215,7 @@
             android:layout_height="wrap_content"
             android:text="@string/video_loading_failed"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
 
         <TextView
             android:id="@+id/retry_btn"
@@ -229,6 +229,6 @@
             android:paddingTop="@dimen/d_8dp"
             android:text="@string/click_to_restart"
             android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"/>
     </LinearLayout>
 </RelativeLayout>
